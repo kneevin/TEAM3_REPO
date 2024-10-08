@@ -1,36 +1,25 @@
 import React, { useState} from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import Button from '@mui/material/Button';
 Chart.register(...registerables);
 
 const Graph = ({ data, chartType, x, y }) => {
-    const [chartData, setChartData] = useState(null);
 
-    const labels = data.map(z => z[x]);
+   
     const values = data.map(row => parseFloat(row[y])); // Adjust to your CSV value column
-    
-
-    const generateChart = () => {
-        const labels = data.map(row => row[x]);
-        const datasets = y.map((col) => ({
-          label: data[0][col],
-          data: data.map(row => parseFloat(row[col])),
-          borderColor: `hsl(${col * 50}, 70%, 50%)`,
-          backgroundColor: `hsl(${col * 50}, 70%, 70%)`,
-        }));
-
-    
-        setChartData({ labels, datasets });
-      };
-    
-
-
+    const labels = data.map(row => row[x]);
+    const datasets = y.map((col) => ({
+      label: data[0][col],
+      data: data.map(row => parseFloat(row[col])),
+      borderColor: `hsl(${col * 50}, 70%, 50%)`,
+      backgroundColor: `hsl(${col * 50}, 70%, 70%)`,
+    }));
   return (
     <div>
-    <button onClick={generateChart}>Generate Chart</button>
-        {chartData && chartType === 'bar' && <Bar data={chartData} />}
-      {chartData && chartType === 'line' && <Line data={chartData} />}
-      {chartData && chartType === 'pie' && <Pie data={chartData} />}
+      {chartType === 'bar' && <Bar data={{ labels, datasets }} />}
+      {chartType === 'line' && <Line data={{ labels, datasets }} />}
+      {chartType === 'pie' && <Pie data={{ labels, datasets }} />}
     </div>
   );
 };

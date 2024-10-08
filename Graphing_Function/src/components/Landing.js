@@ -1,23 +1,16 @@
-import React, { useState, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CSVUploader from './components/CSVUploader';
-import Landing from './components/Landing';
-import AddTilePage from './components/AddTilePage';
-import Dashboard from '././components/DashBoard2';
+import React, { useState, useEffect } from 'react';
+import Dashboard from './DashBoard2';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import SingleDashboard from './components/SingleDashboard'; 
+import { FormControl } from '@mui/material';
+import { alignProperty } from '@mui/material/styles/cssUtils';
 
-function App() {
-  const [data, setData] = useState([]);
-  const [dashboards, setDashboards] = useState(JSON.parse(localStorage.getItem('dashboards')) || []);
-  
-  useEffect(() => {
-    localStorage.setItem('dashboards', JSON.stringify(dashboards));
-  }, [dashboards]);
-  const [dashboardName, setDashboardName] = useState('');
+const Landing = () => {
+// Load dashboards from localStorage or initialize an empty array
+const [dashboards, setDashboards] = useState(JSON.parse(localStorage.getItem('dashboards')) || []);
+const [dashboardName, setDashboardName] = useState('');
 const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
@@ -38,9 +31,11 @@ const style = {
   m: 1,
   
 };
+// Persist the dashboards in localStorage whenever they change
 useEffect(() => {
-    localStorage.setItem('dashboards', JSON.stringify(dashboards));
-  }, [dashboards]);
+  localStorage.setItem('dashboards', JSON.stringify(dashboards));
+}, [dashboards]);
+
 // Function to add a new dashboard
 const addDashboard = () => {
   if (dashboardName.trim()) {
@@ -56,13 +51,10 @@ const addDashboard = () => {
 
 // Function to update a specific dashboard's tiles
 const updateDashboardTiles = (dashboardId, updatedTiles) => {
-
-  
-    const updatedDashboards = dashboards.map(dashboard =>
+  const updatedDashboards = dashboards.map(dashboard =>
     dashboard.id === dashboardId ? { ...dashboard, tiles: updatedTiles } : dashboard
   );
   setDashboards(updatedDashboards);
-  
 };
 
 const deleteDashboard = (dashboardId) => {
@@ -70,19 +62,8 @@ const deleteDashboard = (dashboardId) => {
     setDashboards(updatedDashboards);
   };
 
-
-
-
-
-
-
-
-  return (
-    <Router>
-      <Routes>
-        <Route path="/landing" element={
-            <>
-            <div className="App">
+return (
+  <div className="App">
     <h1>Dashboard Creator</h1>
     <Button variant="contained" onClick={handleOpen}>Add Dashboard</Button>
     <Modal open={open} onClose={handleClose} contentLabel="Enter Name">
@@ -104,37 +85,18 @@ const deleteDashboard = (dashboardId) => {
     </Modal>
     
     <div>
-    {dashboards.map((dashboard) => (
+      {dashboards.map((dashboard) => (
         <Dashboard
           key={dashboard.id}
           dashboard={dashboard}
           updateDashboardTiles={updateDashboardTiles}
           deleteDashboard={deleteDashboard}
         />
-      ))
-
-    }
+      ))}
     </div>
-  </div>     
-            
-  </>
+  </div>
+);
+    
+};
 
-
-
-
-
-
-
-
-
-
-
-        } />
-        <Route path="/add-tile/:dashboardId" element={<AddTilePage dashboards={dashboards} setDashboards={setDashboards} />} />
-        <Route path="/:dashboardId" element={<SingleDashboard dashboards={dashboards}  updateDashboardTiles={updateDashboardTiles}/>} />
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
+export default Landing;

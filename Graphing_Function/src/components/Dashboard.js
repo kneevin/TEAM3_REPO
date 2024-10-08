@@ -3,7 +3,7 @@ import Graph from './Graph';
 import DataTable from './DataTable';
 import { MultiSelect } from "react-multi-select-component";
 import { useEffect } from 'react';
-import { Box, Tab, Tabs, FormControl, MenuItem, InputLabel,Select} from '@mui/material';
+import { Box, Tab, Tabs, FormControl, MenuItem, InputLabel,Select, Typography} from '@mui/material';
 import { TabPanel, TabContext } from '@mui/lab';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
@@ -12,9 +12,9 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const Dashboard = ({ data }) => {
-  const [chartType, setChartType] = useState('bar');
+  const [chartType, setChartType] = useState('');
   const [y, sety] = useState([]);
-  const [x, setx] = useState([0]);
+  const [x, setx] = useState([]);
   const headers = Object.keys(data[0]);
   const [activeTab, setActiveTab] = useState('1');
 
@@ -49,7 +49,7 @@ const Dashboard = ({ data }) => {
       </TabPanel>
 
       <TabPanel value="2">
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 300 }}>
         <InputLabel id="chart_type">Chart Type</InputLabel>
         <Select
           labelId="chart_type"
@@ -62,7 +62,7 @@ const Dashboard = ({ data }) => {
           <MenuItem value="pie">Pie Chart</MenuItem>
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 300 }}>
         <InputLabel id="x_value">X-Axis</InputLabel>
         <Select
           labelId="x_value"
@@ -75,7 +75,7 @@ const Dashboard = ({ data }) => {
           ))}
         </Select>
       </FormControl>
-
+      <FormControl sx={{ m: 1, minWidth: 300 }}>
       <Autocomplete
         multiple
         id="checkboxes-tags-demo"
@@ -100,11 +100,11 @@ const Dashboard = ({ data }) => {
             );
             
         }}
-        style={{ width: 500 }}
         renderInput={(params) => (
-            <TextField {...params} label="Checkboxes" placeholder="Favorites" />
+            <TextField {...params} label="Y-Axis" placeholder="Y-Axis" />
         )}
     />
+    </FormControl>
       <Graph data={data} chartType={chartType} x = {x} y = {y}/>
       </TabPanel>
     
