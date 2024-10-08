@@ -80,7 +80,7 @@ const deleteDashboard = (dashboardId) => {
   return (
     <Router>
       <Routes>
-        <Route path="/landing" element={
+        <Route path="/" element={
             <>
             <div className="App">
     <h1>Dashboard Creator</h1>

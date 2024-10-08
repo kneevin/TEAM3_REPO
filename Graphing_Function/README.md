@@ -1,3 +1,14 @@
+#### How to Run the App ####
+
+1. naviagte to the graphing funtions directory 
+2. Only the first time, run "npm install"
+3. then run npm start
+    Running the JSON server
+4. naviagte to the graphing funtions directory 
+5. run "json-server --watch db.json --port 5002"
+6. the JSON file will be available at "http://localhost:5002/files"
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +79,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
