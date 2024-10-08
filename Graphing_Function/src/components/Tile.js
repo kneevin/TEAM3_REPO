@@ -25,7 +25,6 @@ function Tile({ tile, deleteTile}) {
   return (
     <div className="tile">
       {data.length !== 0 && <Graph data={data} chartType={tile.graph_type} x = {tile.x_axis} y = {tile.y_axis}></Graph>}
-      <p>{tile.filename}</p>
       {console.log(data)}
       <button onClick={deleteTile}>Delete Tile</button>
     </div>
