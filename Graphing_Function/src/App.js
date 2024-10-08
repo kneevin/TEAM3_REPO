@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CSVUploader from './components/CSVUploader';
-import Landing from './components/Landing';
 import AddTilePage from './components/AddTilePage';
 import Dashboard from '././components/DashBoard2';
 import Box from '@mui/material/Box';
