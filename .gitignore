@@ -2,3 +2,4 @@ venv/
 .DS_Store
 images/
 __pycache__/
+Graphing_Function/node_modules
