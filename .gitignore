@@ -1,4 +1,42 @@
+# Python-related ignores
+backend/data/             # CSV files uploaded by users
+__pycache__/              # Compiled cache files
+*.pyc
+*.pyo
+*.pyd
+*.env                     # Environment variables for backend (optional)
+
+# FastAPI/Uvicorn log files
+*.log
+
+# Virtual environment
 venv/
-.DS_Store
-images/
-__pycache__/
+env/
+.venv/
+
+# Node.js-related ignores (for the frontend)
+node_modules/             # Dependencies
+npm-debug.log*            # npm error log
+yarn-error.log            # Yarn error log (if using Yarn)
+.env                      # Environment variables for frontend (optional)
+
+# React build outputs
+frontend/build/
+
+# OS generated files
+.DS_Store                 # macOS
+Thumbs.db                 # Windows
+
+# IDE-related ignores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# General files to ignore
+*.bak
+*.tmp
+*.swp
