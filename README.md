@@ -2,6 +2,12 @@
 
 The team members
 
+## Table of Contents
+
+- [High Level Summary](#high-level-summary)
+- [Functional Requirements](#functional-requirements)
+- [Integration Guide](#integration-guide)
+
 ## High Level Summary
 
 This is team 3\'s repository, responsible for dashboarding.
@@ -146,3 +152,6 @@ The FastAPI backend is able to search through the saved plots at the request of 
 **Status Report:**  
 The FastAPI backend has been successfully integrated with the frontend. It responds to requests from the React app to retrieve saved plots for display in the dashboard.
 
+## Integration Guide
+
+(Work in progress)
