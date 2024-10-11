@@ -1,6 +1,7 @@
 from collections import defaultdict
 import base64
 import json
+import sys
 import os
 
 
@@ -26,7 +27,12 @@ def export_images(ipynb_fname, export_dir):
 
 
 if __name__ == "__main__":
-    nb_fname = './sample.ipynb'
-    export_dir = './images/'
+    arguments = sys.argv[1:]
+    nb_fname, export_dir = arguments[0], arguments[1]
+
+    # pass
+    # nb_fname = './sample.ipynb'
+    # export_dir = './images/'
 
     export_images(nb_fname, export_dir)
+
