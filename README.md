@@ -96,10 +96,16 @@ Users can toggle between a data table view and a graph view to visualize CSV dat
 **Status Report:**  
 Users are able to seamlessly toggle between the data table and the graph view, allowing them to visualize the CSV data in either form. The feature has been tested and is functioning as expected.
 
-Functional Requirement: Pagination for Data Tables
-Description: Users can paginate through large datasets in the data table, with options to control how many rows are displayed per page for better navigation through the data.
-Status: Completed
-Status Report: Users can efficiently navigate through large datasets by selecting how many rows to display per page. The feature has been tested and performs well for typical dataset sizes.
+### Functional Requirement: Pagination for Data Tables
+
+**Description:**  
+Users can paginate through large datasets in the data table, with options to control how many rows are displayed per page for better navigation through the data.
+
+**Status:**  
+*Completed*
+
+**Status Report:**  
+Users can efficiently navigate through large datasets by selecting how many rows to display per page. The feature has been tested and performs well for typical dataset sizes.
 
 ### Functional Requirement: Local Storage
 
