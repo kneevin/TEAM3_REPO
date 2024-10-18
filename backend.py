@@ -7,26 +7,23 @@ import csv
 import pandas as pd
 import codecs
 from TableManager import TableManager
+import os
 
 app = FastAPI()
 tb = TableManager()
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):
+    if os.path.splitext(file.filename)[-1] != "csv":
+        raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
+    
     contents = file.file.read()
     buffer = io.BytesIO(contents)
     df = pd.read_csv(buffer)
 
-    # df = pd.DataFrame(data_rows)
     tb.add_table(file.filename, df)
-    return df.to_dict()
 
-    contents = file.file.read()
-    buffer = BytesIO(contents)
-    df = pd.read_csv(buffer)
-    buffer.close()
-    file.file.close()
-    return df.to_dict(orient='records')
+    return {"content": "Table successfully uploaded!"}
 
 @app.get("/")
 def read_root():
