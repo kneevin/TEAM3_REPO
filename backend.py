@@ -1,12 +1,36 @@
+from typing import Union
+from fastapi import FastAPI, File, UploadFile
+import csv
 import pandas as pd
-import numpy as np
-import nbconvert
+import codecs
+from TableManager import TableManager
 
-import json
+app = FastAPI()
+tb = TableManager()
 
+@app.post("/upload_csv")
+def upload_csv(file: UploadFile = File(...)):
 
-if __name__ == "__main__":
-    fname = "./sample.ipynb"
+    csvReader = csv.DictReader(codecs.iterdecode(file.file, 'utf-8'))
+    data = {}
+    for rows in csvReader:             
+        key = rows['X']
+        data[key] = rows  
+    file.file.close()
 
-    with open(fname) as fp:
-        nb = json.load(fname)
+    df = pd.DataFrame(data)
+    tb.add_table(file.filename, df)
+    return data
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+@app.get("/get_graph_types")
+def get_graph_types():
+    return tb.get_graph_types()
+
+@app.get("/get_tables")
+def get_tables():
+    return { "table names" : tb.get_tables() }
+
