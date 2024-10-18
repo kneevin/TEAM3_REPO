@@ -32,7 +32,7 @@ class TableManager:
         df = self.tables[table_id][SS].set_index(x_column)
         return df.plot(kind=graph_type, y=y_column)
 
-    def get_table_columns(self, table_name: str) -> list[str]:
+    def get_table_columns(self, table_name: str) -> List[str]:
         if table_name not in self.tables:
             return []
         else:
@@ -41,3 +41,8 @@ class TableManager:
     def get_graph_types(self) -> Dict[str, str]:
         return self.graph_types
     
+    def get_all_table_columns(self) -> Dict[str, List[str]]:
+        return {
+            table_name: df.columns.to_list() 
+                for table_name, df in self.tables.items()
+        }

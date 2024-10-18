@@ -37,10 +37,15 @@ def get_graph_types():
 def get_tables():
     return { "table names" : tb.get_tables() }
 
+@app.get("/get_all_table_columns")
+def get_all_table_columns():
+    return tb.get_all_table_columns()
+
 @app.get("/{graph_type}/{table_id}/{x_column}/{y_column}")
 async def graph_table(graph_type: str, table_id: str, x_column: str, y_column: str):
-    if not tb.table_exists(table_id):
-        raise HTTPException(status_code=404, detail="Table does not exist.")
+    if not tb.table_exists(table_id): 
+        raise HTTPException(status_code=404, detail=f"Table {table_id} does not exist.")
+    
     if not tb.graph_exists(graph_type):
         return HTTPException(status_code=404, detail="Graph type does not exist.")
     
@@ -56,7 +61,7 @@ async def get_img(background_tasks: BackgroundTasks):
 
     img_buf = io.BytesIO()
     g.figure.savefig(img_buf, format='png')
-    
+
     bufContents: bytes = img_buf.getvalue()
     background_tasks.add_task(img_buf.close)
     headers = {'Content-Disposition': 'inline; filename="out.png"'}
