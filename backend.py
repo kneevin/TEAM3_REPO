@@ -14,7 +14,7 @@ tb = TableManager()
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):
-    if os.path.splitext(file.filename)[-1] != "csv":
+    if os.path.splitext(file.filename)[-1] != ".csv":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
     
     contents = file.file.read()

@@ -175,4 +175,16 @@ The FastAPI backend has been successfully integrated with the frontend. It respo
 
 ## Integration Guide
 
-(Work in progress)
+Here's the steps to spinning up the backend API locally. First, make sure Python's installed then make sure you're in the repository directory and type the following:
+
+```console
+python -m venv venv
+source ./venv/bin/activate
+pip install -r requirements.txt
+```
+
+To run the backend, simply type
+
+```console
+fastapi dev backend.py
+```
