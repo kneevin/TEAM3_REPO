@@ -9,9 +9,9 @@ class TableManager:
     def __init__(self):
         self.tables: Dict[str, pd.DataFrame] = {}
         self.graph_types: Dict[str, str] = {
-            "Bar Graph": "bar", 
-            "Line Graph": "line", 
-            "Scatterplot": "scatter"
+            "bar": "Bar Graph", 
+            "line": "Line Graph", 
+            "scatter": "Scatterplot"
         }
 
     def add_table(self, fname: str, table_df: pd.DataFrame):
@@ -21,6 +21,12 @@ class TableManager:
     def get_tables(self):
         return list(self.tables.keys())
     
+    def table_exists(self, table_name: str) -> bool:
+        return table_name in self.tables
+    
+    def graph_exists(self, graph_type: str):
+        return graph_type in self.graph_types
+
     def get_table_columns(self, table_name: str) -> list[str]:
         if table_name not in self.tables:
             return []
