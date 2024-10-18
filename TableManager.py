@@ -23,9 +23,14 @@ class TableManager:
     
     def table_exists(self, table_name: str) -> bool:
         return table_name in self.tables
-    
+
     def graph_exists(self, graph_type: str):
         return graph_type in self.graph_types
+
+    def graph_table(self, graph_type: str, table_id: str, x_column: str, y_column: str):
+        SS = [x_column, y_column]
+        df = self.tables[table_id][SS].set_index(x_column)
+        return df.plot(kind=graph_type, y=y_column)
 
     def get_table_columns(self, table_name: str) -> list[str]:
         if table_name not in self.tables:
