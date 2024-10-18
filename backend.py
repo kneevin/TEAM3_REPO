@@ -1,3 +1,4 @@
+import io
 from typing import Union
 from fastapi import (
     FastAPI, File, UploadFile, 
@@ -51,10 +52,11 @@ async def graph_table(graph_type: str, table_id: str, x_column: str, y_column: s
 @app.get('/get_static_image')
 async def get_img(background_tasks: BackgroundTasks):
     df = pd.read_csv("./data.csv")
+    g = df.plot(kind='line', x='X', figsize=(8, 4))
+
+    img_buf = io.BytesIO()
+    g.figure.savefig(img_buf, format='png')
     
-    img_buf = create_img()
-    # get the entire buffer content
-    # because of the async, this will await the loading of all content
     bufContents: bytes = img_buf.getvalue()
     background_tasks.add_task(img_buf.close)
     headers = {'Content-Disposition': 'inline; filename="out.png"'}
