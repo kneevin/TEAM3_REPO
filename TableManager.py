@@ -29,8 +29,8 @@ class TableManager:
 
     def graph_table(self, graph_type: str, table_id: str, x_column: str, y_column: str):
         SS = [x_column, y_column]
-        df = self.tables[table_id][SS].set_index(x_column)
-        return df.plot(kind=graph_type, y=y_column)
+        df = self.tables[table_id][SS]
+        return df.plot(kind=graph_type, x=x_column, y=y_column).get_figure()
 
     def get_table_columns(self, table_name: str) -> List[str]:
         if table_name not in self.tables:

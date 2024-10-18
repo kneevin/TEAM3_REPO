@@ -13,17 +13,20 @@ tb = TableManager()
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):
+    contents = file.file.read()
+    buffer = io.BytesIO(contents)
+    df = pd.read_csv(buffer)
 
-    csvReader = csv.DictReader(codecs.iterdecode(file.file, 'utf-8'))
-    data = {}
-    for rows in csvReader:
-        key = rows['X']
-        data[key] = rows  
-    file.file.close()
-
-    df = pd.DataFrame(data)
+    # df = pd.DataFrame(data_rows)
     tb.add_table(file.filename, df)
-    return data
+    return df.to_dict()
+
+    contents = file.file.read()
+    buffer = BytesIO(contents)
+    df = pd.read_csv(buffer)
+    buffer.close()
+    file.file.close()
+    return df.to_dict(orient='records')
 
 @app.get("/")
 def read_root():
@@ -42,17 +45,27 @@ def get_all_table_columns():
     return tb.get_all_table_columns()
 
 @app.get("/{graph_type}/{table_id}/{x_column}/{y_column}")
-async def graph_table(graph_type: str, table_id: str, x_column: str, y_column: str):
+async def graph_table(background_tasks: BackgroundTasks, graph_type: str, table_id: str, x_column: str, y_column: str):
     if not tb.table_exists(table_id): 
         raise HTTPException(status_code=404, detail=f"Table {table_id} does not exist.")
     
     if not tb.graph_exists(graph_type):
         return HTTPException(status_code=404, detail="Graph type does not exist.")
     
-    return { 
-        table_id: {"X": x_column, "Y": y_column}
-    }
+    fig = tb.graph_table(
+        graph_type=graph_type,
+        table_id=table_id,
+        x_column=x_column,
+        y_column=y_column
+    )
 
+    img_buf = io.BytesIO()
+    fig.savefig(img_buf, format='png')
+
+    bufContents: bytes = img_buf.getvalue()
+    background_tasks.add_task(img_buf.close)
+    headers = {'Content-Disposition': 'inline; filename="out.png"'}
+    return Response(bufContents, headers=headers, media_type='image/png')
 
 @app.get('/get_static_image')
 async def get_img(background_tasks: BackgroundTasks):
