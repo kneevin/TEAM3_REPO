@@ -14,16 +14,17 @@ tb = TableManager()
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):
+    print(file)
     if os.path.splitext(file.filename)[-1] != ".csv":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
     
     contents = file.file.read()
     buffer = io.BytesIO(contents)
     df = pd.read_csv(buffer)
-
+    print(df)
     tb.add_table(file.filename, df)
 
-    return {"content": "Table successfully uploaded!"}
+    return get_all_table_columns()
 
 @app.get("/")
 def read_root():
