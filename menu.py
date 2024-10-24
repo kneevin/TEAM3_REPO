@@ -14,7 +14,7 @@ def data_section():
     with st.sidebar:
         st.title("Data")
         st.page_link("pages/view-data.py", label="View Tables")
-        st.page_link("pages/upload-csv.py", label="Upload CSV File(s)")
+        st.page_link("pages/upload-csv.py", label="Upload Data")
 
 
 def dashboard_section():

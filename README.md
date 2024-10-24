@@ -187,4 +187,5 @@ To run the backend, simply type
 
 ```console
 fastapi dev backend.py
+streamlit run app.py
 ```
