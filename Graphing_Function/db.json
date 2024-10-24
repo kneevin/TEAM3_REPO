@@ -1,7 +1,7 @@
 {
   "files": [
     {
-      "id": "3e98",
+      "id": "2efb",
       "fileName": "test1.csv",
       "data": [
         [
@@ -1848,7 +1848,6918 @@
           "12.96"
         ]
       ],
-      "uploadedAt": "2024-10-08T16:29:38.831Z"
+      "uploadedAt": "2024-10-11T18:29:14.204Z"
+    },
+    {
+      "id": "db37",
+      "fileName": "5g_coverage2.csv",
+      "data": [
+        [
+          "operator",
+          "city_name",
+          "deployment_type",
+          "status",
+          "latitude",
+          "longitude"
+        ],
+        [
+          "Ooredoo",
+          "Abdullah al-Salem",
+          "5G NR",
+          "Commercial Availability",
+          "29.35186",
+          "47.98369"
+        ],
+        [
+          "Optus",
+          "Canberra",
+          "5G NR",
+          "Commercial Availability",
+          "-35.282",
+          "149.12868"
+        ],
+        [
+          "Optus",
+          "Sydney",
+          "5G NR",
+          "Commercial Availability",
+          "-33.86748",
+          "151.20698"
+        ],
+        [
+          "AT&T Mobility",
+          "Jacksonville, FL",
+          "5G NR",
+          "Commercial Availability",
+          "30.33218",
+          "-81.65565"
+        ],
+        [
+          "AT&T Mobility",
+          "Atlanta, GA",
+          "5G NR",
+          "Commercial Availability",
+          "33.749",
+          "-84.38798"
+        ],
+        [
+          "AT&T Mobility",
+          "Indianapolis, IN",
+          "5G NR",
+          "Commercial Availability",
+          "39.7684",
+          "-86.15807"
+        ],
+        [
+          "AT&T Mobility",
+          "Louisville, KY",
+          "5G NR",
+          "Commercial Availability",
+          "38.25266",
+          "-85.75846"
+        ],
+        [
+          "AT&T Mobility",
+          "Charlotte, NC",
+          "5G NR",
+          "Commercial Availability",
+          "35.22709",
+          "-80.84313"
+        ],
+        [
+          "AT&T Mobility",
+          "Raleigh, NC",
+          "5G NR",
+          "Commercial Availability",
+          "35.77959",
+          "-78.63818"
+        ],
+        [
+          "AT&T Mobility",
+          "Oklahoma City, OK",
+          "5G NR",
+          "Commercial Availability",
+          "35.46756",
+          "-97.51643"
+        ],
+        [
+          "AT&T Mobility",
+          "Dallas, TX",
+          "5G NR",
+          "Commercial Availability",
+          "32.77666",
+          "-96.79699"
+        ],
+        [
+          "AT&T Mobility",
+          "Houston, TX",
+          "5G NR",
+          "Commercial Availability",
+          "29.76043",
+          "-95.3698"
+        ],
+        [
+          "AT&T Mobility",
+          "San Antonio, TX",
+          "5G NR",
+          "Commercial Availability",
+          "29.42412",
+          "-98.49363"
+        ],
+        [
+          "SK Telecom",
+          "Ullengdo",
+          "5G NR",
+          "Commercial Availability",
+          "37.48442",
+          "130.9058"
+        ],
+        [
+          "SK Telecom",
+          "Dokdo Islands",
+          "5G NR",
+          "Commercial Availability",
+          "37.2401087",
+          "131.867294"
+        ],
+        [
+          "Elisa",
+          "Tallinn",
+          "5G NR",
+          "Limited Availability",
+          "59.43696",
+          "24.75357"
+        ],
+        [
+          "Elisa",
+          "Tampere",
+          "5G NR",
+          "Commercial Availability",
+          "61.49775",
+          "23.76095"
+        ],
+        [
+          "Vodafone",
+          "A Coruña",
+          "5G NR",
+          "Commercial Availability",
+          "43.36188",
+          "-8.411632"
+        ],
+        [
+          "Vodafone",
+          "Al Rayyan",
+          "5G NR",
+          "Commercial Availability",
+          "25.20282",
+          "51.43491"
+        ],
+        [
+          "Vodafone",
+          "Barcelona",
+          "5G NR",
+          "Commercial Availability",
+          "41.388803",
+          "2.176914"
+        ],
+        [
+          "Telstra",
+          "Sydney",
+          "5G NR",
+          "Commercial Availability",
+          "-33.86748",
+          "151.20698"
+        ],
+        [
+          "Telstra",
+          "Melbourne",
+          "5G NR",
+          "Commercial Availability",
+          "-37.81411",
+          "144.96328"
+        ],
+        [
+          "Telstra",
+          "Canberra",
+          "5G NR",
+          "Commercial Availability",
+          "-35.282",
+          "149.12868"
+        ],
+        [
+          "Telstra",
+          "Brisbane",
+          "5G NR",
+          "Commercial Availability",
+          "-27.47101",
+          "153.02345"
+        ],
+        [
+          "Telstra",
+          "Adelaide",
+          "5G NR",
+          "Commercial Availability",
+          "-34.92862",
+          "138.59996"
+        ],
+        [
+          "Telstra",
+          "Perth",
+          "5G NR",
+          "Commercial Availability",
+          "-31.9536",
+          "115.85701"
+        ],
+        [
+          "Telstra",
+          "Hobart",
+          "5G NR",
+          "Commercial Availability",
+          "-42.8819",
+          "147.32381"
+        ],
+        [
+          "Telstra",
+          "Launceston",
+          "5G NR",
+          "Commercial Availability",
+          "-41.43709",
+          "147.13938"
+        ],
+        [
+          "Telstra",
+          "Toowoomba",
+          "5G NR",
+          "Commercial Availability",
+          "-27.564418",
+          "151.938893"
+        ],
+        [
+          "Telstra",
+          "Gold Coast",
+          "5G NR",
+          "Commercial Availability",
+          "-28.01726",
+          "153.4257"
+        ],
+        [
+          "Vodacom",
+          "Lesotho",
+          "5G NR",
+          "Limited Availability",
+          "-29.581352",
+          "28.239817"
+        ],
+        [
+          "Vodafone",
+          "Bilbao",
+          "5G NR",
+          "Commercial Availability",
+          "43.26301",
+          "-2.93499"
+        ],
+        [
+          "Vodafone",
+          "Birgland",
+          "5G NR",
+          "Commercial Availability",
+          "49.43735",
+          "11.61683"
+        ],
+        [
+          "Rain",
+          "Johannesburg",
+          "5G NR",
+          "Commercial Availability",
+          "-26.2041",
+          "28.04731"
+        ],
+        [
+          "Rain",
+          "Cape Town",
+          "5G NR",
+          "Commercial Availability",
+          "-33.92487",
+          "18.42406"
+        ],
+        [
+          "Vodafone",
+          "Birkenhead",
+          "5G NR",
+          "Commercial Availability",
+          "53.38999",
+          "-3.02301"
+        ],
+        [
+          "TIM",
+          "Bari",
+          "5G NR",
+          "Pre-Release",
+          "41.11714",
+          "16.87187"
+        ],
+        [
+          "TIM",
+          "Matera",
+          "5G NR",
+          "Commercial Availability",
+          "40.669227",
+          "16.599272"
+        ],
+        [
+          "TIM",
+          "Turin",
+          "5G NR",
+          "Commercial Availability",
+          "45.07031",
+          "7.68686"
+        ],
+        [
+          "TIM",
+          "Republic of San Marino",
+          "5G NR",
+          "Pre-Release",
+          "43.934521",
+          "12.447286"
+        ],
+        [
+          "Verizon Wireless",
+          "Chicago, IL",
+          "5G NR",
+          "Commercial Availability",
+          "41.87811",
+          "-87.6298"
+        ],
+        [
+          "Verizon Wireless",
+          "Minneapolis, MN",
+          "5G NR",
+          "Commercial Availability",
+          "44.97775",
+          "-93.26501"
+        ],
+        [
+          "Swisscom",
+          "Lutzelfluh",
+          "5G NR",
+          "Commercial Availability",
+          "47.00818",
+          "7.68659"
+        ],
+        [
+          "Swisscom",
+          "Bern",
+          "5G NR",
+          "Commercial Availability",
+          "46.94797",
+          "7.44745"
+        ],
+        [
+          "Swisscom",
+          "Davos",
+          "5G NR",
+          "Commercial Availability",
+          "46.80275",
+          "9.83597"
+        ],
+        [
+          "Swisscom",
+          "Geneva",
+          "5G NR",
+          "Commercial Availability",
+          "46.20439",
+          "6.14316"
+        ],
+        [
+          "Swisscom",
+          "Zurich",
+          "5G NR",
+          "Commercial Availability",
+          "47.388023",
+          "8.535692"
+        ],
+        [
+          "Swisscom",
+          "Burgdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.05594",
+          "7.62722"
+        ],
+        [
+          "Swisscom",
+          "Basel",
+          "5G NR",
+          "Commercial Availability",
+          "47.5596",
+          "7.58858"
+        ],
+        [
+          "Swisscom",
+          "St. Moritz",
+          "5G NR",
+          "Commercial Availability",
+          "46.4908",
+          "9.83551"
+        ],
+        [
+          "Swisscom",
+          "Estavayer-le-lac",
+          "5G NR",
+          "Commercial Availability",
+          "46.84964",
+          "6.84506"
+        ],
+        [
+          "Swisscom",
+          "Adliswil",
+          "5G NR",
+          "Commercial Availability",
+          "47.31243",
+          "8.52705"
+        ],
+        [
+          "Swisscom",
+          "Affoltern",
+          "5G NR",
+          "Commercial Availability",
+          "47.27951",
+          "8.45401"
+        ],
+        [
+          "Swisscom",
+          "Bachenbülach",
+          "5G NR",
+          "Commercial Availability",
+          "47.5033",
+          "8.54583"
+        ],
+        [
+          "Swisscom",
+          "Balsthal",
+          "5G NR",
+          "Commercial Availability",
+          "47.30959",
+          "7.68833"
+        ],
+        [
+          "Swisscom",
+          "Belp",
+          "5G NR",
+          "Commercial Availability",
+          "46.89142",
+          "7.49901"
+        ],
+        [
+          "Swisscom",
+          "Binningen",
+          "5G NR",
+          "Commercial Availability",
+          "47.53787",
+          "7.57099"
+        ],
+        [
+          "Swisscom",
+          "Braunwald",
+          "5G NR",
+          "Commercial Availability",
+          "46.940213",
+          "8.998428"
+        ],
+        [
+          "Swisscom",
+          "Brunnen",
+          "5G NR",
+          "Commercial Availability",
+          "46.999031",
+          "8.609455"
+        ],
+        [
+          "Swisscom",
+          "Buchillon",
+          "5G NR",
+          "Commercial Availability",
+          "46.46938",
+          "6.42001"
+        ],
+        [
+          "Swisscom",
+          "Champéry",
+          "5G NR",
+          "Commercial Availability",
+          "46.18165",
+          "6.87476"
+        ],
+        [
+          "Swisscom",
+          "Chur",
+          "5G NR",
+          "Commercial Availability",
+          "46.85078",
+          "9.53199"
+        ],
+        [
+          "Swisscom",
+          "Cossonay",
+          "5G NR",
+          "Commercial Availability",
+          "46.61409",
+          "6.50717"
+        ],
+        [
+          "Swisscom",
+          "Courtepin",
+          "5G NR",
+          "Commercial Availability",
+          "46.86531",
+          "7.12382"
+        ],
+        [
+          "Swisscom",
+          "Dietikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.40539",
+          "8.39977"
+        ],
+        [
+          "Swisscom",
+          "Domat/Ems",
+          "5G NR",
+          "Commercial Availability",
+          "46.83364",
+          "9.44735"
+        ],
+        [
+          "Swisscom",
+          "Ecublens (VD)",
+          "5G NR",
+          "Commercial Availability",
+          "46.52964",
+          "6.56153"
+        ],
+        [
+          "Swisscom",
+          "Freienbach",
+          "5G NR",
+          "Commercial Availability",
+          "47.20212",
+          "8.79071"
+        ],
+        [
+          "Swisscom",
+          "Glarus",
+          "5G NR",
+          "Commercial Availability",
+          "47.04112",
+          "9.0679"
+        ],
+        [
+          "Swisscom",
+          "Glattbrugg",
+          "5G NR",
+          "Commercial Availability",
+          "47.434048",
+          "8.567023"
+        ],
+        [
+          "Swisscom",
+          "Horgen",
+          "5G NR",
+          "Commercial Availability",
+          "47.26074",
+          "8.59636"
+        ],
+        [
+          "Swisscom",
+          "Ittigen",
+          "5G NR",
+          "Commercial Availability",
+          "46.97614",
+          "7.48189"
+        ],
+        [
+          "Swisscom",
+          "Langenthal",
+          "5G NR",
+          "Commercial Availability",
+          "47.21208",
+          "7.79056"
+        ],
+        [
+          "Swisscom",
+          "Lyssach",
+          "5G NR",
+          "Commercial Availability",
+          "47.06552",
+          "7.58192"
+        ],
+        [
+          "Swisscom",
+          "Lucerne",
+          "5G NR",
+          "Commercial Availability",
+          "47.05017",
+          "8.30931"
+        ],
+        [
+          "Swisscom",
+          "Malix",
+          "5G NR",
+          "Commercial Availability",
+          "46.81533",
+          "9.53187"
+        ],
+        [
+          "Swisscom",
+          "Meyrin",
+          "5G NR",
+          "Commercial Availability",
+          "46.22832",
+          "6.07099"
+        ],
+        [
+          "Swisscom",
+          "Muttenz",
+          "5G NR",
+          "Commercial Availability",
+          "47.52793",
+          "7.64764"
+        ],
+        [
+          "Swisscom",
+          "Nyon",
+          "5G NR",
+          "Commercial Availability",
+          "46.38327",
+          "6.23479"
+        ],
+        [
+          "Swisscom",
+          "Oberburg",
+          "5G NR",
+          "Commercial Availability",
+          "47.0393",
+          "7.62572"
+        ],
+        [
+          "Swisscom",
+          "Oberwinterthur",
+          "5G NR",
+          "Commercial Availability",
+          "47.507457",
+          "8.758322"
+        ],
+        [
+          "Swisscom",
+          "Ostermundigen",
+          "5G NR",
+          "Commercial Availability",
+          "46.95771",
+          "7.48731"
+        ],
+        [
+          "Swisscom",
+          "Röthenbach",
+          "5G NR",
+          "Commercial Availability",
+          "46.854143",
+          "7.741384"
+        ],
+        [
+          "Swisscom",
+          "Schüpbach",
+          "5G NR",
+          "Commercial Availability",
+          "46.92369",
+          "7.739944"
+        ],
+        [
+          "Swisscom",
+          "Seebach",
+          "5G NR",
+          "Commercial Availability",
+          "47.42188",
+          "8.538584"
+        ],
+        [
+          "Swisscom",
+          "St. Gallen",
+          "5G NR",
+          "Commercial Availability",
+          "47.424086",
+          "9.37622"
+        ],
+        [
+          "Swisscom",
+          "Sumiswald",
+          "5G NR",
+          "Commercial Availability",
+          "47.02845",
+          "7.74466"
+        ],
+        [
+          "Swisscom",
+          "Urnäsch",
+          "5G NR",
+          "Commercial Availability",
+          "47.31706",
+          "9.28264"
+        ],
+        [
+          "Swisscom",
+          "Uster",
+          "5G NR",
+          "Commercial Availability",
+          "47.34827",
+          "8.71787"
+        ],
+        [
+          "Swisscom",
+          "Vernier",
+          "5G NR",
+          "Commercial Availability",
+          "46.21226",
+          "6.10527"
+        ],
+        [
+          "Swisscom",
+          "Wiedlisbach",
+          "5G NR",
+          "Commercial Availability",
+          "47.25127",
+          "7.64534"
+        ],
+        [
+          "Swisscom",
+          "Worblaufen",
+          "5G NR",
+          "Commercial Availability",
+          "46.975462",
+          "7.481681"
+        ],
+        [
+          "Swisscom",
+          "Zeiningen",
+          "5G NR",
+          "Commercial Availability",
+          "47.54327",
+          "7.87212"
+        ],
+        [
+          "Swisscom",
+          "Zollikofen",
+          "5G NR",
+          "Commercial Availability",
+          "46.99826",
+          "7.45134"
+        ],
+        [
+          "Sunrise",
+          "Aarau",
+          "5G NR",
+          "Commercial Availability",
+          "47.39043",
+          "8.0457"
+        ],
+        [
+          "Sunrise",
+          "Aefligen",
+          "5G NR",
+          "Commercial Availability",
+          "47.09549",
+          "7.5576"
+        ],
+        [
+          "Sunrise",
+          "Aesch (BL)",
+          "5G NR",
+          "Commercial Availability",
+          "47.471135",
+          "7.594422"
+        ],
+        [
+          "Sunrise",
+          "Aesch bei Birmensdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.336129",
+          "8.436554"
+        ],
+        [
+          "Sunrise",
+          "Arnex-sur-Nyon",
+          "5G NR",
+          "Commercial Availability",
+          "46.37522",
+          "6.19157"
+        ],
+        [
+          "Sunrise",
+          "Auboranges",
+          "5G NR",
+          "Commercial Availability",
+          "46.58222",
+          "6.80522"
+        ],
+        [
+          "Sunrise",
+          "Autafond",
+          "5G NR",
+          "Commercial Availability",
+          "46.81359",
+          "7.07797"
+        ],
+        [
+          "Sunrise",
+          "Avully",
+          "5G NR",
+          "Commercial Availability",
+          "46.16961",
+          "6.00138"
+        ],
+        [
+          "Sunrise",
+          "Avusy",
+          "5G NR",
+          "Commercial Availability",
+          "46.14446",
+          "6.01229"
+        ],
+        [
+          "Sunrise",
+          "Bachenbülach",
+          "5G NR",
+          "Commercial Availability",
+          "47.5033",
+          "8.54583"
+        ],
+        [
+          "Sunrise",
+          "Bassins",
+          "5G NR",
+          "Commercial Availability",
+          "46.46624",
+          "6.23154"
+        ],
+        [
+          "Sunrise",
+          "Bas-Vully",
+          "5G NR",
+          "Commercial Availability",
+          "46.96188",
+          "7.1129"
+        ],
+        [
+          "Sunrise",
+          "Bière",
+          "5G NR",
+          "Commercial Availability",
+          "46.53738",
+          "6.33397"
+        ],
+        [
+          "Sunrise",
+          "Boningen",
+          "5G NR",
+          "Commercial Availability",
+          "47.30665",
+          "7.85639"
+        ],
+        [
+          "Sunrise",
+          "Bonstetten",
+          "5G NR",
+          "Commercial Availability",
+          "47.31516",
+          "8.46806"
+        ],
+        [
+          "Sunrise",
+          "Borex",
+          "5G NR",
+          "Commercial Availability",
+          "46.37865",
+          "6.1775"
+        ],
+        [
+          "Sunrise",
+          "Bottmingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.52339",
+          "7.57235"
+        ],
+        [
+          "Sunrise",
+          "Bremgarten (AG)",
+          "5G NR",
+          "Commercial Availability",
+          "47.34918",
+          "8.33979"
+        ],
+        [
+          "Sunrise",
+          "Bremgarten bei Bern",
+          "5G NR",
+          "Commercial Availability",
+          "46.97568",
+          "7.43726"
+        ],
+        [
+          "Sunrise",
+          "Brittnau",
+          "5G NR",
+          "Commercial Availability",
+          "47.25971",
+          "7.94697"
+        ],
+        [
+          "Sunrise",
+          "Buchs (AG)",
+          "5G NR",
+          "Commercial Availability",
+          "47.390416",
+          "8.079597"
+        ],
+        [
+          "Sunrise",
+          "Bülach",
+          "5G NR",
+          "Commercial Availability",
+          "47.51607",
+          "8.54196"
+        ],
+        [
+          "Sunrise",
+          "Büren zum Hof",
+          "5G NR",
+          "Commercial Availability",
+          "47.09575",
+          "7.51384"
+        ],
+        [
+          "Sunrise",
+          "Champéry",
+          "5G NR",
+          "Commercial Availability",
+          "46.18165",
+          "6.87476"
+        ],
+        [
+          "Sunrise",
+          "Chancy",
+          "5G NR",
+          "Commercial Availability",
+          "46.1495",
+          "5.97272"
+        ],
+        [
+          "Sunrise",
+          "Chanéaz",
+          "5G NR",
+          "Commercial Availability",
+          "46.72967",
+          "6.74261"
+        ],
+        [
+          "Sunrise",
+          "Chapelle (Glâne)",
+          "5G NR",
+          "Commercial Availability",
+          "46.58572",
+          "6.83921"
+        ],
+        [
+          "Sunrise",
+          "Châtillens",
+          "5G NR",
+          "Commercial Availability",
+          "46.5691",
+          "6.81516"
+        ],
+        [
+          "Sunrise",
+          "Corban",
+          "5G NR",
+          "Commercial Availability",
+          "47.3463",
+          "7.47624"
+        ],
+        [
+          "Sunrise",
+          "Courtedoux",
+          "5G NR",
+          "Commercial Availability",
+          "47.4092",
+          "7.04217"
+        ],
+        [
+          "Sunrise",
+          "Courtemaîche",
+          "5G NR",
+          "Commercial Availability",
+          "47.45954",
+          "7.04741"
+        ],
+        [
+          "Sunrise",
+          "Crassier",
+          "5G NR",
+          "Commercial Availability",
+          "46.37447",
+          "6.16358"
+        ],
+        [
+          "Sunrise",
+          "Dällikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.43967",
+          "8.43813"
+        ],
+        [
+          "Sunrise",
+          "Deitingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.21378",
+          "7.62088"
+        ],
+        [
+          "Sunrise",
+          "Denens",
+          "5G NR",
+          "Commercial Availability",
+          "46.51844",
+          "6.45656"
+        ],
+        [
+          "Sunrise",
+          "Densbüren",
+          "5G NR",
+          "Commercial Availability",
+          "47.45416",
+          "8.05351"
+        ],
+        [
+          "Sunrise",
+          "Derendingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.19524",
+          "7.58559"
+        ],
+        [
+          "Sunrise",
+          "Dielsdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.48242",
+          "8.4535"
+        ],
+        [
+          "Sunrise",
+          "Dietikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.40539",
+          "8.39977"
+        ],
+        [
+          "Sunrise",
+          "Dornach",
+          "5G NR",
+          "Commercial Availability",
+          "47.47905",
+          "7.61704"
+        ],
+        [
+          "Sunrise",
+          "Ecublens (FR)",
+          "5G NR",
+          "Commercial Availability",
+          "46.52964",
+          "6.56153"
+        ],
+        [
+          "Sunrise",
+          "Eggenwil",
+          "5G NR",
+          "Commercial Availability",
+          "47.37022",
+          "8.34017"
+        ],
+        [
+          "Sunrise",
+          "Endingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.5381",
+          "8.29034"
+        ],
+        [
+          "Sunrise",
+          "Ennetbaden",
+          "5G NR",
+          "Commercial Availability",
+          "47.4795",
+          "8.31432"
+        ],
+        [
+          "Sunrise",
+          "Eschenz",
+          "5G NR",
+          "Commercial Availability",
+          "47.64815",
+          "8.87339"
+        ],
+        [
+          "Sunrise",
+          "Essertes",
+          "5G NR",
+          "Commercial Availability",
+          "46.56237",
+          "6.78913"
+        ],
+        [
+          "Sunrise",
+          "Estavannens",
+          "5G NR",
+          "Commercial Availability",
+          "46.565127",
+          "7.102717"
+        ],
+        [
+          "Sunrise",
+          "Felben-Wellhausen",
+          "5G NR",
+          "Commercial Availability",
+          "47.57752",
+          "8.9444"
+        ],
+        [
+          "Sunrise",
+          "Ferlens (VD)",
+          "5G NR",
+          "Commercial Availability",
+          "46.58894",
+          "6.78555"
+        ],
+        [
+          "Sunrise",
+          "Flims",
+          "5G NR",
+          "Commercial Availability",
+          "46.83663",
+          "9.28469"
+        ],
+        [
+          "Sunrise",
+          "Flumenthal",
+          "5G NR",
+          "Commercial Availability",
+          "47.23547",
+          "7.59787"
+        ],
+        [
+          "Sunrise",
+          "Fraubrunnen",
+          "5G NR",
+          "Commercial Availability",
+          "47.08624",
+          "7.52687"
+        ],
+        [
+          "Sunrise",
+          "Freienwil",
+          "5G NR",
+          "Commercial Availability",
+          "47.50357",
+          "8.32802"
+        ],
+        [
+          "Sunrise",
+          "Frenkendorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.50351",
+          "7.71313"
+        ],
+        [
+          "Sunrise",
+          "Fulenbach",
+          "5G NR",
+          "Commercial Availability",
+          "47.2775",
+          "7.83637"
+        ],
+        [
+          "Sunrise",
+          "Füllinsdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.50559",
+          "7.72988"
+        ],
+        [
+          "Sunrise",
+          "Gächlingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.70276",
+          "8.49815"
+        ],
+        [
+          "Sunrise",
+          "Gerlafingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.17073",
+          "7.57314"
+        ],
+        [
+          "Sunrise",
+          "Gillarens",
+          "5G NR",
+          "Commercial Availability",
+          "46.583014",
+          "6.833283"
+        ],
+        [
+          "Sunrise",
+          "Givisiez",
+          "5G NR",
+          "Commercial Availability",
+          "46.81286",
+          "7.13166"
+        ],
+        [
+          "Sunrise",
+          "Givrins",
+          "5G NR",
+          "Commercial Availability",
+          "46.42895",
+          "6.20188"
+        ],
+        [
+          "Sunrise",
+          "Gland",
+          "5G NR",
+          "Commercial Availability",
+          "46.4203",
+          "6.26988"
+        ],
+        [
+          "Sunrise",
+          "Grafenried",
+          "5G NR",
+          "Commercial Availability",
+          "47.0787",
+          "7.51073"
+        ],
+        [
+          "Sunrise",
+          "Gränichen",
+          "5G NR",
+          "Commercial Availability",
+          "47.3621",
+          "8.09803"
+        ],
+        [
+          "Sunrise",
+          "Gunzgen",
+          "5G NR",
+          "Commercial Availability",
+          "47.31632",
+          "7.82863"
+        ],
+        [
+          "Sunrise",
+          "Gurzelen",
+          "5G NR",
+          "Commercial Availability",
+          "46.77984",
+          "7.53367"
+        ],
+        [
+          "Sunrise",
+          "Hägendorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.33314",
+          "7.84356"
+        ],
+        [
+          "Sunrise",
+          "Thalwil",
+          "5G NR",
+          "Commercial Availability",
+          "47.29493",
+          "8.56448"
+        ],
+        [
+          "Sunrise",
+          "Halten",
+          "5G NR",
+          "Commercial Availability",
+          "47.17037",
+          "7.60358"
+        ],
+        [
+          "Sunrise",
+          "Härkingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.30734",
+          "7.81899"
+        ],
+        [
+          "Sunrise",
+          "Hendschiken",
+          "5G NR",
+          "Commercial Availability",
+          "47.38572",
+          "8.21933"
+        ],
+        [
+          "Sunrise",
+          "Hilterfingen",
+          "5G NR",
+          "Commercial Availability",
+          "46.74396",
+          "7.64723"
+        ],
+        [
+          "Sunrise",
+          "Hirzel",
+          "5G NR",
+          "Commercial Availability",
+          "47.21466",
+          "8.61066"
+        ],
+        [
+          "Sunrise",
+          "Höri",
+          "5G NR",
+          "Commercial Availability",
+          "47.50827",
+          "8.51046"
+        ],
+        [
+          "Sunrise",
+          "Hüniken",
+          "5G NR",
+          "Commercial Availability",
+          "47.18481",
+          "7.63749"
+        ],
+        [
+          "Sunrise",
+          "Ingenbohl",
+          "5G NR",
+          "Commercial Availability",
+          "46.99937",
+          "8.60962"
+        ],
+        [
+          "Sunrise",
+          "Jaberg",
+          "5G NR",
+          "Commercial Availability",
+          "46.81789",
+          "7.56956"
+        ],
+        [
+          "Sunrise",
+          "Kappel (SO)",
+          "5G NR",
+          "Commercial Availability",
+          "47.32364",
+          "7.84632"
+        ],
+        [
+          "Sunrise",
+          "Kienersrüti",
+          "5G NR",
+          "Commercial Availability",
+          "46.79721",
+          "7.56137"
+        ],
+        [
+          "Sunrise",
+          "Kiesen",
+          "5G NR",
+          "Commercial Availability",
+          "46.81935",
+          "7.58236"
+        ],
+        [
+          "Sunrise",
+          "Killwangen",
+          "5G NR",
+          "Commercial Availability",
+          "47.43262",
+          "8.34844"
+        ],
+        [
+          "Sunrise",
+          "Kriegstetten",
+          "5G NR",
+          "Commercial Availability",
+          "47.17466",
+          "7.59806"
+        ],
+        [
+          "Sunrise",
+          "Laconnex",
+          "5G NR",
+          "Commercial Availability",
+          "46.15562",
+          "6.03597"
+        ],
+        [
+          "Sunrise",
+          "Laufenburg",
+          "5G NR",
+          "Commercial Availability",
+          "47.55966",
+          "8.05828"
+        ],
+        [
+          "Sunrise",
+          "Le Vaud",
+          "5G NR",
+          "Commercial Availability",
+          "46.47817",
+          "6.23885"
+        ],
+        [
+          "Sunrise",
+          "Leimbach (AG)",
+          "5G NR",
+          "Commercial Availability",
+          "47.27269",
+          "8.16998"
+        ],
+        [
+          "Sunrise",
+          "Lenzburg",
+          "5G NR",
+          "Commercial Availability",
+          "47.39044",
+          "8.17215"
+        ],
+        [
+          "Sunrise",
+          "Les Cullayes",
+          "5G NR",
+          "Commercial Availability",
+          "46.5721",
+          "6.75431"
+        ],
+        [
+          "Sunrise",
+          "Les Tavernes",
+          "5G NR",
+          "Commercial Availability",
+          "46.55431",
+          "6.81191"
+        ],
+        [
+          "Sunrise",
+          "Leuggern",
+          "5G NR",
+          "Commercial Availability",
+          "47.58105",
+          "8.21526"
+        ],
+        [
+          "Sunrise",
+          "Lully (VD)",
+          "5G NR",
+          "Commercial Availability",
+          "46.504609",
+          "6.465392"
+        ],
+        [
+          "Sunrise",
+          "Massongex",
+          "5G NR",
+          "Commercial Availability",
+          "46.24271",
+          "6.98799"
+        ],
+        [
+          "Sunrise",
+          "Mattstetten",
+          "5G NR",
+          "Commercial Availability",
+          "47.02997",
+          "7.51366"
+        ],
+        [
+          "Sunrise",
+          "Meiringen",
+          "5G NR",
+          "Commercial Availability",
+          "46.72516",
+          "8.19091"
+        ],
+        [
+          "Sunrise",
+          "Merenschwand",
+          "5G NR",
+          "Commercial Availability",
+          "47.2594",
+          "8.37492"
+        ],
+        [
+          "Sunrise",
+          "Mervelier",
+          "5G NR",
+          "Commercial Availability",
+          "47.34374",
+          "7.50004"
+        ],
+        [
+          "Sunrise",
+          "Mettendorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.577754",
+          "8.940255"
+        ],
+        [
+          "Sunrise",
+          "Mettmenstetten",
+          "5G NR",
+          "Commercial Availability",
+          "47.2437",
+          "8.46288"
+        ],
+        [
+          "Sunrise",
+          "Mézières (VD)",
+          "5G NR",
+          "Commercial Availability",
+          "46.594677",
+          "6.769969"
+        ],
+        [
+          "Sunrise",
+          "Montbovon",
+          "5G NR",
+          "Commercial Availability",
+          "46.483302",
+          "7.033349"
+        ],
+        [
+          "Sunrise",
+          "Montpreveyres",
+          "5G NR",
+          "Commercial Availability",
+          "46.58212",
+          "6.74081"
+        ],
+        [
+          "Sunrise",
+          "Moosseedorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.0146",
+          "7.48458"
+        ],
+        [
+          "Sunrise",
+          "Moutier",
+          "5G NR",
+          "Commercial Availability",
+          "47.27827",
+          "7.37167"
+        ],
+        [
+          "Sunrise",
+          "Münchringen",
+          "5G NR",
+          "Commercial Availability",
+          "47.04618",
+          "7.52069"
+        ],
+        [
+          "Sunrise",
+          "Müstair",
+          "5G NR",
+          "Commercial Availability",
+          "46.62618",
+          "10.44586"
+        ],
+        [
+          "Sunrise",
+          "Neftenbach",
+          "5G NR",
+          "Commercial Availability",
+          "47.52665",
+          "8.66882"
+        ],
+        [
+          "Sunrise",
+          "Neuenhof",
+          "5G NR",
+          "Commercial Availability",
+          "47.4494",
+          "8.32749"
+        ],
+        [
+          "Sunrise",
+          "Neunkirch",
+          "5G NR",
+          "Commercial Availability",
+          "47.68952",
+          "8.50044"
+        ],
+        [
+          "Sunrise",
+          "Niederbipp",
+          "5G NR",
+          "Commercial Availability",
+          "47.27162",
+          "7.69072"
+        ],
+        [
+          "Sunrise",
+          "Niederglatt",
+          "5G NR",
+          "Commercial Availability",
+          "47.49049",
+          "8.50338"
+        ],
+        [
+          "Sunrise",
+          "Niederhasli",
+          "5G NR",
+          "Commercial Availability",
+          "47.47882",
+          "8.48718"
+        ],
+        [
+          "Sunrise",
+          "Niederlenz",
+          "5G NR",
+          "Commercial Availability",
+          "47.40157",
+          "8.17612"
+        ],
+        [
+          "Sunrise",
+          "Oberbipp",
+          "5G NR",
+          "Commercial Availability",
+          "47.26207",
+          "7.65983"
+        ],
+        [
+          "Sunrise",
+          "Oberbuchsiten",
+          "5G NR",
+          "Commercial Availability",
+          "47.30939",
+          "7.76586"
+        ],
+        [
+          "Sunrise",
+          "Oberehrendingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.496946",
+          "8.34211"
+        ],
+        [
+          "Sunrise",
+          "Obergerlafingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.1614",
+          "7.58404"
+        ],
+        [
+          "Sunrise",
+          "Oberglatt",
+          "5G NR",
+          "Commercial Availability",
+          "47.47666",
+          "8.51948"
+        ],
+        [
+          "Sunrise",
+          "Oberkulm",
+          "5G NR",
+          "Commercial Availability",
+          "47.29995",
+          "8.12385"
+        ],
+        [
+          "Sunrise",
+          "Oberschrot",
+          "5G NR",
+          "Commercial Availability",
+          "46.73815",
+          "7.26639"
+        ],
+        [
+          "Sunrise",
+          "Oberwichtrach",
+          "5G NR",
+          "Commercial Availability",
+          "46.848936",
+          "7.576288"
+        ],
+        [
+          "Sunrise",
+          "Obfelden",
+          "5G NR",
+          "Commercial Availability",
+          "47.26438",
+          "8.43095"
+        ],
+        [
+          "Sunrise",
+          "Oekingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.1795",
+          "7.60428"
+        ],
+        [
+          "Sunrise",
+          "Oftringen",
+          "5G NR",
+          "Commercial Availability",
+          "47.31295",
+          "7.91987"
+        ],
+        [
+          "Sunrise",
+          "Opfikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.43468",
+          "8.56711"
+        ],
+        [
+          "Sunrise",
+          "Othmarsingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.40113",
+          "8.21531"
+        ],
+        [
+          "Sunrise",
+          "Pfeffikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.24684",
+          "8.17634"
+        ],
+        [
+          "Sunrise",
+          "Pfeffingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.45863",
+          "7.59003"
+        ],
+        [
+          "Sunrise",
+          "Promasens",
+          "5G NR",
+          "Commercial Availability",
+          "46.599705",
+          "6.816712"
+        ],
+        [
+          "Sunrise",
+          "Recherswil",
+          "5G NR",
+          "Commercial Availability",
+          "47.16248",
+          "7.59375"
+        ],
+        [
+          "Sunrise",
+          "Reiden",
+          "5G NR",
+          "Commercial Availability",
+          "47.24728",
+          "7.97134"
+        ],
+        [
+          "Sunrise",
+          "Rheinfelden",
+          "5G NR",
+          "Commercial Availability",
+          "47.55219",
+          "7.79229"
+        ],
+        [
+          "Sunrise",
+          "Roggwil (BE)",
+          "5G NR",
+          "Commercial Availability",
+          "47.239852",
+          "7.823378"
+        ],
+        [
+          "Sunrise",
+          "Rohr (AG)",
+          "5G NR",
+          "Commercial Availability",
+          "47.40963",
+          "7.95475"
+        ],
+        [
+          "Sunrise",
+          "Rüdtlingen-Alchenflüh",
+          "5G NR",
+          "Commercial Availability",
+          "47.085359",
+          "7.574209"
+        ],
+        [
+          "Sunrise",
+          "Russikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.3945",
+          "8.77706"
+        ],
+        [
+          "Sunrise",
+          "Schalunen",
+          "5G NR",
+          "Commercial Availability",
+          "47.10913",
+          "7.5261"
+        ],
+        [
+          "Sunrise",
+          "Schlieren",
+          "5G NR",
+          "Commercial Availability",
+          "47.39826",
+          "8.4488"
+        ],
+        [
+          "Sunrise",
+          "Singy-Avenex",
+          "5G NR",
+          "Commercial Availability",
+          "46.389402",
+          "6.19707"
+        ],
+        [
+          "Sunrise",
+          "Staufen",
+          "5G NR",
+          "Commercial Availability",
+          "47.38369",
+          "8.1682"
+        ],
+        [
+          "Sunrise",
+          "Stettlen",
+          "5G NR",
+          "Commercial Availability",
+          "46.95837",
+          "7.52516"
+        ],
+        [
+          "Sunrise",
+          "Strengelbach",
+          "5G NR",
+          "Commercial Availability",
+          "47.27908",
+          "7.92903"
+        ],
+        [
+          "Sunrise",
+          "Subingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.19566",
+          "7.61405"
+        ],
+        [
+          "Sunrise",
+          "Sufers",
+          "5G NR",
+          "Commercial Availability",
+          "46.57058",
+          "9.36644"
+        ],
+        [
+          "Sunrise",
+          "Tafers",
+          "5G NR",
+          "Commercial Availability",
+          "46.81533",
+          "7.21575"
+        ],
+        [
+          "Sunrise",
+          "Thierrens",
+          "5G NR",
+          "Commercial Availability",
+          "46.70408",
+          "6.75384"
+        ],
+        [
+          "Sunrise",
+          "Uetendorf",
+          "5G NR",
+          "Commercial Availability",
+          "46.77432",
+          "7.57161"
+        ],
+        [
+          "Sunrise",
+          "Uitikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.37095",
+          "8.4519"
+        ],
+        [
+          "Sunrise",
+          "Unterehrendingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.496522",
+          "8.341607"
+        ],
+        [
+          "Sunrise",
+          "Unterengstringen",
+          "5G NR",
+          "Commercial Availability",
+          "47.41363",
+          "8.44892"
+        ],
+        [
+          "Sunrise",
+          "Unterkulm",
+          "5G NR",
+          "Commercial Availability",
+          "47.31313",
+          "8.11371"
+        ],
+        [
+          "Sunrise",
+          "Urdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.38671",
+          "8.42069"
+        ],
+        [
+          "Sunrise",
+          "Ursy",
+          "5G NR",
+          "Commercial Availability",
+          "46.6344",
+          "6.83538"
+        ],
+        [
+          "Sunrise",
+          "Urtenen",
+          "5G NR",
+          "Commercial Availability",
+          "47.019823",
+          "7.49974"
+        ],
+        [
+          "Sunrise",
+          "Uster",
+          "5G NR",
+          "Commercial Availability",
+          "47.34827",
+          "8.71787"
+        ],
+        [
+          "Sunrise",
+          "Uttigen",
+          "5G NR",
+          "Commercial Availability",
+          "46.79439",
+          "7.57371"
+        ],
+        [
+          "Sunrise",
+          "Vallorbe",
+          "5G NR",
+          "Commercial Availability",
+          "46.712",
+          "6.37911"
+        ],
+        [
+          "Sunrise",
+          "Vauderens",
+          "5G NR",
+          "Commercial Availability",
+          "46.616283",
+          "6.850003"
+        ],
+        [
+          "Sunrise",
+          "Vich",
+          "5G NR",
+          "Commercial Availability",
+          "46.42885",
+          "6.25041"
+        ],
+        [
+          "Sunrise",
+          "Villmergen",
+          "5G NR",
+          "Commercial Availability",
+          "47.34752",
+          "8.24465"
+        ],
+        [
+          "Sunrise",
+          "Villnachern",
+          "5G NR",
+          "Commercial Availability",
+          "47.46941",
+          "8.16317"
+        ],
+        [
+          "Sunrise",
+          "Vuibroye",
+          "5G NR",
+          "Commercial Availability",
+          "46.57194",
+          "6.80534"
+        ],
+        [
+          "Sunrise",
+          "Weiningen (ZH)",
+          "5G NR",
+          "Commercial Availability",
+          "47.41963",
+          "8.43445"
+        ],
+        [
+          "Sunrise",
+          "Wettingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.46595",
+          "8.3266"
+        ],
+        [
+          "Sunrise",
+          "Wettswil am Albis",
+          "5G NR",
+          "Commercial Availability",
+          "47.33939",
+          "8.47363"
+        ],
+        [
+          "Sunrise",
+          "Winkel",
+          "5G NR",
+          "Commercial Availability",
+          "47.49212",
+          "8.55542"
+        ],
+        [
+          "Sunrise",
+          "Wohlen (AG)",
+          "5G NR",
+          "Commercial Availability",
+          "47.349164",
+          "8.276957"
+        ],
+        [
+          "Sunrise",
+          "Wynau",
+          "5G NR",
+          "Commercial Availability",
+          "47.25714",
+          "7.82102"
+        ],
+        [
+          "Sunrise",
+          "Zauggenried",
+          "5G NR",
+          "Commercial Availability",
+          "47.07315",
+          "7.54102"
+        ],
+        [
+          "Sunrise",
+          "Zielebach",
+          "5G NR",
+          "Commercial Availability",
+          "47.15863",
+          "7.57652"
+        ],
+        [
+          "Sunrise",
+          "Zofingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.28884",
+          "7.94476"
+        ],
+        [
+          "Sunrise",
+          "Zufikon",
+          "5G NR",
+          "Commercial Availability",
+          "47.34559",
+          "8.35776"
+        ],
+        [
+          "Sunrise",
+          "Zwieselberg",
+          "5G NR",
+          "Commercial Availability",
+          "46.70844",
+          "7.61724"
+        ],
+        [
+          "Sunrise",
+          "Zwingen",
+          "5G NR",
+          "Commercial Availability",
+          "47.43716",
+          "7.53089"
+        ],
+        [
+          "AT&T Mobility",
+          "Austin, TX",
+          "5G NR",
+          "Commercial Availability",
+          "30.26715",
+          "-97.74306"
+        ],
+        [
+          "AT&T Mobility",
+          "Los Angeles, CA",
+          "5G NR",
+          "Commercial Availability",
+          "34.05223",
+          "-118.24368"
+        ],
+        [
+          "AT&T Mobility",
+          "Nashville, TN",
+          "5G NR",
+          "Commercial Availability",
+          "36.16266",
+          "-86.7816"
+        ],
+        [
+          "AT&T Mobility",
+          "Orlando, FL",
+          "5G NR",
+          "Commercial Availability",
+          "28.53834",
+          "-81.37924"
+        ],
+        [
+          "AT&T Mobility",
+          "San Diego, CA",
+          "5G NR",
+          "Commercial Availability",
+          "32.71574",
+          "-117.16108"
+        ],
+        [
+          "AT&T Mobility",
+          "San Francisco, CA",
+          "5G NR",
+          "Commercial Availability",
+          "37.77493",
+          "-122.41942"
+        ],
+        [
+          "AT&T Mobility",
+          "San Jose, CA",
+          "5G NR",
+          "Commercial Availability",
+          "37.33821",
+          "-121.88633"
+        ],
+        [
+          "T-Mobile",
+          "Warsaw",
+          "5G NR",
+          "Commercial Availability",
+          "52.22968",
+          "21.01223"
+        ],
+        [
+          "Antel",
+          "Manantiales",
+          "5G NR",
+          "Commercial Availability",
+          "-34.90494",
+          "-54.82775"
+        ],
+        [
+          "China Unicom",
+          "Shanghai",
+          "5G NR",
+          "Commercial Availability",
+          "31.23042",
+          "121.4737"
+        ],
+        [
+          "China Unicom",
+          "Beijing",
+          "5G NR",
+          "Commercial Availability",
+          "39.90421",
+          "116.4074"
+        ],
+        [
+          "China Unicom",
+          "Hangzhou",
+          "5G NR",
+          "Commercial Availability",
+          "30.27409",
+          "120.15507"
+        ],
+        [
+          "China Unicom",
+          "Xiong'an Area",
+          "5G NR",
+          "Commercial Availability",
+          "38.989647",
+          "116.10661"
+        ],
+        [
+          "China Unicom",
+          "Shenzhen",
+          "5G NR",
+          "Commercial Availability",
+          "22.5431",
+          "114.05787"
+        ],
+        [
+          "China Unicom",
+          "Guangzhou",
+          "5G NR",
+          "Commercial Availability",
+          "23.12911",
+          "113.26439"
+        ],
+        [
+          "China Unicom",
+          "Nanjing",
+          "5G NR",
+          "Commercial Availability",
+          "32.06026",
+          "118.79688"
+        ],
+        [
+          "STC",
+          "Abha",
+          "5G NR",
+          "Commercial Availability",
+          "18.24647",
+          "42.51172"
+        ],
+        [
+          "STC",
+          "Dammam",
+          "5G NR",
+          "Commercial Availability",
+          "26.39267",
+          "49.97771"
+        ],
+        [
+          "STC",
+          "Jeddah",
+          "5G NR",
+          "Commercial Availability",
+          "21.28541",
+          "39.23755"
+        ],
+        [
+          "STC",
+          "Al Jubail",
+          "5G NR",
+          "Commercial Availability",
+          "26.95977",
+          "49.56874"
+        ],
+        [
+          "STC",
+          "Medina",
+          "5G NR",
+          "Commercial Availability",
+          "24.52465",
+          "39.56918"
+        ],
+        [
+          "STC",
+          "Mecca",
+          "5G NR",
+          "Commercial Availability",
+          "21.38908",
+          "39.85791"
+        ],
+        [
+          "STC",
+          "Buraydah",
+          "5G NR",
+          "Commercial Availability",
+          "26.35923",
+          "43.98181"
+        ],
+        [
+          "STC",
+          "Unayzah",
+          "5G NR",
+          "Commercial Availability",
+          "26.0834",
+          "43.96275"
+        ],
+        [
+          "STC",
+          "Riyadh",
+          "5G NR",
+          "Commercial Availability",
+          "24.71355",
+          "46.6753"
+        ],
+        [
+          "STC",
+          "Sharma",
+          "5G NR",
+          "Commercial Availability",
+          "27.99346",
+          "35.23682"
+        ],
+        [
+          "STC",
+          "Taif",
+          "5G NR",
+          "Commercial Availability",
+          "21.43727",
+          "40.51271"
+        ],
+        [
+          "Zain",
+          "Mecca",
+          "5G NR",
+          "Commercial Availability",
+          "21.38908",
+          "39.85791"
+        ],
+        [
+          "Zain",
+          "Dammam",
+          "5G NR",
+          "Commercial Availability",
+          "26.39267",
+          "49.97771"
+        ],
+        [
+          "Zain",
+          "Jeddah",
+          "5G NR",
+          "Commercial Availability",
+          "21.28541",
+          "39.23755"
+        ],
+        [
+          "Zain",
+          "Al Khobar",
+          "5G NR",
+          "Commercial Availability",
+          "26.21719",
+          "50.19714"
+        ],
+        [
+          "Zain",
+          "Medina",
+          "5G NR",
+          "Commercial Availability",
+          "24.52465",
+          "39.56918"
+        ],
+        [
+          "Zain",
+          "Riyadh",
+          "5G NR",
+          "Commercial Availability",
+          "24.71355",
+          "46.6753"
+        ],
+        [
+          "Mobily",
+          "Medina",
+          "5G NR",
+          "Commercial Availability",
+          "24.52465",
+          "39.56918"
+        ],
+        [
+          "Mobily",
+          "Jeddah",
+          "5G NR",
+          "Commercial Availability",
+          "21.28541",
+          "39.23755"
+        ],
+        [
+          "Mobily",
+          "Mecca",
+          "5G NR",
+          "Commercial Availability",
+          "21.38908",
+          "39.85791"
+        ],
+        [
+          "Mobily",
+          "Riyadh",
+          "5G NR",
+          "Commercial Availability",
+          "24.71355",
+          "46.6753"
+        ],
+        [
+          "Mobily",
+          "Dammam",
+          "5G NR",
+          "Commercial Availability",
+          "26.39267",
+          "49.97771"
+        ],
+        [
+          "Mobily",
+          "Al Khobar",
+          "5G NR",
+          "Commercial Availability",
+          "26.21719",
+          "50.19714"
+        ],
+        [
+          "DU",
+          "Abu Dhabi",
+          "5G NR",
+          "Commercial Availability",
+          "24.449928",
+          "54.376979"
+        ],
+        [
+          "DU",
+          "Dubai",
+          "5G NR",
+          "Commercial Availability",
+          "25.20485",
+          "55.27078"
+        ],
+        [
+          "TIM",
+          "Florianópolis",
+          "5G NR",
+          "Pre-Release",
+          "-27.59538",
+          "-48.54805"
+        ],
+        [
+          "China Mobile",
+          "Shanghai",
+          "5G NR",
+          "Pre-Release",
+          "31.23042",
+          "121.4737"
+        ],
+        [
+          "China Mobile",
+          "Hangzhou",
+          "5G NR",
+          "Pre-Release",
+          "30.27409",
+          "120.15507"
+        ],
+        [
+          "China Mobile",
+          "Guangzhou",
+          "5G NR",
+          "Pre-Release",
+          "23.12911",
+          "113.26439"
+        ],
+        [
+          "China Mobile",
+          "Suzhou",
+          "5G NR",
+          "Pre-Release",
+          "31.29898",
+          "120.58529"
+        ],
+        [
+          "China Mobile",
+          "Wuhan",
+          "5G NR",
+          "Pre-Release",
+          "30.5931",
+          "114.30539"
+        ],
+        [
+          "Magenta Telekom",
+          "Lendorf",
+          "5G NR",
+          "Commercial Availability",
+          "46.83615",
+          "13.42722"
+        ],
+        [
+          "Magenta Telekom",
+          "Hochstrass",
+          "5G NR",
+          "Commercial Availability",
+          "48.139244",
+          "15.983846"
+        ],
+        [
+          "Magenta Telekom",
+          "Hohenau an der March",
+          "5G NR",
+          "Commercial Availability",
+          "48.60587",
+          "16.90446"
+        ],
+        [
+          "Magenta Telekom",
+          "Innsbruck",
+          "5G NR",
+          "Commercial Availability",
+          "47.26921",
+          "11.4041"
+        ],
+        [
+          "Magenta Telekom",
+          "Kaindorf an der Sulm",
+          "5G NR",
+          "Commercial Availability",
+          "46.79381",
+          "15.53696"
+        ],
+        [
+          "Magenta Telekom",
+          "Kalsdorf bei Graz",
+          "5G NR",
+          "Commercial Availability",
+          "46.96438",
+          "15.47873"
+        ],
+        [
+          "Magenta Telekom",
+          "Kapfenberg",
+          "5G NR",
+          "Commercial Availability",
+          "47.44333",
+          "15.27919"
+        ],
+        [
+          "Magenta Telekom",
+          "Kirchbichl",
+          "5G NR",
+          "Commercial Availability",
+          "47.51771",
+          "12.09626"
+        ],
+        [
+          "Magenta Telekom",
+          "Loosdorf",
+          "5G NR",
+          "Commercial Availability",
+          "48.200597",
+          "15.400069"
+        ],
+        [
+          "Magenta Telekom",
+          "Oberhofen am Irrsee",
+          "5G NR",
+          "Commercial Availability",
+          "47.953592",
+          "13.30675"
+        ],
+        [
+          "Magenta Telekom",
+          "Pirka",
+          "5G NR",
+          "Commercial Availability",
+          "47.00084",
+          "15.39138"
+        ],
+        [
+          "Magenta Telekom",
+          "Ried im Innkreis",
+          "5G NR",
+          "Commercial Availability",
+          "48.21272",
+          "13.49272"
+        ],
+        [
+          "Magenta Telekom",
+          "Seefeld in Tirol",
+          "5G NR",
+          "Commercial Availability",
+          "47.33",
+          "11.18777"
+        ],
+        [
+          "Magenta Telekom",
+          "Serfaus",
+          "5G NR",
+          "Commercial Availability",
+          "47.03869",
+          "10.60483"
+        ],
+        [
+          "Magenta Telekom",
+          "St. Johann in Tirol",
+          "5G NR",
+          "Commercial Availability",
+          "47.521071",
+          "12.430561"
+        ],
+        [
+          "Magenta Telekom",
+          "Villach",
+          "5G NR",
+          "Commercial Availability",
+          "46.60856",
+          "13.85062"
+        ],
+        [
+          "Magenta Telekom",
+          "Wartberg im Mürztal",
+          "5G NR",
+          "Commercial Availability",
+          "47.52708",
+          "15.4866"
+        ],
+        [
+          "Viettel",
+          "Hanoi",
+          "5G NR",
+          "Pre-Release",
+          "21.02776",
+          "105.83416"
+        ],
+        [
+          "Vodafone",
+          "Birmingham",
+          "5G NR",
+          "Commercial Availability",
+          "52.48624",
+          "-1.8904"
+        ],
+        [
+          "Elisa",
+          "Espoo",
+          "5G NR",
+          "Commercial Availability",
+          "60.20549",
+          "24.6559"
+        ],
+        [
+          "Elisa",
+          "Vantaa",
+          "5G NR",
+          "Commercial Availability",
+          "60.29335",
+          "25.03777"
+        ],
+        [
+          "Elisa",
+          "Helsinki",
+          "5G NR",
+          "Commercial Availability",
+          "60.16986",
+          "24.93838"
+        ],
+        [
+          "Elisa",
+          "Jyväskylä",
+          "5G NR",
+          "Commercial Availability",
+          "62.2426",
+          "25.74726"
+        ],
+        [
+          "Elisa",
+          "Turku",
+          "5G NR",
+          "Commercial Availability",
+          "60.45181",
+          "22.26663"
+        ],
+        [
+          "EE",
+          "London",
+          "5G NR",
+          "Commercial Availability",
+          "51.50735",
+          "-0.12776"
+        ],
+        [
+          "EE",
+          "Edinburgh",
+          "5G NR",
+          "Commercial Availability",
+          "55.95325",
+          "-3.18827"
+        ],
+        [
+          "EE",
+          "Cardiff",
+          "5G NR",
+          "Commercial Availability",
+          "51.48158",
+          "-3.17909"
+        ],
+        [
+          "EE",
+          "Belfast",
+          "5G NR",
+          "Commercial Availability",
+          "54.59729",
+          "-5.93012"
+        ],
+        [
+          "EE",
+          "Birmingham",
+          "5G NR",
+          "Commercial Availability",
+          "52.48624",
+          "-1.8904"
+        ],
+        [
+          "EE",
+          "Manchester",
+          "5G NR",
+          "Commercial Availability",
+          "53.48076",
+          "-2.24263"
+        ],
+        [
+          "Telenor",
+          "Győr",
+          "5G NR",
+          "Pre-Release",
+          "47.68746",
+          "17.6504"
+        ],
+        [
+          "Vodafone",
+          "Bologna",
+          "5G NR",
+          "Commercial Availability",
+          "44.49489",
+          "11.34262"
+        ],
+        [
+          "Vodafone",
+          "Bolton",
+          "5G NR",
+          "Commercial Availability",
+          "53.57686",
+          "-2.42822"
+        ],
+        [
+          "Vodafone",
+          "Bristol",
+          "5G NR",
+          "Commercial Availability",
+          "51.45451",
+          "-2.58791"
+        ],
+        [
+          "Vodafone",
+          "Bucharest",
+          "5G NR",
+          "Commercial Availability",
+          "44.42677",
+          "26.10254"
+        ],
+        [
+          "China Mobile",
+          "Beijing",
+          "5G NR",
+          "Pre-Release",
+          "39.90421",
+          "116.4074"
+        ],
+        [
+          "China Mobile",
+          "Chengdu",
+          "5G NR",
+          "Pre-Release",
+          "30.57282",
+          "104.0668"
+        ],
+        [
+          "China Mobile",
+          "Shenzhen",
+          "5G NR",
+          "Pre-Release",
+          "22.5431",
+          "114.05787"
+        ],
+        [
+          "China Unicom",
+          "Tianjin",
+          "5G NR",
+          "Commercial Availability",
+          "39.08416",
+          "117.20098"
+        ],
+        [
+          "China Unicom",
+          "Qingdao",
+          "5G NR",
+          "Commercial Availability",
+          "36.06711",
+          "120.38261"
+        ],
+        [
+          "China Unicom",
+          "Wuhan",
+          "5G NR",
+          "Commercial Availability",
+          "30.5931",
+          "114.30539"
+        ],
+        [
+          "China Unicom",
+          "Guiyang",
+          "5G NR",
+          "Commercial Availability",
+          "26.64766",
+          "106.63015"
+        ],
+        [
+          "China Unicom",
+          "Chengdu",
+          "5G NR",
+          "Commercial Availability",
+          "30.57282",
+          "104.0668"
+        ],
+        [
+          "China Unicom",
+          "Fuzhou",
+          "5G NR",
+          "Commercial Availability",
+          "26.07451",
+          "119.29649"
+        ],
+        [
+          "China Unicom",
+          "Zhengzhou",
+          "5G NR",
+          "Commercial Availability",
+          "34.74661",
+          "113.62533"
+        ],
+        [
+          "China Unicom",
+          "Shenyang",
+          "5G NR",
+          "Commercial Availability",
+          "41.8057",
+          "123.43147"
+        ],
+        [
+          "Personal",
+          "Buenos Aires",
+          "5G NR",
+          "Commercial Availability",
+          "-34.60368",
+          "-58.38156"
+        ],
+        [
+          "Mobitel",
+          "Polonnaruwa",
+          "5G NR",
+          "Pre-Release",
+          "7.93264",
+          "81.00368"
+        ],
+        [
+          "Advanced Info Service",
+          "Bangkok",
+          "5G NR",
+          "Commercial Availability",
+          "13.75633",
+          "100.50177"
+        ],
+        [
+          "Etisalat",
+          "Ras Al-Khaimah",
+          "5G NR",
+          "Commercial Availability",
+          "25.798047",
+          "55.975937"
+        ],
+        [
+          "Etisalat",
+          "Umm Al Quwain",
+          "5G NR",
+          "Commercial Availability",
+          "25.50895",
+          "55.569087"
+        ],
+        [
+          "Etisalat",
+          "Fujairah",
+          "5G NR",
+          "Commercial Availability",
+          "25.12881",
+          "56.32648"
+        ],
+        [
+          "Etisalat",
+          "Al Ain",
+          "5G NR",
+          "Commercial Availability",
+          "24.13016",
+          "55.80231"
+        ],
+        [
+          "Etisalat",
+          "Abu Dhabi",
+          "5G NR",
+          "Commercial Availability",
+          "24.449928",
+          "54.376979"
+        ],
+        [
+          "Etisalat",
+          "Dubai",
+          "5G NR",
+          "Commercial Availability",
+          "25.20485",
+          "55.27078"
+        ],
+        [
+          "Etisalat",
+          "Sharjah",
+          "5G NR",
+          "Commercial Availability",
+          "25.32233",
+          "55.51364"
+        ],
+        [
+          "Etisalat",
+          "Dibba",
+          "5G NR",
+          "Commercial Availability",
+          "25.590002",
+          "56.25936"
+        ],
+        [
+          "Etisalat",
+          "Khor Fakkan",
+          "5G NR",
+          "Commercial Availability",
+          "25.33657",
+          "56.34326"
+        ],
+        [
+          "Etisalat",
+          "Ajman",
+          "5G NR",
+          "Commercial Availability",
+          "25.40522",
+          "55.51364"
+        ],
+        [
+          "China Telecom",
+          "Xiong'an Area",
+          "5G NR",
+          "Pre-Release",
+          "38.989647",
+          "116.10661"
+        ],
+        [
+          "China Telecom",
+          "Shenzhen",
+          "5G NR",
+          "Pre-Release",
+          "22.5431",
+          "114.05787"
+        ],
+        [
+          "China Telecom",
+          "Shanghai",
+          "5G NR",
+          "Pre-Release",
+          "31.23042",
+          "121.4737"
+        ],
+        [
+          "China Telecom",
+          "Suzhou",
+          "5G NR",
+          "Pre-Release",
+          "31.29898",
+          "120.58529"
+        ],
+        [
+          "China Telecom",
+          "Chengdu",
+          "5G NR",
+          "Pre-Release",
+          "30.57282",
+          "104.0668"
+        ],
+        [
+          "China Telecom",
+          "Lanzhou",
+          "5G NR",
+          "Pre-Release",
+          "36.06109",
+          "103.8343"
+        ],
+        [
+          "Orange",
+          "Valencia",
+          "5G NR",
+          "Commercial Availability",
+          "39.46991",
+          "-0.37629"
+        ],
+        [
+          "Orange",
+          "Seville",
+          "5G NR",
+          "Commercial Availability",
+          "37.38909",
+          "-5.98446"
+        ],
+        [
+          "Orange",
+          "Málaga",
+          "5G NR",
+          "Commercial Availability",
+          "36.72126",
+          "-4.42127"
+        ],
+        [
+          "Orange",
+          "Vigo",
+          "5G NR",
+          "Pre-Release",
+          "42.2406",
+          "-8.72073"
+        ],
+        [
+          "Orange",
+          "Santiago de Compostela",
+          "5G NR",
+          "Pre-Release",
+          "42.87821",
+          "-8.54484"
+        ],
+        [
+          "Orange",
+          "Barcelona",
+          "5G NR",
+          "Commercial Availability",
+          "41.388803",
+          "2.176914"
+        ],
+        [
+          "Orange",
+          "Bilbao",
+          "5G NR",
+          "Commercial Availability",
+          "43.26301",
+          "-2.93499"
+        ],
+        [
+          "Dialog Axiata",
+          "Colombo",
+          "5G NR",
+          "Limited Availability",
+          "6.92708",
+          "79.86124"
+        ],
+        [
+          "Videotron",
+          "Montreal",
+          "5G NR",
+          "Pre-Release",
+          "45.50169",
+          "-73.56726"
+        ],
+        [
+          "Batelco",
+          "Reef Island",
+          "5G NR",
+          "Commercial Availability",
+          "26.241298",
+          "50.562464"
+        ],
+        [
+          "Batelco",
+          "Amwaj",
+          "5G NR",
+          "Commercial Availability",
+          "26.29242",
+          "50.66004"
+        ],
+        [
+          "Movistar",
+          "Segovia",
+          "5G NR",
+          "Pre-Release",
+          "40.9429",
+          "-4.10881"
+        ],
+        [
+          "Movistar",
+          "Talavera de la Reina",
+          "5G NR",
+          "Pre-Release",
+          "39.96288",
+          "-4.83045"
+        ],
+        [
+          "Nos",
+          "Matosinhos",
+          "5G NR",
+          "Commercial Availability",
+          "41.18444",
+          "-8.69628"
+        ],
+        [
+          "VIVA",
+          "Salmiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.33529",
+          "48.07156"
+        ],
+        [
+          "VIVA",
+          "Abdullah al-Salem",
+          "5G NR",
+          "Commercial Availability",
+          "29.35186",
+          "47.98369"
+        ],
+        [
+          "VIVA",
+          "Abdullah Al Mubarak Al Sabah",
+          "5G NR",
+          "Commercial Availability",
+          "29.24047",
+          "47.90451"
+        ],
+        [
+          "VIVA",
+          "Abu Fatira",
+          "5G NR",
+          "Commercial Availability",
+          "29.19737",
+          "48.10268"
+        ],
+        [
+          "VIVA",
+          "Abu Halifa",
+          "5G NR",
+          "Commercial Availability",
+          "29.12718",
+          "48.12502"
+        ],
+        [
+          "VIVA",
+          "Adailiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.32806",
+          "47.98369"
+        ],
+        [
+          "VIVA",
+          "Adan",
+          "5G NR",
+          "Commercial Availability",
+          "29.22844",
+          "48.06547"
+        ],
+        [
+          "VIVA",
+          "Ali Sabah Al Salem",
+          "5G NR",
+          "Commercial Availability",
+          "28.95705",
+          "48.15483"
+        ],
+        [
+          "VIVA",
+          "Qurain",
+          "5G NR",
+          "Commercial Availability",
+          "29.2022",
+          "48.07787"
+        ],
+        [
+          "VIVA",
+          "Qusor",
+          "5G NR",
+          "Commercial Availability",
+          "29.2146",
+          "48.07291"
+        ],
+        [
+          "VIVA",
+          "Andalous",
+          "5G NR",
+          "Commercial Availability",
+          "29.3042",
+          "47.88473"
+        ],
+        [
+          "VIVA",
+          "Al-Ardiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.29138",
+          "47.90698"
+        ],
+        [
+          "VIVA",
+          "Ishbiliya",
+          "5G NR",
+          "Commercial Availability",
+          "29.27283",
+          "47.93914"
+        ],
+        [
+          "VIVA",
+          "Bayan",
+          "5G NR",
+          "Commercial Availability",
+          "29.29799",
+          "48.05109"
+        ],
+        [
+          "VIVA",
+          "Dahar",
+          "5G NR",
+          "Commercial Availability",
+          "29.16502",
+          "48.06795"
+        ],
+        [
+          "VIVA",
+          "Doha",
+          "5G NR",
+          "Commercial Availability",
+          "29.31552",
+          "47.81557"
+        ],
+        [
+          "VIVA",
+          "Eqaila",
+          "5G NR",
+          "Commercial Availability",
+          "29.16875",
+          "48.10268"
+        ],
+        [
+          "VIVA",
+          "Fahaheel",
+          "5G NR",
+          "Commercial Availability",
+          "29.08313",
+          "48.13346"
+        ],
+        [
+          "VIVA",
+          "Faiha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34043",
+          "47.97874"
+        ],
+        [
+          "VIVA",
+          "Firdous",
+          "5G NR",
+          "Commercial Availability",
+          "29.28612",
+          "47.87485"
+        ],
+        [
+          "VIVA",
+          "Fintas",
+          "5G NR",
+          "Commercial Availability",
+          "29.16967",
+          "48.11758"
+        ],
+        [
+          "VIVA",
+          "Hadiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.14588",
+          "48.09276"
+        ],
+        [
+          "VIVA",
+          "Hawally",
+          "5G NR",
+          "Commercial Availability",
+          "29.3333",
+          "48.01589"
+        ],
+        [
+          "VIVA",
+          "Hateen",
+          "5G NR",
+          "Commercial Availability",
+          "29.28424",
+          "48.01837"
+        ],
+        [
+          "VIVA",
+          "Jaber Al Ali",
+          "5G NR",
+          "Commercial Availability",
+          "29.16927",
+          "48.08531"
+        ],
+        [
+          "VIVA",
+          "Jabriya",
+          "5G NR",
+          "Commercial Availability",
+          "29.31806",
+          "48.0258"
+        ],
+        [
+          "VIVA",
+          "Jahra",
+          "5G NR",
+          "Commercial Availability",
+          "29.33657",
+          "47.67553"
+        ],
+        [
+          "VIVA",
+          "Jeleeb Al-Shuyoukh",
+          "5G NR",
+          "Commercial Availability",
+          "29.25522",
+          "47.93666"
+        ],
+        [
+          "VIVA",
+          "Khaitan",
+          "5G NR",
+          "Commercial Availability",
+          "29.27997",
+          "47.97626"
+        ],
+        [
+          "VIVA",
+          "Khaldiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.3252",
+          "47.96388"
+        ],
+        [
+          "VIVA",
+          "Kaifan",
+          "5G NR",
+          "Commercial Availability",
+          "29.33757",
+          "47.95893"
+        ],
+        [
+          "VIVA",
+          "Mahboula",
+          "5G NR",
+          "Commercial Availability",
+          "29.14966",
+          "48.1192"
+        ],
+        [
+          "VIVA",
+          "Mangaf",
+          "5G NR",
+          "Commercial Availability",
+          "29.10706",
+          "48.12399"
+        ],
+        [
+          "VIVA",
+          "Mansouriya",
+          "5G NR",
+          "Commercial Availability",
+          "29.35734",
+          "47.99484"
+        ],
+        [
+          "VIVA",
+          "Mishref",
+          "5G NR",
+          "Commercial Availability",
+          "29.2761",
+          "48.06547"
+        ],
+        [
+          "VIVA",
+          "Mubarak Al-Abdullah",
+          "5G NR",
+          "Commercial Availability",
+          "29.2766",
+          "48.04811"
+        ],
+        [
+          "VIVA",
+          "Mubarak Al-Kabeer",
+          "5G NR",
+          "Commercial Availability",
+          "29.21224",
+          "48.06051"
+        ],
+        [
+          "VIVA",
+          "Nuzha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34139",
+          "47.9936"
+        ],
+        [
+          "VIVA",
+          "Qadsiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.34996",
+          "48.00351"
+        ],
+        [
+          "VIVA",
+          "Qairawan",
+          "5G NR",
+          "Commercial Availability",
+          "29.30028",
+          "47.80076"
+        ],
+        [
+          "VIVA",
+          "Qortuba",
+          "5G NR",
+          "Commercial Availability",
+          "29.34375",
+          "47.69204"
+        ],
+        [
+          "VIVA",
+          "Rabia",
+          "5G NR",
+          "Commercial Availability",
+          "29.29663",
+          "47.93914"
+        ],
+        [
+          "VIVA",
+          "Rawda",
+          "5G NR",
+          "Commercial Availability",
+          "29.32901",
+          "47.99855"
+        ],
+        [
+          "VIVA",
+          "Rehab",
+          "5G NR",
+          "Commercial Availability",
+          "29.28521",
+          "47.93419"
+        ],
+        [
+          "VIVA",
+          "Rigai",
+          "5G NR",
+          "Commercial Availability",
+          "29.30613",
+          "47.9144"
+        ],
+        [
+          "VIVA",
+          "Al-Riqqa",
+          "5G NR",
+          "Commercial Availability",
+          "29.1504",
+          "48.10536"
+        ],
+        [
+          "VIVA",
+          "Rumaithiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.31803",
+          "48.07539"
+        ],
+        [
+          "VIVA",
+          "Saad Al Abdullah",
+          "5G NR",
+          "Commercial Availability",
+          "29.30698",
+          "47.71568"
+        ],
+        [
+          "VIVA",
+          "Sabah Al Nasser",
+          "5G NR",
+          "Commercial Availability",
+          "29.27091",
+          "47.88473"
+        ],
+        [
+          "VIVA",
+          "Sabah Al Salem",
+          "5G NR",
+          "Commercial Availability",
+          "29.25656",
+          "48.06261"
+        ],
+        [
+          "VIVA",
+          "South Sabahiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.08143",
+          "48.10517"
+        ],
+        [
+          "VIVA",
+          "Salam",
+          "5G NR",
+          "Commercial Availability",
+          "29.29663",
+          "48.01342"
+        ],
+        [
+          "VIVA",
+          "Salwa",
+          "5G NR",
+          "Commercial Availability",
+          "29.29649",
+          "48.07938"
+        ],
+        [
+          "VIVA",
+          "Shamiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.3509",
+          "47.96884"
+        ],
+        [
+          "VIVA",
+          "Shuhada",
+          "5G NR",
+          "Commercial Availability",
+          "29.27089",
+          "48.03324"
+        ],
+        [
+          "VIVA",
+          "Shuwaikh",
+          "5G NR",
+          "Commercial Availability",
+          "29.3544",
+          "47.9564"
+        ],
+        [
+          "VIVA",
+          "Sulaibikhat",
+          "5G NR",
+          "Commercial Availability",
+          "29.31556",
+          "47.84026"
+        ],
+        [
+          "VIVA",
+          "Surra",
+          "5G NR",
+          "Commercial Availability",
+          "29.31378",
+          "48.00846"
+        ],
+        [
+          "VIVA",
+          "Taima",
+          "5G NR",
+          "Commercial Availability",
+          "29.32968",
+          "47.67918"
+        ],
+        [
+          "VIVA",
+          "Waha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34259",
+          "47.65807"
+        ],
+        [
+          "VIVA",
+          "Yarmouk",
+          "5G NR",
+          "Commercial Availability",
+          "29.31282",
+          "47.96884"
+        ],
+        [
+          "VIVA",
+          "Zahra",
+          "5G NR",
+          "Commercial Availability",
+          "29.27806",
+          "47.99607"
+        ],
+        [
+          "VIVA",
+          "Al Farwaniyah",
+          "5G NR",
+          "Commercial Availability",
+          "29.2819",
+          "47.95888"
+        ],
+        [
+          "VIVA",
+          "Naeem",
+          "5G NR",
+          "Commercial Availability",
+          "29.3331",
+          "47.69358"
+        ],
+        [
+          "VIVA",
+          "Nasseem",
+          "5G NR",
+          "Commercial Availability",
+          "29.31852",
+          "47.67757"
+        ],
+        [
+          "VIVA",
+          "Omariya",
+          "5G NR",
+          "Commercial Availability",
+          "29.29759",
+          "47.95398"
+        ],
+        [
+          "VIVA",
+          "Oyoun",
+          "5G NR",
+          "Commercial Availability",
+          "29.32958",
+          "47.65788"
+        ],
+        [
+          "VIVA",
+          "Qasr",
+          "5G NR",
+          "Commercial Availability",
+          "29.34014",
+          "47.69725"
+        ],
+        [
+          "Batelco",
+          "Saar",
+          "5G NR",
+          "Commercial Availability",
+          "26.19148",
+          "50.48769"
+        ],
+        [
+          "Batelco",
+          "Hamala",
+          "5G NR",
+          "Commercial Availability",
+          "26.13867",
+          "50.47735"
+        ],
+        [
+          "Batelco",
+          "Nabih Saleh",
+          "5G NR",
+          "Commercial Availability",
+          "26.18182",
+          "50.58481"
+        ],
+        [
+          "Batelco",
+          "Riffa",
+          "5G NR",
+          "Commercial Availability",
+          "26.12261",
+          "50.53426"
+        ],
+        [
+          "Vodafone",
+          "Cardiff",
+          "5G NR",
+          "Commercial Availability",
+          "51.48158",
+          "-3.17909"
+        ],
+        [
+          "Vodafone",
+          "Cluj-Napoca",
+          "5G NR",
+          "Commercial Availability",
+          "46.77121",
+          "23.62364"
+        ],
+        [
+          "Vodafone",
+          "Cologne",
+          "5G NR",
+          "Commercial Availability",
+          "50.93753",
+          "6.96028"
+        ],
+        [
+          "Vodafone",
+          "Doha",
+          "5G NR",
+          "Commercial Availability",
+          "25.35214",
+          "51.49399"
+        ],
+        [
+          "Vodafone",
+          "Dortmund",
+          "5G NR",
+          "Commercial Availability",
+          "51.51359",
+          "7.4653"
+        ],
+        [
+          "Vodafone",
+          "Düsseldorf",
+          "5G NR",
+          "Commercial Availability",
+          "51.22774",
+          "6.77346"
+        ],
+        [
+          "Vodafone",
+          "Gijón",
+          "5G NR",
+          "Commercial Availability",
+          "43.5322",
+          "-5.66112"
+        ],
+        [
+          "Vodafone",
+          "Glasgow",
+          "5G NR",
+          "Commercial Availability",
+          "55.86424",
+          "-4.25181"
+        ],
+        [
+          "Vodafone",
+          "Hamburg",
+          "5G NR",
+          "Commercial Availability",
+          "53.55108",
+          "9.99368"
+        ],
+        [
+          "Vodafone",
+          "Hattstedt",
+          "5G NR",
+          "Commercial Availability",
+          "54.52745",
+          "9.02119"
+        ],
+        [
+          "Vodafone",
+          "Karlovy Vary",
+          "5G NR",
+          "Commercial Availability",
+          "50.23185",
+          "12.87196"
+        ],
+        [
+          "Vodafone",
+          "Lancaster",
+          "5G NR",
+          "Commercial Availability",
+          "54.04658",
+          "-2.80074"
+        ],
+        [
+          "Telekom Deutschland",
+          "Berlin",
+          "5G NR",
+          "Commercial Availability",
+          "52.52001",
+          "13.40495"
+        ],
+        [
+          "Telekom Deutschland",
+          "Darmstadt",
+          "5G NR",
+          "Commercial Availability",
+          "49.87283",
+          "8.65119"
+        ],
+        [
+          "Telekom Deutschland",
+          "Hamburg",
+          "5G NR",
+          "Commercial Availability",
+          "53.55108",
+          "9.99368"
+        ],
+        [
+          "Telenor",
+          "Kongsberg",
+          "5G NR",
+          "Commercial Availability",
+          "59.66888",
+          "9.65019"
+        ],
+        [
+          "Telenor",
+          "Elverum",
+          "5G NR",
+          "Commercial Availability",
+          "60.88207",
+          "11.56247"
+        ],
+        [
+          "Telenor",
+          "Trondheim",
+          "5G NR",
+          "Commercial Availability",
+          "63.43051",
+          "10.39505"
+        ],
+        [
+          "SK Telecom",
+          "Andong-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.5635",
+          "128.7261"
+        ],
+        [
+          "SK Telecom",
+          "Ansan-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3217",
+          "126.8309"
+        ],
+        [
+          "SK Telecom",
+          "Anseong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.0078",
+          "127.28"
+        ],
+        [
+          "SK Telecom",
+          "Anyang-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3939",
+          "126.9571"
+        ],
+        [
+          "SK Telecom",
+          "Bucheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5014",
+          "126.766"
+        ],
+        [
+          "SK Telecom",
+          "Busan",
+          "5G NR",
+          "Commercial Availability",
+          "35.18",
+          "129.0752"
+        ],
+        [
+          "SK Telecom",
+          "Changwon",
+          "5G NR",
+          "Commercial Availability",
+          "35.228",
+          "128.6819"
+        ],
+        [
+          "SK Telecom",
+          "Cheonan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.815",
+          "127.1141"
+        ],
+        [
+          "SK Telecom",
+          "Cheongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.6421",
+          "127.4892"
+        ],
+        [
+          "SK Telecom",
+          "Chuncheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.8811",
+          "127.7298"
+        ],
+        [
+          "SK Telecom",
+          "Chungju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.9907",
+          "127.926"
+        ],
+        [
+          "SK Telecom",
+          "Daegu",
+          "5G NR",
+          "Commercial Availability",
+          "35.8495",
+          "128.56"
+        ],
+        [
+          "SK Telecom",
+          "Daejeon",
+          "5G NR",
+          "Commercial Availability",
+          "36.3497",
+          "127.3849"
+        ],
+        [
+          "SK Telecom",
+          "Dangjin-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.8904",
+          "126.6462"
+        ],
+        [
+          "SK Telecom",
+          "Gangneung-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7525",
+          "128.876"
+        ],
+        [
+          "SK Telecom",
+          "Geoje-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.8805",
+          "128.6212"
+        ],
+        [
+          "SK Telecom",
+          "Gimhae",
+          "5G NR",
+          "Commercial Availability",
+          "35.2311",
+          "128.8908"
+        ],
+        [
+          "SK Telecom",
+          "Gimpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.6155",
+          "126.7158"
+        ],
+        [
+          "SK Telecom",
+          "Gongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.4726",
+          "127.0912"
+        ],
+        [
+          "SK Telecom",
+          "Goyang",
+          "5G NR",
+          "Commercial Availability",
+          "37.6582",
+          "126.8319"
+        ],
+        [
+          "SK Telecom",
+          "Gumi-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.1196",
+          "128.3445"
+        ],
+        [
+          "SK Telecom",
+          "Gunpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3615",
+          "126.9349"
+        ],
+        [
+          "SK Telecom",
+          "Gunsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.968",
+          "126.7369"
+        ],
+        [
+          "SK Telecom",
+          "Guri-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5941",
+          "127.1298"
+        ],
+        [
+          "SK Telecom",
+          "Gwacheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4289",
+          "126.9882"
+        ],
+        [
+          "SK Telecom",
+          "Gwangju",
+          "5G NR",
+          "Commercial Availability",
+          "35.1601",
+          "126.8517"
+        ],
+        [
+          "SK Telecom",
+          "Gwangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4291",
+          "127.2552"
+        ],
+        [
+          "SK Telecom",
+          "Gwangmyeong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4811",
+          "126.8631"
+        ],
+        [
+          "SK Telecom",
+          "Gwangyang-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.9407",
+          "127.6959"
+        ],
+        [
+          "SK Telecom",
+          "Gyeongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.8557",
+          "129.2249"
+        ],
+        [
+          "SK Telecom",
+          "Gyeongsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.8251",
+          "128.7413"
+        ],
+        [
+          "SK Telecom",
+          "Hanam-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5392",
+          "127.2149"
+        ],
+        [
+          "SK Telecom",
+          "Icheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2809",
+          "127.4429"
+        ],
+        [
+          "SK Telecom",
+          "Iksan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.9479",
+          "126.9578"
+        ],
+        [
+          "SK Telecom",
+          "Incheon",
+          "5G NR",
+          "Commercial Availability",
+          "37.4734",
+          "126.6166"
+        ],
+        [
+          "SK Telecom",
+          "Jeju",
+          "5G NR",
+          "Commercial Availability",
+          "33.4931",
+          "126.5131"
+        ],
+        [
+          "SK Telecom",
+          "Jeongeup-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.5699",
+          "126.856"
+        ],
+        [
+          "SK Telecom",
+          "Jeonju",
+          "5G NR",
+          "Commercial Availability",
+          "35.8243",
+          "127.1481"
+        ],
+        [
+          "SK Telecom",
+          "Jinju-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.1803",
+          "128.108"
+        ],
+        [
+          "SK Telecom",
+          "Miryang",
+          "5G NR",
+          "Commercial Availability",
+          "35.5038",
+          "128.7467"
+        ],
+        [
+          "SK Telecom",
+          "Mokpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.7903",
+          "126.3848"
+        ],
+        [
+          "SK Telecom",
+          "Naju-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.0159",
+          "126.7108"
+        ],
+        [
+          "SK Telecom",
+          "Namyangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.6359",
+          "127.2165"
+        ],
+        [
+          "SK Telecom",
+          "Nonsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.1869",
+          "127.0988"
+        ],
+        [
+          "SK Telecom",
+          "Osan",
+          "5G NR",
+          "Commercial Availability",
+          "37.1499",
+          "127.0775"
+        ],
+        [
+          "SK Telecom",
+          "Pocheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.8948",
+          "127.2007"
+        ],
+        [
+          "SK Telecom",
+          "Pohang-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.0189",
+          "129.3429"
+        ],
+        [
+          "SK Telecom",
+          "Pyeongtaek-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.9925",
+          "127.1127"
+        ],
+        [
+          "SK Telecom",
+          "Sangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.4104",
+          "128.1591"
+        ],
+        [
+          "SK Telecom",
+          "Sejong",
+          "5G NR",
+          "Commercial Availability",
+          "36.4817",
+          "127.2871"
+        ],
+        [
+          "SK Telecom",
+          "Seogwipo-si",
+          "5G NR",
+          "Commercial Availability",
+          "33.2573",
+          "126.5153"
+        ],
+        [
+          "SK Telecom",
+          "Seongnam-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4202",
+          "127.1262"
+        ],
+        [
+          "SK Telecom",
+          "Seosan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.7845",
+          "126.4503"
+        ],
+        [
+          "SK Telecom",
+          "Seoul",
+          "5G NR",
+          "Commercial Availability",
+          "37.5667",
+          "126.9783"
+        ],
+        [
+          "SK Telecom",
+          "Siheung-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3799",
+          "126.8032"
+        ],
+        [
+          "SK Telecom",
+          "Suncheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.9505",
+          "127.4873"
+        ],
+        [
+          "SK Telecom",
+          "Suwon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2633",
+          "127.0287"
+        ],
+        [
+          "SK Telecom",
+          "Tongyeong-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.8543",
+          "128.4332"
+        ],
+        [
+          "SK Telecom",
+          "Uijeongbu-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7381",
+          "127.0337"
+        ],
+        [
+          "SK Telecom",
+          "Wonju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3421",
+          "127.9198"
+        ],
+        [
+          "SK Telecom",
+          "Yangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7848",
+          "127.046"
+        ],
+        [
+          "SK Telecom",
+          "Yangsan",
+          "5G NR",
+          "Commercial Availability",
+          "35.335",
+          "129.0371"
+        ],
+        [
+          "SK Telecom",
+          "Yeoju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2983",
+          "127.637"
+        ],
+        [
+          "SK Telecom",
+          "Yeongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.8057",
+          "128.6241"
+        ],
+        [
+          "SK Telecom",
+          "Yeosu-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.7546",
+          "127.6599"
+        ],
+        [
+          "SK Telecom",
+          "Yongin-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2406",
+          "127.1786"
+        ],
+        [
+          "KT",
+          "Andong-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.5635",
+          "128.7261"
+        ],
+        [
+          "KT",
+          "Ansan-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3217",
+          "126.8309"
+        ],
+        [
+          "KT",
+          "Anseong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.0078",
+          "127.28"
+        ],
+        [
+          "KT",
+          "Anyang-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3939",
+          "126.9571"
+        ],
+        [
+          "KT",
+          "Asan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.7896",
+          "127.0027"
+        ],
+        [
+          "KT",
+          "Bucheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5014",
+          "126.766"
+        ],
+        [
+          "KT",
+          "Busan",
+          "5G NR",
+          "Commercial Availability",
+          "35.18",
+          "129.0752"
+        ],
+        [
+          "KT",
+          "Changwon",
+          "5G NR",
+          "Commercial Availability",
+          "35.228",
+          "128.6819"
+        ],
+        [
+          "KT",
+          "Cheonan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.815",
+          "127.1141"
+        ],
+        [
+          "KT",
+          "Cheongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.6421",
+          "127.4892"
+        ],
+        [
+          "KT",
+          "Chuncheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.8811",
+          "127.7298"
+        ],
+        [
+          "KT",
+          "Daegu",
+          "5G NR",
+          "Commercial Availability",
+          "35.8495",
+          "128.56"
+        ],
+        [
+          "KT",
+          "Daejeon",
+          "5G NR",
+          "Commercial Availability",
+          "36.3497",
+          "127.3849"
+        ],
+        [
+          "KT",
+          "Gangneung-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7525",
+          "128.876"
+        ],
+        [
+          "KT",
+          "Geoje-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.8805",
+          "128.6212"
+        ],
+        [
+          "KT",
+          "Gijang-gun",
+          "5G NR",
+          "Commercial Availability",
+          "35.2431",
+          "129.214"
+        ],
+        [
+          "KT",
+          "Gimhae",
+          "5G NR",
+          "Commercial Availability",
+          "35.2311",
+          "128.8908"
+        ],
+        [
+          "KT",
+          "Gimpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.6155",
+          "126.7158"
+        ],
+        [
+          "KT",
+          "Gongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.4726",
+          "127.0912"
+        ],
+        [
+          "KT",
+          "Goyang",
+          "5G NR",
+          "Commercial Availability",
+          "37.6582",
+          "126.8319"
+        ],
+        [
+          "KT",
+          "Gumi-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.1196",
+          "128.3445"
+        ],
+        [
+          "KT",
+          "Gunpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3615",
+          "126.9349"
+        ],
+        [
+          "KT",
+          "Guri-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5941",
+          "127.1298"
+        ],
+        [
+          "KT",
+          "Gwacheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4289",
+          "126.9882"
+        ],
+        [
+          "KT",
+          "Gwangju",
+          "5G NR",
+          "Commercial Availability",
+          "35.1601",
+          "126.8517"
+        ],
+        [
+          "KT",
+          "Gwangmyeong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4811",
+          "126.8631"
+        ],
+        [
+          "KT",
+          "Gwangyang-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.9407",
+          "127.6959"
+        ],
+        [
+          "KT",
+          "Gyeongsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.8251",
+          "128.7413"
+        ],
+        [
+          "KT",
+          "Hanam-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5392",
+          "127.2149"
+        ],
+        [
+          "KT",
+          "Hwaseong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.1995",
+          "126.8313"
+        ],
+        [
+          "KT",
+          "Icheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2809",
+          "127.4429"
+        ],
+        [
+          "KT",
+          "Iksan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.9479",
+          "126.9578"
+        ],
+        [
+          "KT",
+          "Incheon",
+          "5G NR",
+          "Commercial Availability",
+          "37.4734",
+          "126.6166"
+        ],
+        [
+          "KT",
+          "Jeju",
+          "5G NR",
+          "Commercial Availability",
+          "33.4931",
+          "126.5131"
+        ],
+        [
+          "KT",
+          "Jeongeup-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.5699",
+          "126.856"
+        ],
+        [
+          "KT",
+          "Jeonju",
+          "5G NR",
+          "Commercial Availability",
+          "35.8243",
+          "127.1481"
+        ],
+        [
+          "KT",
+          "Jinju-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.1803",
+          "128.108"
+        ],
+        [
+          "KT",
+          "Mokpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.7903",
+          "126.3848"
+        ],
+        [
+          "KT",
+          "Naju-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.0159",
+          "126.7108"
+        ],
+        [
+          "KT",
+          "Namyangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.6359",
+          "127.2165"
+        ],
+        [
+          "KT",
+          "Nonsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.1869",
+          "127.0988"
+        ],
+        [
+          "KT",
+          "Osan",
+          "5G NR",
+          "Commercial Availability",
+          "37.1499",
+          "127.0775"
+        ],
+        [
+          "KT",
+          "Pohang-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.0189",
+          "129.3429"
+        ],
+        [
+          "KT",
+          "Pyeongtaek-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.9925",
+          "127.1127"
+        ],
+        [
+          "KT",
+          "Sejong",
+          "5G NR",
+          "Commercial Availability",
+          "36.4817",
+          "127.2871"
+        ],
+        [
+          "KT",
+          "Seongnam-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4202",
+          "127.1262"
+        ],
+        [
+          "KT",
+          "Seosan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.7845",
+          "126.4503"
+        ],
+        [
+          "KT",
+          "Seoul",
+          "5G NR",
+          "Commercial Availability",
+          "37.5667",
+          "126.9783"
+        ],
+        [
+          "KT",
+          "Siheung-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3799",
+          "126.8032"
+        ],
+        [
+          "KT",
+          "Suncheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.9505",
+          "127.4873"
+        ],
+        [
+          "KT",
+          "Suwon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2633",
+          "127.0287"
+        ],
+        [
+          "KT",
+          "Tongyeong-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.8543",
+          "128.4332"
+        ],
+        [
+          "KT",
+          "Uijeongbu-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7381",
+          "127.0337"
+        ],
+        [
+          "KT",
+          "Uiwang",
+          "5G NR",
+          "Commercial Availability",
+          "37.3449",
+          "126.969"
+        ],
+        [
+          "KT",
+          "Wonju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3421",
+          "127.9198"
+        ],
+        [
+          "KT",
+          "Yangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7848",
+          "127.046"
+        ],
+        [
+          "KT",
+          "Yangsan",
+          "5G NR",
+          "Commercial Availability",
+          "35.335",
+          "129.0371"
+        ],
+        [
+          "KT",
+          "Yeoju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2983",
+          "127.637"
+        ],
+        [
+          "KT",
+          "Yeongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.8057",
+          "128.6241"
+        ],
+        [
+          "KT",
+          "Yongin-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2406",
+          "127.1786"
+        ],
+        [
+          "LG U+",
+          "Ansan-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3217",
+          "126.8309"
+        ],
+        [
+          "LG U+",
+          "Anseong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.0078",
+          "127.28"
+        ],
+        [
+          "LG U+",
+          "Anyang-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3939",
+          "126.9571"
+        ],
+        [
+          "LG U+",
+          "Asan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.7896",
+          "127.0027"
+        ],
+        [
+          "LG U+",
+          "Bucheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5014",
+          "126.766"
+        ],
+        [
+          "LG U+",
+          "Busan",
+          "5G NR",
+          "Commercial Availability",
+          "35.18",
+          "129.0752"
+        ],
+        [
+          "LG U+",
+          "Cheonan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.815",
+          "127.1141"
+        ],
+        [
+          "LG U+",
+          "Cheongju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.6421",
+          "127.4892"
+        ],
+        [
+          "LG U+",
+          "Chuncheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.8811",
+          "127.7298"
+        ],
+        [
+          "LG U+",
+          "Chungju-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.9907",
+          "127.926"
+        ],
+        [
+          "LG U+",
+          "Daejeon",
+          "5G NR",
+          "Commercial Availability",
+          "36.3497",
+          "127.3849"
+        ],
+        [
+          "LG U+",
+          "Dangjin-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.8904",
+          "126.6462"
+        ],
+        [
+          "LG U+",
+          "Gangneung-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7525",
+          "128.876"
+        ],
+        [
+          "LG U+",
+          "Gijang-gun",
+          "5G NR",
+          "Commercial Availability",
+          "35.2431",
+          "129.214"
+        ],
+        [
+          "LG U+",
+          "Gimpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.6155",
+          "126.7158"
+        ],
+        [
+          "LG U+",
+          "Goyang",
+          "5G NR",
+          "Commercial Availability",
+          "37.6582",
+          "126.8319"
+        ],
+        [
+          "LG U+",
+          "Gunpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3615",
+          "126.9349"
+        ],
+        [
+          "LG U+",
+          "Gunsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.968",
+          "126.7369"
+        ],
+        [
+          "LG U+",
+          "Guri-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5941",
+          "127.1298"
+        ],
+        [
+          "LG U+",
+          "Gwacheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4289",
+          "126.9882"
+        ],
+        [
+          "LG U+",
+          "Gwangju",
+          "5G NR",
+          "Commercial Availability",
+          "35.1601",
+          "126.8517"
+        ],
+        [
+          "LG U+",
+          "Gwangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4291",
+          "127.2552"
+        ],
+        [
+          "LG U+",
+          "Gwangmyeong-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4811",
+          "126.8631"
+        ],
+        [
+          "LG U+",
+          "Gwangyang-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.9407",
+          "127.6959"
+        ],
+        [
+          "LG U+",
+          "Hanam-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.5392",
+          "127.2149"
+        ],
+        [
+          "LG U+",
+          "Icheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2809",
+          "127.4429"
+        ],
+        [
+          "LG U+",
+          "Iksan-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.9479",
+          "126.9578"
+        ],
+        [
+          "LG U+",
+          "Incheon",
+          "5G NR",
+          "Commercial Availability",
+          "37.4734",
+          "126.6166"
+        ],
+        [
+          "LG U+",
+          "Jecheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.1326",
+          "128.1914"
+        ],
+        [
+          "LG U+",
+          "Jeju",
+          "5G NR",
+          "Commercial Availability",
+          "33.4931",
+          "126.5131"
+        ],
+        [
+          "LG U+",
+          "Jeongeup-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.5699",
+          "126.856"
+        ],
+        [
+          "LG U+",
+          "Jeonju",
+          "5G NR",
+          "Commercial Availability",
+          "35.8243",
+          "127.1481"
+        ],
+        [
+          "LG U+",
+          "Mokpo-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.7903",
+          "126.3848"
+        ],
+        [
+          "LG U+",
+          "Naju-si",
+          "5G NR",
+          "Commercial Availability",
+          "35.0159",
+          "126.7108"
+        ],
+        [
+          "LG U+",
+          "Namyangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.6359",
+          "127.2165"
+        ],
+        [
+          "LG U+",
+          "Nonsan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.1869",
+          "127.0988"
+        ],
+        [
+          "LG U+",
+          "Osan",
+          "5G NR",
+          "Commercial Availability",
+          "37.1499",
+          "127.0775"
+        ],
+        [
+          "LG U+",
+          "Pocheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.8948",
+          "127.2007"
+        ],
+        [
+          "LG U+",
+          "Pyeongtaek-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.9925",
+          "127.1127"
+        ],
+        [
+          "LG U+",
+          "Sejong",
+          "5G NR",
+          "Commercial Availability",
+          "36.4817",
+          "127.2871"
+        ],
+        [
+          "LG U+",
+          "Seogwipo-si",
+          "5G NR",
+          "Commercial Availability",
+          "33.2573",
+          "126.5153"
+        ],
+        [
+          "LG U+",
+          "Seongnam-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.4202",
+          "127.1262"
+        ],
+        [
+          "LG U+",
+          "Seosan-si",
+          "5G NR",
+          "Commercial Availability",
+          "36.7845",
+          "126.4503"
+        ],
+        [
+          "LG U+",
+          "Seoul",
+          "5G NR",
+          "Commercial Availability",
+          "37.5667",
+          "126.9783"
+        ],
+        [
+          "LG U+",
+          "Siheung-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3799",
+          "126.8032"
+        ],
+        [
+          "LG U+",
+          "Suncheon-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.9505",
+          "127.4873"
+        ],
+        [
+          "LG U+",
+          "Suwon-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2633",
+          "127.0287"
+        ],
+        [
+          "LG U+",
+          "Uijeongbu-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7381",
+          "127.0337"
+        ],
+        [
+          "LG U+",
+          "Uiwang",
+          "5G NR",
+          "Commercial Availability",
+          "37.3449",
+          "126.969"
+        ],
+        [
+          "LG U+",
+          "Wonju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.3421",
+          "127.9198"
+        ],
+        [
+          "LG U+",
+          "Yangju-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.7848",
+          "127.046"
+        ],
+        [
+          "LG U+",
+          "Yeosu-si",
+          "5G NR",
+          "Commercial Availability",
+          "34.7546",
+          "127.6599"
+        ],
+        [
+          "LG U+",
+          "Yongin-si",
+          "5G NR",
+          "Commercial Availability",
+          "37.2406",
+          "127.1786"
+        ],
+        [
+          "Zain",
+          "Adailiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.32806",
+          "47.98369"
+        ],
+        [
+          "Zain",
+          "Bneid Al Qar",
+          "5G NR",
+          "Commercial Availability",
+          "29.37305",
+          "48.00474"
+        ],
+        [
+          "Zain",
+          "Daiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.36044",
+          "48.01837"
+        ],
+        [
+          "Zain",
+          "Faiha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34043",
+          "47.97874"
+        ],
+        [
+          "Zain",
+          "Fnaitees",
+          "5G NR",
+          "Commercial Availability",
+          "29.22076",
+          "48.09524"
+        ],
+        [
+          "Zain",
+          "Jabriya",
+          "5G NR",
+          "Commercial Availability",
+          "29.31806",
+          "48.0258"
+        ],
+        [
+          "Zain",
+          "Jibla",
+          "5G NR",
+          "Commercial Availability",
+          "29.36993",
+          "47.96884"
+        ],
+        [
+          "Zain",
+          "Kaifan",
+          "5G NR",
+          "Commercial Availability",
+          "29.33757",
+          "47.95893"
+        ],
+        [
+          "Zain",
+          "Khaldiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.3252",
+          "47.96388"
+        ],
+        [
+          "Zain",
+          "Nuzha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34139",
+          "47.9936"
+        ],
+        [
+          "Zain",
+          "Qadsiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.34996",
+          "48.00351"
+        ],
+        [
+          "Zain",
+          "Rawda",
+          "5G NR",
+          "Commercial Availability",
+          "29.32901",
+          "47.99855"
+        ],
+        [
+          "Zain",
+          "Sabah Al Salem",
+          "5G NR",
+          "Commercial Availability",
+          "29.25656",
+          "48.06261"
+        ],
+        [
+          "Zain",
+          "Shaab",
+          "5G NR",
+          "Commercial Availability",
+          "29.34997",
+          "48.02828"
+        ],
+        [
+          "Zain",
+          "Shamiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.3509",
+          "47.96884"
+        ],
+        [
+          "Zain",
+          "Sharq",
+          "5G NR",
+          "Commercial Availability",
+          "29.38232",
+          "47.98864"
+        ],
+        [
+          "Zain",
+          "Shuhada",
+          "5G NR",
+          "Commercial Availability",
+          "29.27089",
+          "48.03324"
+        ],
+        [
+          "Zain",
+          "Al-Siddeeq",
+          "5G NR",
+          "Commercial Availability",
+          "29.29378",
+          "47.9936"
+        ],
+        [
+          "Zain",
+          "Surra",
+          "5G NR",
+          "Commercial Availability",
+          "29.31378",
+          "48.00846"
+        ],
+        [
+          "Zain",
+          "Yarmouk",
+          "5G NR",
+          "Commercial Availability",
+          "29.31282",
+          "47.96884"
+        ],
+        [
+          "Zain",
+          "Zahra",
+          "5G NR",
+          "Commercial Availability",
+          "29.27806",
+          "47.99607"
+        ],
+        [
+          "Orange",
+          "Lille",
+          "5G NR",
+          "Pre-Release",
+          "50.62925",
+          "3.05726"
+        ],
+        [
+          "Orange",
+          "Douai",
+          "5G NR",
+          "Commercial Availability",
+          "50.36787",
+          "3.0806"
+        ],
+        [
+          "Orange",
+          "Marseille",
+          "5G NR",
+          "Commercial Availability",
+          "43.29648",
+          "5.36978"
+        ],
+        [
+          "Orange",
+          "Saint-Denis",
+          "5G NR",
+          "Commercial Availability",
+          "48.93618",
+          "2.35744"
+        ],
+        [
+          "Orange",
+          "Montpellier",
+          "5G NR",
+          "Commercial Availability",
+          "43.61077",
+          "3.87672"
+        ],
+        [
+          "Orange",
+          "Nantes",
+          "5G NR",
+          "Commercial Availability",
+          "47.21837",
+          "-1.55362"
+        ],
+        [
+          "Bouygues Telecom",
+          "Lyon",
+          "5G NR",
+          "Commercial Availability",
+          "45.76404",
+          "4.83566"
+        ],
+        [
+          "Bouygues Telecom",
+          "Bordeaux",
+          "5G NR",
+          "Commercial Availability",
+          "44.83779",
+          "-0.57918"
+        ],
+        [
+          "Bouygues Telecom",
+          "Vélizy-Villacoublay",
+          "5G NR",
+          "Pre-Release",
+          "48.7879",
+          "2.19041"
+        ],
+        [
+          "Bouygues Telecom",
+          "Paris",
+          "5G NR",
+          "Pre-Release",
+          "48.85661",
+          "2.35222"
+        ],
+        [
+          "SFR",
+          "Francazal",
+          "5G NR",
+          "Pre-Release",
+          "43.019278",
+          "0.998335"
+        ],
+        [
+          "SFR",
+          "Vélizy-Villacoublay",
+          "5G NR",
+          "Pre-Release",
+          "48.7879",
+          "2.19041"
+        ],
+        [
+          "SFR",
+          "Nantes",
+          "5G NR",
+          "Commercial Availability",
+          "47.21837",
+          "-1.55362"
+        ],
+        [
+          "SFR",
+          "Toulouse",
+          "5G NR",
+          "Pre-Release",
+          "43.60465",
+          "1.44421"
+        ],
+        [
+          "Telia",
+          "Helsinki",
+          "5G NR",
+          "Commercial Availability",
+          "60.16986",
+          "24.93838"
+        ],
+        [
+          "Telia",
+          "Oulu",
+          "5G NR",
+          "Commercial Availability",
+          "65.01209",
+          "25.46508"
+        ],
+        [
+          "Telia",
+          "Vantaa",
+          "5G NR",
+          "Commercial Availability",
+          "60.29335",
+          "25.03777"
+        ],
+        [
+          "DNA",
+          "Helsinki",
+          "5G NR",
+          "Commercial Availability",
+          "60.16986",
+          "24.93838"
+        ],
+        [
+          "Three",
+          "Linz",
+          "5G NR",
+          "Commercial Availability",
+          "48.30694",
+          "14.28583"
+        ],
+        [
+          "TIM",
+          "Rome",
+          "5G NR",
+          "Commercial Availability",
+          "41.90278",
+          "12.49637"
+        ],
+        [
+          "Wind Tre",
+          "Prato",
+          "5G NR",
+          "Pre-Release",
+          "43.8777",
+          "11.10223"
+        ],
+        [
+          "Wind Tre",
+          "L'Aquila",
+          "5G NR",
+          "Pre-Release",
+          "42.34985",
+          "13.39951"
+        ],
+        [
+          "T-Mobile",
+          "Auburn, AL",
+          "5G NR",
+          "Commercial Availability",
+          "32.60772",
+          "-85.4895"
+        ],
+        [
+          "T-Mobile",
+          "Belgreen, AL",
+          "5G NR",
+          "Commercial Availability",
+          "34.474679",
+          "-87.861703"
+        ],
+        [
+          "T-Mobile",
+          "Benton, AL",
+          "5G NR",
+          "Commercial Availability",
+          "32.3079306",
+          "-86.817546"
+        ],
+        [
+          "T-Mobile",
+          "Bessemer, AL",
+          "5G NR",
+          "Commercial Availability",
+          "33.3708243",
+          "-86.971504"
+        ],
+        [
+          "T-Mobile",
+          "Birmingham, AL",
+          "5G NR",
+          "Commercial Availability",
+          "33.5274441",
+          "-86.799047"
+        ],
+        [
+          "T-Mobile",
+          "Brighton, AL",
+          "5G NR",
+          "Commercial Availability",
+          "33.4392273",
+          "-86.945389"
+        ],
+        [
+          "DU",
+          "Al Ain",
+          "5G NR",
+          "Commercial Availability",
+          "24.13016",
+          "55.80231"
+        ],
+        [
+          "DU",
+          "Fujairah",
+          "5G NR",
+          "Commercial Availability",
+          "25.12881",
+          "56.32648"
+        ],
+        [
+          "DU",
+          "Ras Al-Khaimah",
+          "5G NR",
+          "Commercial Availability",
+          "25.80069",
+          "55.9762"
+        ],
+        [
+          "DU",
+          "Sharjah",
+          "5G NR",
+          "Commercial Availability",
+          "25.32233",
+          "55.51364"
+        ],
+        [
+          "AT&T Mobility",
+          "Las Vegas, NV",
+          "5G NR",
+          "Commercial Availability",
+          "36.16994",
+          "-115.13983"
+        ],
+        [
+          "Verizon Wireless",
+          "Denver, CO",
+          "5G NR",
+          "Commercial Availability",
+          "39.73924",
+          "-104.99025"
+        ],
+        [
+          "Digi",
+          "Bucharest",
+          "5G NR",
+          "Commercial Availability",
+          "44.42677",
+          "26.10254"
+        ],
+        [
+          "Verizon Wireless",
+          "Providence, RI",
+          "5G NR",
+          "Commercial Availability",
+          "41.82399",
+          "-71.41283"
+        ],
+        [
+          "Vodafone",
+          "Liverpool",
+          "5G NR",
+          "Commercial Availability",
+          "53.40837",
+          "-2.99157"
+        ],
+        [
+          "Vodafone",
+          "Logroño",
+          "5G NR",
+          "Commercial Availability",
+          "42.46272",
+          "-2.44499"
+        ],
+        [
+          "Vodafone",
+          "Lohmar",
+          "5G NR",
+          "Commercial Availability",
+          "50.8378",
+          "7.21266"
+        ],
+        [
+          "Vodafone",
+          "London",
+          "5G NR",
+          "Commercial Availability",
+          "51.50735",
+          "-0.12776"
+        ],
+        [
+          "Vodafone",
+          "Madrid",
+          "5G NR",
+          "Commercial Availability",
+          "40.414699",
+          "-3.703597"
+        ],
+        [
+          "Vodafone",
+          "Malaga",
+          "5G NR",
+          "Commercial Availability",
+          "36.72126",
+          "-4.42127"
+        ],
+        [
+          "Vodafone",
+          "Mamaia",
+          "5G NR",
+          "Commercial Availability",
+          "44.30967",
+          "28.6235"
+        ],
+        [
+          "Vodafone",
+          "Manchester",
+          "5G NR",
+          "Commercial Availability",
+          "53.48076",
+          "-2.24263"
+        ],
+        [
+          "Vodafone",
+          "Milan",
+          "5G NR",
+          "Commercial Availability",
+          "45.46542",
+          "9.18592"
+        ],
+        [
+          "Telia",
+          "Copenhagen",
+          "5G NR",
+          "Pre-Release",
+          "55.6761",
+          "12.56834"
+        ],
+        [
+          "Play",
+          "Torun",
+          "5G NR",
+          "Commercial Availability",
+          "53.01379",
+          "18.59844"
+        ],
+        [
+          "A1",
+          "Sofia",
+          "5G NR",
+          "Commercial Availability",
+          "42.69771",
+          "23.32187"
+        ],
+        [
+          "Telekom Deutschland",
+          "Bonn",
+          "5G NR",
+          "Commercial Availability",
+          "50.73743",
+          "7.09821"
+        ],
+        [
+          "Ooredoo",
+          "Adailiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.32806",
+          "47.98369"
+        ],
+        [
+          "Ooredoo",
+          "Ahmadi",
+          "5G NR",
+          "Commercial Availability",
+          "29.08538",
+          "48.06547"
+        ],
+        [
+          "Ooredoo",
+          "Al Farwaniyah",
+          "5G NR",
+          "Commercial Availability",
+          "29.2819",
+          "47.95888"
+        ],
+        [
+          "Ooredoo",
+          "Al-Ardiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.29138",
+          "47.90698"
+        ],
+        [
+          "Ooredoo",
+          "Al-Riqqa",
+          "5G NR",
+          "Commercial Availability",
+          "29.1504",
+          "48.10536"
+        ],
+        [
+          "Ooredoo",
+          "Al-Seer",
+          "5G NR",
+          "Commercial Availability",
+          "29.698483",
+          "47.421259"
+        ],
+        [
+          "Ooredoo",
+          "Al-Siddeeq",
+          "5G NR",
+          "Commercial Availability",
+          "29.29378",
+          "47.9936"
+        ],
+        [
+          "Ooredoo",
+          "Arifjan",
+          "5G NR",
+          "Commercial Availability",
+          "28.875536",
+          "48.167553"
+        ],
+        [
+          "Ooredoo",
+          "Dasma",
+          "5G NR",
+          "Commercial Availability",
+          "29.36643",
+          "48.0007"
+        ],
+        [
+          "Ooredoo",
+          "Doha",
+          "5G NR",
+          "Commercial Availability",
+          "25.35214",
+          "51.49399"
+        ],
+        [
+          "Ooredoo",
+          "Faiha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34043",
+          "47.97874"
+        ],
+        [
+          "Ooredoo",
+          "Hawally",
+          "5G NR",
+          "Commercial Availability",
+          "29.3333",
+          "48.01589"
+        ],
+        [
+          "Ooredoo",
+          "Jaber Al Ali",
+          "5G NR",
+          "Commercial Availability",
+          "29.16927",
+          "48.08531"
+        ],
+        [
+          "Ooredoo",
+          "Jabriya",
+          "5G NR",
+          "Commercial Availability",
+          "29.31806",
+          "48.0258"
+        ],
+        [
+          "Ooredoo",
+          "Jahra",
+          "5G NR",
+          "Commercial Availability",
+          "29.33657",
+          "47.67553"
+        ],
+        [
+          "Ooredoo",
+          "Jibla",
+          "5G NR",
+          "Commercial Availability",
+          "29.36993",
+          "47.96884"
+        ],
+        [
+          "Ooredoo",
+          "Kaifan",
+          "5G NR",
+          "Commercial Availability",
+          "29.33757",
+          "47.95893"
+        ],
+        [
+          "Ooredoo",
+          "Khaitan",
+          "5G NR",
+          "Commercial Availability",
+          "29.27997",
+          "47.97626"
+        ],
+        [
+          "Ooredoo",
+          "Khaldiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.3252",
+          "47.96388"
+        ],
+        [
+          "Ooredoo",
+          "Mansouriya",
+          "5G NR",
+          "Commercial Availability",
+          "29.35734",
+          "47.99484"
+        ],
+        [
+          "Ooredoo",
+          "Mubarak Al-Kabeer",
+          "5G NR",
+          "Commercial Availability",
+          "29.21224",
+          "48.06051"
+        ],
+        [
+          "Ooredoo",
+          "Muscat",
+          "5G NR",
+          "Commercial Availability",
+          "23.58589",
+          "58.40592"
+        ],
+        [
+          "Ooredoo",
+          "Nuzha",
+          "5G NR",
+          "Commercial Availability",
+          "29.34139",
+          "47.9936"
+        ],
+        [
+          "Ooredoo",
+          "Qadsiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.34996",
+          "48.00351"
+        ],
+        [
+          "Ooredoo",
+          "Qasr",
+          "5G NR",
+          "Commercial Availability",
+          "29.34014",
+          "47.69725"
+        ],
+        [
+          "Ooredoo",
+          "Qortuba",
+          "5G NR",
+          "Commercial Availability",
+          "29.34375",
+          "47.69204"
+        ],
+        [
+          "Ooredoo",
+          "Rai",
+          "5G NR",
+          "Commercial Availability",
+          "29.30805",
+          "47.94409"
+        ],
+        [
+          "Ooredoo",
+          "Rawda",
+          "5G NR",
+          "Commercial Availability",
+          "29.32901",
+          "47.99855"
+        ],
+        [
+          "Ooredoo",
+          "Rumaithiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.31803",
+          "48.07539"
+        ],
+        [
+          "Ooredoo",
+          "Sabah Al Ahmad",
+          "5G NR",
+          "Commercial Availability",
+          "28.78648",
+          "48.07043"
+        ],
+        [
+          "Ooredoo",
+          "Salalah",
+          "5G NR",
+          "Commercial Availability",
+          "17.05067",
+          "54.10659"
+        ],
+        [
+          "Ooredoo",
+          "Salmiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.33529",
+          "48.07156"
+        ],
+        [
+          "Ooredoo",
+          "Salwa",
+          "5G NR",
+          "Commercial Availability",
+          "29.29649",
+          "48.07938"
+        ],
+        [
+          "Ooredoo",
+          "Shamiya",
+          "5G NR",
+          "Commercial Availability",
+          "29.3509",
+          "47.96884"
+        ],
+        [
+          "Ooredoo",
+          "Sharq",
+          "5G NR",
+          "Commercial Availability",
+          "29.38232",
+          "47.98864"
+        ],
+        [
+          "TIM",
+          "Naples",
+          "5G NR",
+          "Commercial Availability",
+          "40.85177",
+          "14.26812"
+        ],
+        [
+          "Singtel",
+          "Queenstown",
+          "5G NR",
+          "Commercial Availability",
+          "1.29417",
+          "103.78613"
+        ],
+        [
+          "4ka",
+          "Banská Bystrica",
+          "5G NR",
+          "Pre-Release",
+          "48.73628",
+          "19.14619"
+        ],
+        [
+          "Smart Axiata",
+          "Phnom Penh",
+          "5G NR",
+          "Pre-Release",
+          "11.54487",
+          "104.89217"
+        ],
+        [
+          "VodafoneZiggo",
+          "Maastricht",
+          "5G NR",
+          "Commercial Availability",
+          "50.85137",
+          "5.69097"
+        ],
+        [
+          "Monaco Telecom",
+          "La Condamine",
+          "5G NR",
+          "Commercial Availability",
+          "43.73493",
+          "7.42326"
+        ],
+        [
+          "Monaco Telecom",
+          "Fontvieille",
+          "5G NR",
+          "Commercial Availability",
+          "43.72814",
+          "7.41786"
+        ],
+        [
+          "Monaco Telecom",
+          "Monte Carlo",
+          "5G NR",
+          "Commercial Availability",
+          "43.74007",
+          "7.42664"
+        ],
+        [
+          "Monaco Telecom",
+          "Monaco City",
+          "5G NR",
+          "Commercial Availability",
+          "43.730675",
+          "7.422929"
+        ],
+        [
+          "T-Mobile",
+          "The Hague",
+          "5G NR",
+          "Commercial Availability",
+          "52.0705",
+          "4.3007"
+        ],
+        [
+          "Ooredoo",
+          "Shuwaikh",
+          "5G NR",
+          "Commercial Availability",
+          "29.3544",
+          "47.9564"
+        ],
+        [
+          "Ooredoo",
+          "Surra",
+          "5G NR",
+          "Commercial Availability",
+          "29.31378",
+          "48.00846"
+        ],
+        [
+          "Vodafone",
+          "Munich",
+          "5G NR",
+          "Commercial Availability",
+          "48.13513",
+          "11.58198"
+        ],
+        [
+          "Vodafone",
+          "Naples",
+          "5G NR",
+          "Commercial Availability",
+          "40.85177",
+          "14.26812"
+        ],
+        [
+          "Vodafone",
+          "Newbury",
+          "5G NR",
+          "Commercial Availability",
+          "51.40141",
+          "-1.32311"
+        ],
+        [
+          "Vodafone",
+          "Pamplona",
+          "5G NR",
+          "Commercial Availability",
+          "42.81253",
+          "-1.64577"
+        ],
+        [
+          "Vodafone",
+          "Plymouth",
+          "5G NR",
+          "Commercial Availability",
+          "50.37546",
+          "-4.14266"
+        ],
+        [
+          "Vodafone",
+          "Rome",
+          "5G NR",
+          "Commercial Availability",
+          "41.90278",
+          "12.49637"
+        ],
+        [
+          "Vodafone",
+          "San Sebastián",
+          "5G NR",
+          "Commercial Availability",
+          "43.31833",
+          "-1.98123"
+        ],
+        [
+          "Vodafone",
+          "Santander",
+          "5G NR",
+          "Commercial Availability",
+          "43.46231",
+          "-3.80998"
+        ],
+        [
+          "Vodafone",
+          "Seville",
+          "5G NR",
+          "Commercial Availability",
+          "37.38909",
+          "-5.98446"
+        ],
+        [
+          "Vodafone",
+          "Stoke-on-Trent",
+          "5G NR",
+          "Commercial Availability",
+          "53.00267",
+          "-2.1794"
+        ],
+        [
+          "Vodafone",
+          "Turin",
+          "5G NR",
+          "Commercial Availability",
+          "45.07031",
+          "7.68686"
+        ],
+        [
+          "Vodafone",
+          "Umm Salal",
+          "5G NR",
+          "Commercial Availability",
+          "25.39811",
+          "51.42508"
+        ],
+        [
+          "Vodafone",
+          "Valencia",
+          "5G NR",
+          "Commercial Availability",
+          "39.46991",
+          "-0.37629"
+        ],
+        [
+          "Vodafone",
+          "Vigo",
+          "5G NR",
+          "Commercial Availability",
+          "42.2406",
+          "-8.72073"
+        ],
+        [
+          "Vodafone",
+          "Vitoria-Gasteiz",
+          "5G NR",
+          "Commercial Availability",
+          "42.85917",
+          "-2.68179"
+        ],
+        [
+          "Vodafone",
+          "Wolverhampton",
+          "5G NR",
+          "Commercial Availability",
+          "52.58697",
+          "-2.12882"
+        ],
+        [
+          "Vodafone",
+          "Zaragoza",
+          "5G NR",
+          "Commercial Availability",
+          "41.64882",
+          "-0.88909"
+        ],
+        [
+          "Verizon Wireless",
+          "Saint Paul, MN",
+          "5G NR",
+          "Commercial Availability",
+          "44.9537",
+          "-93.08996"
+        ],
+        [
+          "Ooredoo",
+          "Yarmouk",
+          "5G NR",
+          "Commercial Availability",
+          "29.31282",
+          "47.96884"
+        ],
+        [
+          "Ooredoo",
+          "Zour",
+          "5G NR",
+          "Commercial Availability",
+          "28.7117",
+          "48.329"
+        ],
+        [
+          "Verizon Wireless",
+          "Washington, DC",
+          "5G NR",
+          "Commercial Availability",
+          "38.90719",
+          "-77.03687"
+        ],
+        [
+          "Verizon Wireless",
+          "Detroit, MI",
+          "5G NR",
+          "Commercial Availability",
+          "42.33143",
+          "-83.04575"
+        ],
+        [
+          "Verizon Wireless",
+          "Indianapolis, IN",
+          "5G NR",
+          "Commercial Availability",
+          "39.7684",
+          "-86.15807"
+        ],
+        [
+          "Verizon Wireless",
+          "Atlanta, GA",
+          "5G NR",
+          "Commercial Availability",
+          "33.749",
+          "-84.38798"
+        ],
+        [
+          "Digi",
+          "Constanța",
+          "5G NR",
+          "Commercial Availability",
+          "44.1598",
+          "28.63481"
+        ],
+        [
+          "Digi",
+          "Mamaia",
+          "5G NR",
+          "Commercial Availability",
+          "44.30967",
+          "28.6235"
+        ],
+        [
+          "Digi",
+          "Oradea",
+          "5G NR",
+          "Commercial Availability",
+          "47.0465",
+          "21.91894"
+        ],
+        [
+          "Digi",
+          "Cluj-Napoca",
+          "5G NR",
+          "Commercial Availability",
+          "46.77121",
+          "23.62364"
+        ],
+        [
+          "Digi",
+          "Iași",
+          "5G NR",
+          "Commercial Availability",
+          "47.15845",
+          "27.60144"
+        ],
+        [
+          "Nova",
+          "Kalamata",
+          "5G NR",
+          "Pre-Release",
+          "37.04224",
+          "22.11413"
+        ],
+        [
+          "Telenor",
+          "Sofia",
+          "5G NR",
+          "Commercial Availability",
+          "42.69771",
+          "23.32187"
+        ],
+        [
+          "LMT",
+          "Riga",
+          "5G NR",
+          "Commercial Availability",
+          "56.94965",
+          "24.10519"
+        ],
+        [
+          "LMT",
+          "Liepāja",
+          "5G NR",
+          "Limited Availability",
+          "56.50467",
+          "21.01081"
+        ],
+        [
+          "Tele2",
+          "Riga",
+          "5G NR",
+          "Commercial Availability",
+          "56.94965",
+          "24.10519"
+        ],
+        [
+          "Celcom",
+          "Petaling Jaya",
+          "5G NR",
+          "Pre-Release",
+          "3.12789",
+          "101.59449"
+        ],
+        [
+          "Oi",
+          "Rio de Janeiro",
+          "5G NR",
+          "Pre-Release",
+          "-22.90685",
+          "-43.1729"
+        ],
+        [
+          "Orange",
+          "Cluj-Napoca",
+          "5G NR",
+          "Pre-Release",
+          "46.77121",
+          "23.62364"
+        ],
+        [
+          "Dhiraagu",
+          "Male'",
+          "5G NR",
+          "Commercial Availability",
+          "4.1755",
+          "73.50935"
+        ],
+        [
+          "Dhiraagu",
+          "Addu City",
+          "5G NR",
+          "Commercial Availability",
+          "-0.6301",
+          "73.15856"
+        ],
+        [
+          "Dhiraagu",
+          "Haa Dhaalu Atoll",
+          "5G NR",
+          "Commercial Availability",
+          "6.75137",
+          "73.16608"
+        ],
+        [
+          "Dhiraagu",
+          "Hithadhoo",
+          "5G NR",
+          "Commercial Availability",
+          "1.79633",
+          "73.38708"
+        ],
+        [
+          "Dhiraagu",
+          "Kulhudhuffushi",
+          "5G NR",
+          "Commercial Availability",
+          "6.62246",
+          "73.07152"
+        ],
+        [
+          "Mytel",
+          "Yangon",
+          "5G NR",
+          "Pre-Release",
+          "16.86607",
+          "96.19513"
+        ],
+        [
+          "AT&T Mobility",
+          "New York City, NY",
+          "5G NR",
+          "Commercial Availability",
+          "40.71278",
+          "-74.00594"
+        ],
+        [
+          "Tele2",
+          "Moscow",
+          "5G NR",
+          "Pre-Release",
+          "55.75583",
+          "37.6173"
+        ],
+        [
+          "Vodafone",
+          "Cork",
+          "5G NR",
+          "Commercial Availability",
+          "51.89689",
+          "-8.48632"
+        ],
+        [
+          "Vodafone",
+          "Dublin",
+          "5G NR",
+          "Commercial Availability",
+          "53.34981",
+          "-6.26031"
+        ],
+        [
+          "Vodafone",
+          "Galway",
+          "5G NR",
+          "Commercial Availability",
+          "53.27067",
+          "-9.05679"
+        ],
+        [
+          "Vodafone",
+          "Limerick",
+          "5G NR",
+          "Commercial Availability",
+          "52.66802",
+          "-8.6305"
+        ],
+        [
+          "Vodafone",
+          "Waterford",
+          "5G NR",
+          "Commercial Availability",
+          "52.25932",
+          "-7.11007"
+        ],
+        [
+          "JT",
+          "St Helier",
+          "5G NR",
+          "Pre-Release",
+          "49.19912",
+          "-2.10637"
+        ],
+        [
+          "JT",
+          "Saint Peter Port",
+          "5G NR",
+          "Pre-Release",
+          "49.45417",
+          "-2.54971"
+        ],
+        [
+          "Three",
+          "Pörtschach am Wörthersee",
+          "5G NR",
+          "Commercial Availability",
+          "46.636542",
+          "14.139448"
+        ],
+        [
+          "Vodafone",
+          "Berlin",
+          "5G NR",
+          "Commercial Availability",
+          "52.52001",
+          "13.40495"
+        ],
+        [
+          "Vodafone",
+          "Bremen",
+          "5G NR",
+          "Commercial Availability",
+          "53.0793",
+          "8.80169"
+        ],
+        [
+          "Vodafone",
+          "Frankfurt",
+          "5G NR",
+          "Commercial Availability",
+          "50.11092",
+          "8.68213"
+        ],
+        [
+          "Vodafone",
+          "Solingen",
+          "5G NR",
+          "Commercial Availability",
+          "51.17021",
+          "7.08314"
+        ],
+        [
+          "Vodafone",
+          "Duisburg",
+          "5G NR",
+          "Commercial Availability",
+          "51.43441",
+          "6.76233"
+        ],
+        [
+          "Vodafone",
+          "Wolfsburg",
+          "5G NR",
+          "Commercial Availability",
+          "52.42265",
+          "10.78655"
+        ],
+        [
+          "Vodafone",
+          "Neukirchen",
+          "5G NR",
+          "Commercial Availability",
+          "50.77943",
+          "12.86694"
+        ],
+        [
+          "Three",
+          "London",
+          "5G NR",
+          "Commercial Availability",
+          "51.50735",
+          "-0.12776"
+        ],
+        [
+          "Vodafone",
+          "Budapest",
+          "5G NR",
+          "Commercial Availability",
+          "47.49791",
+          "19.04024"
+        ],
+        [
+          "Vodafone",
+          "Zalaegerszeg",
+          "5G NR",
+          "Commercial Availability",
+          "46.84169",
+          "16.84163"
+        ],
+        [
+          "A1 Hrvatska",
+          "Zagreb",
+          "5G NR",
+          "Pre-Release",
+          "45.81501",
+          "15.98192"
+        ],
+        [
+          "BH Telecom",
+          "Sarajevo",
+          "5G NR",
+          "Pre-Release",
+          "43.85626",
+          "18.41308"
+        ],
+        [
+          "Verizon Wireless",
+          "Phoenix, AZ",
+          "5G NR",
+          "Commercial Availability",
+          "33.44838",
+          "-112.07404"
+        ],
+        [
+          "XL Axiata",
+          "Jakarta",
+          "5G NR",
+          "Limited Availability",
+          "-6.17447",
+          "106.82275"
+        ],
+        [
+          "Zong",
+          "Islamabad",
+          "5G NR",
+          "Pre-Release",
+          "33.72939",
+          "73.09315"
+        ],
+        [
+          "Three",
+          "Wörgl",
+          "5G NR",
+          "Commercial Availability",
+          "47.48561",
+          "12.06495"
+        ],
+        [
+          "Telekom Deutschland",
+          "Munich",
+          "5G NR",
+          "Commercial Availability",
+          "48.13513",
+          "11.58198"
+        ],
+        [
+          "Vodafone",
+          "Tui",
+          "5G NR",
+          "Commercial Availability",
+          "42.04916",
+          "-8.64661"
+        ],
+        [
+          "Vodafone",
+          "Auckland",
+          "5G NR",
+          "Commercial Availability",
+          "-36.84846",
+          "174.76333"
+        ],
+        [
+          "A1",
+          "Vienna",
+          "5G NR",
+          "Commercial Availability",
+          "48.20817",
+          "16.37382"
+        ],
+        [
+          "Sunrise",
+          "Aarberg",
+          "5G NR",
+          "Commercial Availability",
+          "47.04206",
+          "7.2751"
+        ],
+        [
+          "Sunrise",
+          "Aclens",
+          "5G NR",
+          "Commercial Availability",
+          "46.56779",
+          "6.50996"
+        ],
+        [
+          "Sunrise",
+          "Aedermannsdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.30492",
+          "7.61013"
+        ],
+        [
+          "Sunrise",
+          "Ballaigues",
+          "5G NR",
+          "Commercial Availability",
+          "46.72969",
+          "6.41592"
+        ],
+        [
+          "Sunrise",
+          "Bassersdorf",
+          "5G NR",
+          "Commercial Availability",
+          "47.44346",
+          "8.62871"
+        ],
+        [
+          "Sunrise",
+          "Biberist",
+          "5G NR",
+          "Commercial Availability",
+          "47.18183",
+          "7.55778"
+        ],
+        [
+          "Sunrise",
+          "Biberstein",
+          "5G NR",
+          "Commercial Availability",
+          "47.41372",
+          "8.08138"
+        ],
+        [
+          "Sunrise",
+          "Bioley-Magnoux",
+          "5G NR",
+          "Commercial Availability",
+          "46.72697",
+          "6.71147"
+        ],
+        [
+          "Sunrise",
+          "Birr",
+          "5G NR",
+          "Commercial Availability",
+          "47.43635",
+          "8.20591"
+        ],
+        [
+          "Sunrise",
+          "Böttstein",
+          "5G NR",
+          "Commercial Availability",
+          "47.57084",
+          "8.24636"
+        ]
+      ],
+      "uploadedAt": "2024-10-11T18:29:56.930Z"
     }
   ]
 }

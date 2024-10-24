@@ -1,13 +1,10 @@
-import React, { useState} from 'react';
+import React from 'react';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
-import Button from '@mui/material/Button';
 Chart.register(...registerables);
 
 const Graph = ({ data, chartType, x, y }) => {
 
-   
-    const values = data.map(row => parseFloat(row[y])); // Adjust to your CSV value column
     const labels = data.map(row => row[x]);
     const datasets = y.map((col) => ({
       label: data[0][col],

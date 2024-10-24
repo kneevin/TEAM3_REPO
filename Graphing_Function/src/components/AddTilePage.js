@@ -6,7 +6,7 @@ import { Box, Tab, Tabs, FormControl, MenuItem, InputLabel, Select, Typography, 
 import { TabPanel, TabContext } from '@mui/lab';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import React, { useContext, useState } from "react";
+import React, {useState } from "react";
 import CSVReader from 'react-csv-reader';
 import Papa from 'papaparse';
 import axios from 'axios';
@@ -109,7 +109,7 @@ function AddTilePage({ dashboards, setDashboards }) {
       setData([]);
       setHeaders([]);
       setDashboards(updatedDashboards);
-      localStorage.setItem('dashboards', JSON.stringify(updatedDashboards));
+      //localStorage.setItem('dashboards', JSON.stringify(updatedDashboards));
       navigate(`/${dashboardId}`);
     }
   };
@@ -222,14 +222,14 @@ function AddTilePage({ dashboards, setDashboards }) {
 
                 {/* Graph Component */}
                 <Graph data={data} chartType={chartType} x={x} y={y} />
-              </TabPanel>
-
-              {/* Button to Add Tile */}
+                              {/* Button to Add Tile */}
               <Box mt={2}>
+                {(selectedFile !== '' && chartType !== '' && x !== '' && y !== null) && 
                 <Button variant="contained" onClick={handleAddTile}>
                   Add Tile to Dashboard
-                </Button>
+                </Button>}
               </Box>
+              </TabPanel>
             </TabContext>
           </Box>
         )}
