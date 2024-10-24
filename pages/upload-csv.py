@@ -15,7 +15,6 @@ def upload_df(csv_fname):
             data={ 'filename': fname, "type": "multipart/form-data" },
             files = {"file": fp}
         )
-    print(res.text)
 
 def display_files(csv_fname):
     if not csv_fname: return
