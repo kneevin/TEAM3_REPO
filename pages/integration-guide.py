@@ -1,6 +1,6 @@
 import streamlit as st
 from menu import menu
 
-st.title("Create Dashboard")
+st.title("Integration Guide")
 menu()
 

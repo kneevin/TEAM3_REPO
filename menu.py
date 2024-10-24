@@ -8,6 +8,7 @@ def team_section():
     with st.sidebar:
         st.title("Team 3 Repository")
         st.page_link("app.py", label="About Us")
+        st.page_link("pages/integration-guide.py", label="Integration Guide")
 
 def data_section():
     with st.sidebar:
