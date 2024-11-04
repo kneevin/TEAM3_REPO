@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AddTilePage from './components/AddTilePage';
 import Landing from './components/Landing'
 import SingleDashboard from './components/SingleDashboard'; 
+import Read_OnlyDash from './components/Read_OnlyDash';
+import './App.css';
 
 
 function App() {
@@ -11,8 +13,17 @@ function App() {
     return storedDashboards ? JSON.parse(storedDashboards) : [];
   });
 
-  useEffect(() => {
+  const [layouts, setLayouts] = useState(() => {
+    const storedLayout = localStorage.getItem('layouts');
+    return storedLayout ? JSON.parse(storedLayout) : [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem('layouts', JSON.stringify(layouts));
+  }, [layouts]);
+
+
+  useEffect(() => {
     localStorage.setItem('dashboards', JSON.stringify(dashboards));
   }, [dashboards]);
 
@@ -23,12 +34,21 @@ function App() {
     setDashboards(updatedDashboards);
   };
 
+  const updateDashboardLayout = (dashboardId, updatedTilesLayout) => {
+    const updatedLayout = layouts.map(layout =>
+      layout.id === parseInt(dashboardId) ? { ...layout, layout: updatedTilesLayout } : layout
+    );
+    console.log(updatedLayout); 
+    setLayouts(updatedLayout);
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<> <Landing dashboards={dashboards} setDashboards={setDashboards} /> </>}/>
-        <Route path="/add-tile/:dashboardId" element={dashboards &&  <AddTilePage dashboards={dashboards} setDashboards={setDashboards} />} />
-        <Route path="/:dashboardId" element={dashboards && <SingleDashboard dashboards={dashboards} updateDashboardTiles={updateDashboardTiles} />} />
+        <Route path="/" element={<Landing dashboards={dashboards} layouts= {layouts} setDashboards={setDashboards} setLayouts={setLayouts}/>}/>
+        <Route path="/add-tile/:dashboardId" element={dashboards &&  <AddTilePage dashboards={dashboards} layouts= {layouts}  setDashboards={setDashboards} setLayouts={setLayouts}/>} />
+        <Route path="/:dashboardId" element={dashboards && <SingleDashboard dashboards={dashboards} layouts= {layouts}  updateDashboardTiles={updateDashboardTiles} updateDashboardLayout={updateDashboardLayout}  setLayouts={setLayouts} setDashboards={setDashboards}/>} />
+        <Route path="/read_only/:dashboardId" element={dashboards && <Read_OnlyDash dashboards={dashboards}  setDashboards={setDashboards} layouts= {layouts} />} />
       </Routes>
     </Router>
   );
