@@ -21,7 +21,8 @@ st.markdown("""We are team 3:
 
 
 st.header("High-Level Summary")
-st.markdown("""This project implements a comprehensive dashboard management application that allows users to upload, visualize, and manage data through an interactive and user-friendly interface. The application provides several core functionalities, ranging from dashboard and tile management to robust file handling and visualization capabilities. Key features include:
+st.markdown(
+"""This project implements a comprehensive dashboard management application that allows users to upload, visualize, and manage data through an interactive and user-friendly interface. The application provides several core functionalities, ranging from dashboard and tile management to robust file handling and visualization capabilities. Key features include:
 
 - **Dashboard and Tile Management**: Users can create, view, and delete dashboards and tiles. Tiles support various chart types, including bar, line, and pie charts, with customization options for axes and data points.
 - **File Management**: Users can upload, select, and parse CSV files to generate visualizations. IPython notebook integration allows users to upload notebooks and extract plots for dashboard use.
@@ -31,5 +32,6 @@ st.markdown("""This project implements a comprehensive dashboard management appl
 - **Backend Integration**: The FastAPI backend and JSON server integration enable file uploads, dashboard state persistence, and the retrieval of saved data. The backend efficiently responds to requests from the frontend for data and plot display.
   
 The app has been thoroughly tested, and most core functionalities have been implemented and completed. Future enhancements will focus on improving user experience, adding new chart types, and enhancing error handling.
-""")
+"""
+)
 

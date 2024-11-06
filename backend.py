@@ -3,14 +3,30 @@ from typing import Union
 from fastapi import (
     FastAPI, File, UploadFile, 
     HTTPException, Response, BackgroundTasks)
+from pydantic import BaseModel
 import csv
 import pandas as pd
 import codecs
 from TableManager import TableManager
 import os
 
+
+class Dashboard(BaseModel):
+    pass
+
+
 app = FastAPI()
 tb = TableManager()
+
+# @app.post("/upload_csv")
+# @app.post("/get_table_columns/{table_name}")
+# @app.post("/create_graph/{table_name}/{graph_name}/{x_axis}/{y_axis}")
+# @app.post("/get_dashboard/{dashboard_id}")
+# @app.post("")
+# @app.post("")
+
+
+
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):

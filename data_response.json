@@ -1,0 +1,35 @@
+{
+  "dashboard id": "money dashboard",
+  "graphs": [
+    {
+      "graph id": "graph1",
+      "graph title": "Dollars vs Days",
+      "graph type": "Line",
+      "headers": ["Days", "Dollars"],
+      "ax": {
+        "0": "Days",
+        "1": "Dollars"
+      },
+      "data": [
+        [0, 12],
+        [1, 429],
+        [2, 29]
+      ]
+    },
+    {
+      "graph id": "graph2",
+      "graph title": "Dollars vs Days",
+      "graph type": "Bar",
+      "headers": ["Days", "Dollars"],
+      "ax": {
+        "0": "Days",
+        "1": "Dollars"
+      },
+      "data": [
+        [0, -23],
+        [1, 410],
+        [2, 9]
+      ]
+    }
+  ]
+}

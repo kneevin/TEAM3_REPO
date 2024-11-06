@@ -1,0 +1,34 @@
+{
+  "dashboards": [
+    {
+      "id": 1730392901220,
+      "name": "dash1",
+      "tiles": [
+        {
+          "id": 1730395780629,
+          "filename": "5g_data_sample",
+          "graph_type": "bar",
+          "x_axis": 6,
+          "y_axis": [{ "label": "timestamp", "value": 9 }]
+        },
+        {
+          "id": 1730396303866,
+          "filename": "5g_coverage2",
+          "graph_type": "bar",
+          "x_axis": 2,
+          "y_axis": [{ "label": "latitude", "value": 4 }]
+        }
+      ]
+    }
+  ],
+  "layouts": [
+    {
+      "id": 1730392901220,
+      "name": "dash1",
+      "layout": [
+        { "i": "1730395780629", "x": 0, "y": null, "w": 20, "h": 20 },
+        { "i": "1730396303866", "x": 0, "y": null, "w": 20, "h": 20 }
+      ]
+    }
+  ]
+}
