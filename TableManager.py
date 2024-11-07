@@ -103,3 +103,25 @@ class TableManager:
         with sqlite3.connect(self.DB_FNAME) as conn:
             cursor = conn.execute(check_query, (table_name,))
             return cursor.fetchone() is not None
+
+    def column_exists(self, table_name: str, column_name: str) -> bool:
+        return self.columns_exist(table_name, column_names=[column_name])
+
+    def columns_exist(self, table_name: str, column_names: List[str]) -> bool:
+        check_query = f"""
+        PRAGMA table_info({table_name})
+        """
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            cursor = conn.execute(check_query)
+            columns = [row[1] for row in cursor.fetchall()]
+        return all(column in columns for column in column_names)
+
+    def get_table_graph(self, table_name: str, ax0: str, ax1: str) -> pd.DataFrame:
+        select_query = f"""
+        SELECT {ax0}, {ax1} FROM {table_name}
+        """
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            cursor = conn.execute(select_query)
+            columns = [description[0] for description in cursor.description]
+            rows = cursor.fetchall()
+        return pd.DataFrame(rows, columns=columns)

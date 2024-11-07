@@ -42,8 +42,18 @@ class GraphManager:
                 GRAPH_INSERT_QUERY, (table_id, graph_title, graph_type, ax0, ax1)
             )
             conn.commit()
+            graph_id = cursor.lastrowid
 
-    def get_graph_data(self, )
+            # Fetch the inserted row
+            SELECT_QUERY = """
+            SELECT * FROM graphs WHERE graph_id = ?
+            """
+            cursor.execute(SELECT_QUERY, (graph_id,))
+            row = cursor.fetchone()
+            columns = [description[0] for description in cursor.description]
+        return dict(zip(columns, row))
+
+    # def get_graph_data(self, ):
 
     def get_all_graph_types(self):
         return ['Bar', 'Line', 'Scatter']

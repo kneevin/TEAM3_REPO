@@ -1,5 +1,5 @@
 import io
-from typing import Union
+from typing import Union, NamedTuple
 from fastapi import (
     FastAPI, File, UploadFile, 
     HTTPException, Response, BackgroundTasks)
@@ -15,6 +15,17 @@ app = FastAPI()
 tb = TableManager()
 gm = GraphManager()
 
+class Axes(NamedTuple):
+    ax0: str
+    ax1: str
+
+class Graph(BaseModel):
+    graph_id: int
+    graph_title: str
+    graph_type: str
+    ax: Axes
+    data: list[list]
+
 # @app.post("/upload_csv")
 # @app.post("/get_table_columns/{table_name}")
 # @app.post("/create_graph/{table_name}/{graph_name}/{x_axis}/{y_axis}")
@@ -22,7 +33,7 @@ gm = GraphManager()
 # @app.post("")
 
 @app.post("/upload_csv")
-def upload_csv(file: UploadFile = File(...)):
+async def upload_csv(file: UploadFile = File(...)):
     if os.path.splitext(file.filename)[-1] != ".csv":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
     table_name, _ = os.path.splitext(file.filename)
@@ -51,24 +62,48 @@ def get_table(table_id: str):
 def get_all_table_columns():
     return tb.get_all_table_columns()
 
-@app.post("/create_graph/{table_id}/{graph_title}/{graph_type}/{ax0}/{ax1}")
-def create_graph(table_id: str, graph_title: str, graph_type: str, ax0: str, ax1: str):
+@app.post("/create_graph/{table_name}")
+def create_graph(table_name: str, graph_title: str, graph_type: str, ax0: str, ax1: str) -> Graph:
     """
     ax0: x_axis
     ax1: y_axis
     """
-    if not tb.table_exists(table_id):
-        raise HTTPException(status_code=404, detail=f"Table {table_id} does not exist.")
-    gm.add_graph(
-        table_id=table_id,
+    if not tb.table_exists(table_name):
+        raise HTTPException(status_code=404, detail=f"Table {table_name} does not exist.")
+    graph_mp = gm.add_graph(
+        table_id=table_name,
         graph_title=graph_title,
         graph_type=graph_type,
         ax0=ax0,
         ax1=ax1
     )
-    all_graphs_df = gm.get_all_graphs()
-    return jsonify_df(all_graphs_df)
 
+    df_graph = tb.get_table_graph(table_name=table_name, ax0=ax0, ax1=ax1)
+
+    return create_graph_response(
+        df=df_graph,
+        graph_id=graph_mp['graph_id'],
+        graph_title=graph_mp['graph_title'],
+        graph_type=graph_mp['graph_type'],
+        ax0=graph_mp['ax0'],
+        ax1=graph_mp['ax1']
+    )
+
+def create_graph_response(
+        df: pd.DataFrame, 
+        graph_id: int,
+        graph_title: str, 
+        graph_type: str, 
+        ax0: str, 
+        ax1: str) -> Graph:
+    json_df = jsonify_df(df)
+    return Graph(
+        graph_id=graph_id,
+        graph_title=graph_title,
+        graph_type=graph_type,
+        ax=Axes(ax0=ax0, ax1=ax1),
+        data=json_df['data']
+    )
 
 def jsonify_df(df: pd.DataFrame, table_id: str | None = None):
     if not table_id:
