@@ -9,15 +9,6 @@ class TableManager:
     def __init__(self):
         self.__create_master_table()
 
-    def __enter__(self):
-        self.conn = sqlite3.connect(self.DB_FNAME)
-        return self.conn
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        if hasattr(self, 'conn'):
-            self.conn.commit()
-            self.conn.close()
-
     def __create_master_table(self):
         create_master_table_query = """
         CREATE TABLE IF NOT EXISTS master_tables (
@@ -76,6 +67,12 @@ class TableManager:
             table_names = [row[0] for row in cursor.fetchall()]
         return table_names
 
+    def get_table_id_mp(self) -> Dict[str, str]:
+        select_query = """SELECT table_id, table_name from master_tables"""
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            df = pd.read_sql_query(select_query, conn)
+        return dict(zip(df['table_id'], df['table_name']))
+
     def get_table_data(self, table_name: str) -> pd.DataFrame:
         select_query = f"""
         SELECT * FROM {table_name}
@@ -115,6 +112,16 @@ class TableManager:
             cursor = conn.execute(check_query)
             columns = [row[1] for row in cursor.fetchall()]
         return all(column in columns for column in column_names)
+
+    def get_table_name(self, table_id: int) -> str:
+        SELECT_QUERY = """SELECT table_name FROM master_tables WHERE table_id = ? LIMIT 1"""
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            df = pd.read_sql_query(SELECT_QUERY, conn, params=(table_id, ))
+        return df.iloc[0]['table_name']
+
+    def get_table_id_graph(self, table_id: str, ax0: str, ax1: str) -> pd.DataFrame:
+        table_name = self.get_table_name(table_id=table_id)
+        return self.get_table_graph(table_name, ax0, ax1)
 
     def get_table_graph(self, table_name: str, ax0: str, ax1: str) -> pd.DataFrame:
         select_query = f"""

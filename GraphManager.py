@@ -1,11 +1,22 @@
-from typing import Dict, List
+from typing import Dict, List, NamedTuple
 import sqlite3
 import matplotlib.pyplot as pl
+from pydantic import BaseModel
 import seaborn as sns
 import pandas as pd
 import numpy as np
 import os
 
+class Axes(NamedTuple):
+    ax0: str
+    ax1: str
+
+class Graph(BaseModel):
+    graph_id: int
+    graph_title: str
+    graph_type: str
+    ax: Axes
+    data: list[list]
 
 class GraphManager:
     DB_FNAME = "./graph_manager.db"
@@ -28,6 +39,13 @@ class GraphManager:
             cursor = conn.cursor()
             cursor.execute(create_table_query)
             conn.commit()
+
+    def get_graph_id_map(self) -> Dict[int, Dict[int, str]]:
+        SELECT_QUERY = """SELECT table_id, graph_id, graph_title FROM graphs ORDER BY table_id, graph_id"""
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            df = pd.read_sql_query(SELECT_QUERY, conn)
+        # res = df.groupby('table_id').apply(lambda x: dict(zip(x['graph_id'], x['graph_title']))).to_dict()
+        return df.to_dict(orient='records')
 
     def add_graph(
         self, table_id: int, graph_title: str, graph_type: str, ax0: str, ax1: str
@@ -53,7 +71,21 @@ class GraphManager:
             columns = [description[0] for description in cursor.description]
         return dict(zip(columns, row))
 
-    # def get_graph_data(self, ):
+    def get_graph(self, graph_id: int):
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            cursor = conn.cursor()
+            # Fetch the inserted row
+            SELECT_QUERY = """
+            SELECT * FROM graphs WHERE graph_id = ?
+            """
+            cursor.execute(SELECT_QUERY, (graph_id,))
+            row = cursor.fetchone()
+            columns = [description[0] for description in cursor.description]
+        graph_mp = dict(zip(columns, row))
+        return graph_mp
+
+    def graph_df_to_obj(self, df: pd.DataFrame):
+        return
 
     def get_all_graph_types(self):
         return ['Bar', 'Line', 'Scatter']
