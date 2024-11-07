@@ -8,47 +8,37 @@ import csv
 import pandas as pd
 import codecs
 from TableManager import TableManager
+from GraphManager import GraphManager
 import os
-
-
-class Dashboard(BaseModel):
-    pass
-
 
 app = FastAPI()
 tb = TableManager()
+gm = GraphManager()
 
 # @app.post("/upload_csv")
 # @app.post("/get_table_columns/{table_name}")
 # @app.post("/create_graph/{table_name}/{graph_name}/{x_axis}/{y_axis}")
 # @app.post("/get_dashboard/{dashboard_id}")
 # @app.post("")
-# @app.post("")
-
-
-
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):
-    print(file)
     if os.path.splitext(file.filename)[-1] != ".csv":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
-    
+    table_name, _ = os.path.splitext(file.filename)
+
     contents = file.file.read()
     buffer = io.BytesIO(contents)
     df = pd.read_csv(buffer)
-    print(df)
-    tb.add_table(file.filename, df)
-
-    return get_all_table_columns()
+    tb.add_table(
+        table_name=table_name,
+        dataframe=df
+    )
+    return {"tables" : tb.get_all_table_names()}
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
-
-@app.get("/get_graph_types")
-def get_graph_types():
-    return tb.get_graph_types()
 
 @app.get("/get_tables")
 def get_tables():
@@ -58,38 +48,6 @@ def get_tables():
 def get_all_table_columns():
     return tb.get_all_table_columns()
 
-@app.get("/{graph_type}/{table_id}/{x_column}/{y_column}")
-async def graph_table(background_tasks: BackgroundTasks, graph_type: str, table_id: str, x_column: str, y_column: str):
-    if not tb.table_exists(table_id): 
-        raise HTTPException(status_code=404, detail=f"Table {table_id} does not exist.")
-    
-    if not tb.graph_exists(graph_type):
-        return HTTPException(status_code=404, detail="Graph type does not exist.")
-    
-    fig = tb.graph_table(
-        graph_type=graph_type,
-        table_id=table_id,
-        x_column=x_column,
-        y_column=y_column
-    )
-
-    img_buf = io.BytesIO()
-    fig.savefig(img_buf, format='png')
-
-    bufContents: bytes = img_buf.getvalue()
-    background_tasks.add_task(img_buf.close)
-    headers = {'Content-Disposition': 'inline; filename="out.png"'}
-    return Response(bufContents, headers=headers, media_type='image/png')
-
-@app.get('/get_static_image')
-async def get_img(background_tasks: BackgroundTasks):
-    df = pd.read_csv("./data.csv")
-    g = df.plot(kind='line', x='X', figsize=(8, 4))
-
-    img_buf = io.BytesIO()
-    g.figure.savefig(img_buf, format='png')
-
-    bufContents: bytes = img_buf.getvalue()
-    background_tasks.add_task(img_buf.close)
-    headers = {'Content-Disposition': 'inline; filename="out.png"'}
-    return Response(bufContents, headers=headers, media_type='image/png')
+@app.post("/create_graph/{table_name}")
+def create_graph(table_name: str, graph_name: str, x_axis: str, y_axis: str):
+    return table_name
