@@ -8,9 +8,8 @@ import os
 
 class GraphManager:
     DB_FNAME = './graph_manager.db'
-    def __init__(self, ):
-        self.conn = sqlite3.connect(self.DB_FNAME, check_same_thread=False)
-        self.cursor = self.conn.cursor()
+
+    def __init__(self):
         self.__create_table()
 
     def __create_table(self):
@@ -24,16 +23,17 @@ class GraphManager:
             ax1 TEXT
         )
         '''
-        self.cursor.execute(create_table_query)
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            cursor = conn.cursor()
+            cursor.execute(create_table_query)
+            conn.commit()
 
     def add_graph(self, table_id: int, graph_title: str, graph_type: str, ax0: str, ax1: str):
         GRAPH_INSERT_QUERY = '''
         INSERT INTO graphs (table_id, graph_title, graph_type, ax0, ax1)
         VALUES (?, ?, ?, ?, ?)
         '''
-        self.cursor.execute(GRAPH_INSERT_QUERY, (table_id, graph_title, graph_type, ax0, ax1))
-        self.conn.commit()
-    
-    def __del__(self):
-        self.cursor.close()
-        self.conn.close()
+        with sqlite3.connect(self.DB_FNAME) as conn:
+            cursor = conn.cursor()
+            cursor.execute(GRAPH_INSERT_QUERY, (table_id, graph_title, graph_type, ax0, ax1))
+            conn.commit()
