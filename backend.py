@@ -26,12 +26,6 @@ class Graph(BaseModel):
     ax: Axes
     data: list[list]
 
-# @app.post("/upload_csv")
-# @app.post("/get_table_columns/{table_name}")
-# @app.post("/create_graph/{table_name}/{graph_name}/{x_axis}/{y_axis}")
-# @app.post("/get_dashboard/{dashboard_id}")
-# @app.post("")
-
 @app.post("/upload_csv")
 async def upload_csv(file: UploadFile = File(...)):
     if os.path.splitext(file.filename)[-1] != ".csv":
