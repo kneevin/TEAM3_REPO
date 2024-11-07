@@ -43,12 +43,18 @@ class GraphManager:
             )
             conn.commit()
 
+    def get_graph_data(self, )
+
+    def get_all_graph_types(self):
+        return ['Bar', 'Line', 'Scatter']
+
     def get_all_graphs(self):
         GET_ALL_GRAPHS_QUERY = """
             SELECT * FROM graphs
             """
         with sqlite3.connect(self.DB_FNAME) as conn:
-            cursor = conn.cursor()
-            cursor.execute(GET_ALL_GRAPHS_QUERY)
-            graphs = cursor.fetchall()
-        return graphs
+            # cursor = conn.cursor()
+            # cursor.execute(GET_ALL_GRAPHS_QUERY)
+            # graphs = cursor.fetchall()
+            df: pd.DataFrame = pd.read_sql_query(GET_ALL_GRAPHS_QUERY, conn)
+        return df

@@ -51,13 +51,34 @@ def get_table(table_id: str):
 def get_all_table_columns():
     return tb.get_all_table_columns()
 
-@app.post("/create_graph/{table_name}")
-def create_graph(table_name: str, graph_name: str, x_axis: str, y_axis: str):
-    return table_name
+@app.post("/create_graph/{table_id}/{graph_title}/{graph_type}/{ax0}/{ax1}")
+def create_graph(table_id: str, graph_title: str, graph_type: str, ax0: str, ax1: str):
+    """
+    ax0: x_axis
+    ax1: y_axis
+    """
+    if not tb.table_exists(table_id):
+        raise HTTPException(status_code=404, detail=f"Table {table_id} does not exist.")
+    gm.add_graph(
+        table_id=table_id,
+        graph_title=graph_title,
+        graph_type=graph_type,
+        ax0=ax0,
+        ax1=ax1
+    )
+    all_graphs_df = gm.get_all_graphs()
+    return jsonify_df(all_graphs_df)
 
-def jsonify_df(df: pd.DataFrame, table_id: str):
-    return {
-        'table_id': table_id,
-        'columns': list(df.columns),
-        'data': df.values.tolist()
-    }
+
+def jsonify_df(df: pd.DataFrame, table_id: str | None = None):
+    if not table_id:
+        return {
+            'columns': list(df.columns),
+            'data': df.values.tolist()
+        }
+    else:
+        return {
+            'table_id': table_id,
+            'columns': list(df.columns),
+            'data': df.values.tolist()
+        }

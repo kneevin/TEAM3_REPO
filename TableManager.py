@@ -9,6 +9,15 @@ class TableManager:
     def __init__(self):
         self.__create_master_table()
 
+    def __enter__(self):
+        self.conn = sqlite3.connect(self.DB_FNAME)
+        return self.conn
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if hasattr(self, 'conn'):
+            self.conn.commit()
+            self.conn.close()
+
     def __create_master_table(self):
         create_master_table_query = """
         CREATE TABLE IF NOT EXISTS master_tables (
