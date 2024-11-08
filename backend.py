@@ -9,11 +9,13 @@ import pandas as pd
 import codecs
 from TableManager import TableManager
 from GraphManager import GraphManager, Graph, Axes
+from DashboardManager import DashboardManager, Dashboard
 import os
 
 app = FastAPI()
 tb = TableManager()
 gm = GraphManager()
+dbm = DashboardManager()
 
 # class Axes(NamedTuple):
 #     ax0: str
@@ -25,10 +27,6 @@ gm = GraphManager()
 #     graph_type: str
 #     ax: Axes
 #     data: list[list]
-
-class Dashboard(BaseModel):
-    dashboard_id: int
-    graphs: List[Graph]
 
 @app.post("/upload_csv")
 async def upload_csv(file: UploadFile = File(...)):
@@ -48,6 +46,17 @@ async def upload_csv(file: UploadFile = File(...)):
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+@app.post("/create_dashboard")
+def post_dashboard(dashboard_title: str, graphs: List[Graph]) -> Dashboard:
+    pass
+
+# @app.post("/{dashboard_id}")
+# def get_
+
+@app.get("/dashboard_id_map")
+def get_dashboard_id_map():
+    return {"dashboards": dbm.get_dashboard_id_mp()}
 
 @app.get("/get_table/{table_id}")
 def get_table(table_id: str):
