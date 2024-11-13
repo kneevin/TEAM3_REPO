@@ -17,17 +17,6 @@ tb = TableManager()
 gm = GraphManager()
 dbm = DashboardManager()
 
-# class Axes(NamedTuple):
-#     ax0: str
-#     ax1: str
-
-# class Graph(BaseModel):
-#     graph_id: int
-#     graph_title: str
-#     graph_type: str
-#     ax: Axes
-#     data: list[list]
-
 @app.post("/upload_csv")
 async def upload_csv(file: UploadFile = File(...)):
     if os.path.splitext(file.filename)[-1] != ".csv":
@@ -42,6 +31,8 @@ async def upload_csv(file: UploadFile = File(...)):
         dataframe=df
     )
     return tb.get_all_table_columns()
+
+
 
 @app.get("/")
 def read_root():
