@@ -13,7 +13,6 @@ class TableMapResponse(BaseModel):
     table_ids: List[int]
     table_names: List[str]
 
-
 class TableManager:
     def __init__(self, get_connection_callback: Callable[[], sqlite3.Connection]):
         self.get_sql_db_connection = get_connection_callback
@@ -38,9 +37,7 @@ class TableManager:
             SELECT_QUERY = '''SELECT table_id, table_name FROM master_tables'''
             curs = conn.cursor()
             curs.execute(SELECT_QUERY)
-            # conn.row_factory = sqlite3.Row
             for table_id, table_name in curs.fetchall():
-                # print(row)
                 TABLE_IDS.append(table_id)
                 TABLE_NAMES.append(table_name)
 

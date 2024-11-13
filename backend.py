@@ -16,28 +16,6 @@ import os
 app = FastAPI()
 db_manager = DataVisualizationFacade()
 
-# @app.get("/")
-# return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
-class TableQueryParams(BaseModel):
-    table_id: Optional[str] = None
-    table_ids: Optional[List[str]] = None
-
-    @model_validator(mode='before')
-    def check_mutually_exclusive(cls, data: Any) -> Any:
-        table_id, table_ids = data.get('table_id'), data.get('table_ids')
-        if table_id and table_ids:
-            raise HTTPException(status_code=400, detail="'table_id' and 'table_ids' cannot be used together. Please provide only one.")
-        if (not table_id) and (not table_ids):
-            raise HTTPException(status_code=400, detail="Please provide table_id(s).")
-        return data
-
-def parse_table_query(
-        table_id: Optional[str] = None,
-        table_ids: Optional[List[str]] = Query(None)
-) -> TableQueryParams:
-    return TableQueryParams(table_id=table_id, table_ids=table_ids)
-
-
 @app.get("/tables_map")
 def get_table_map() -> TableMapResponse:
     return db_manager.get_all_tables_mp()
