@@ -1,6 +1,13 @@
 import sqlite3
 import pandas as pd
-from typing import List, Dict, Callable
+from typing import List, Any, Callable
+from pydantic import BaseModel
+
+class TableResponse(BaseModel):
+    table_id: int
+    table_name: str
+    column_names: List[str]
+    data: List[List[Any]]
 
 
 class TableManager:
@@ -36,7 +43,7 @@ class TableManager:
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()
             db_name = self.insert_master_table(table_name)
-            
+
             column_definitions = []
             for column_name, dtype in dataframe.dtypes.items():
                 if pd.api.types.is_integer_dtype(dtype):
@@ -63,6 +70,8 @@ class TableManager:
             VALUES ({placeholders})
             """
             cursor.executemany(insert_query, dataframe.values.tolist())
+
+
 
     # def get_all_table_names(self) -> List[str]:
     #     select_query = """

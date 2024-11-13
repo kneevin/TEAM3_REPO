@@ -10,30 +10,15 @@ import codecs
 # from DataViz.TableManager import TableManager
 # from DataViz.GraphManager import GraphManager, Graph, Axes
 # from DataViz.DashboardManager import DashboardManager, Dashboard
-from DataViz import DataVisualizationFacade
+from DataViz import DataVisualizationFacade, TableResponse
 import os
 
 app = FastAPI()
 db_manager = DataVisualizationFacade()
 
-@app.post("/upload_csv")
-async def upload_csv(file: UploadFile = File(...)):
-    if os.path.splitext(file.filename)[-1] != ".csv":
-        raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
-    table_name, _ = os.path.splitext(file.filename)
-
-    contents = file.file.read()
-    buffer = io.BytesIO(contents)
-    df = pd.read_csv(buffer)
-    db_manager.add_table(
-        table_name
-    )
-
-
-
 # @app.get("/")
 # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
-class TableQuery(BaseModel):
+class TableQueryParams(BaseModel):
     table_id: Optional[str] = None
     table_ids: Optional[List[str]] = None
 
@@ -47,11 +32,11 @@ class TableQuery(BaseModel):
 def parse_table_query(
         table_id: Optional[str] = None,
         table_ids: Optional[List[str]] = Query(None)
-) -> TableQuery:
-    return TableQuery(table_id=table_id, table_ids=table_ids)
+) -> TableQueryParams:
+    return TableQueryParams(table_id=table_id, table_ids=table_ids)
 
 @app.get("/tables")
-def get_tables(query: TableQuery = Depends(parse_table_query)):
+def get_tables(query: TableQueryParams = Depends(parse_table_query)):
     if query.table_id:
         return {'table': query.table_id}
     elif query.table_ids:
