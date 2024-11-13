@@ -3,8 +3,6 @@ import sqlite3
 from pydantic import BaseModel
 import pandas as pd
 
-from .GraphManager import Graph
-
 class Dashboard(BaseModel):
     dashboard_id: int
     dashboard_title: str

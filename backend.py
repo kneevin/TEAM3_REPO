@@ -7,15 +7,14 @@ from pydantic import BaseModel, model_validator
 import csv
 import pandas as pd
 import codecs
-from DataViz.TableManager import TableManager
-from DataViz.GraphManager import GraphManager, Graph, Axes
-from DataViz.DashboardManager import DashboardManager, Dashboard
+# from DataViz.TableManager import TableManager
+# from DataViz.GraphManager import GraphManager, Graph, Axes
+# from DataViz.DashboardManager import DashboardManager, Dashboard
+from DataViz import DataVisualizationFacade
 import os
 
 app = FastAPI()
-tb = TableManager()
-gm = GraphManager()
-dbm = DashboardManager()
+db_manager = DataVisualizationFacade()
 
 @app.post("/upload_csv")
 async def upload_csv(file: UploadFile = File(...)):
@@ -26,11 +25,9 @@ async def upload_csv(file: UploadFile = File(...)):
     contents = file.file.read()
     buffer = io.BytesIO(contents)
     df = pd.read_csv(buffer)
-    tb.add_table(
-        table_name=table_name,
-        dataframe=df
+    db_manager.add_table(
+        table_name
     )
-    return tb.get_all_table_columns()
 
 
 
@@ -44,7 +41,7 @@ class TableQuery(BaseModel):
     def check_mutually_exclusive(cls, data: Any) -> Any:
         table_id, table_ids = data.get('table_id'), data.get('table_ids')
         if table_id and table_ids:
-            raise ValueError("'table_id' and 'table_ids' cannot be used together. Please provide only one.")
+            raise HTTPException(status_code=400, detail="'table_id' and 'table_ids' cannot be used together. Please provide only one.")
         return data
 
 def parse_table_query(
@@ -53,7 +50,7 @@ def parse_table_query(
 ) -> TableQuery:
     return TableQuery(table_id=table_id, table_ids=table_ids)
 
-app.get("/tables")
+@app.get("/tables")
 def get_tables(query: TableQuery = Depends(parse_table_query)):
     if query.table_id:
         return {'table': query.table_id}
@@ -61,7 +58,20 @@ def get_tables(query: TableQuery = Depends(parse_table_query)):
         return {'table': query.table_ids}
     else:
         return {'table': "lol"}
-# app.post("/tables")
+    
+@app.post("/tables")
+async def post_tables(table_name: str, file: UploadFile = File(...)):
+    if os.path.splitext(file.filename)[-1] != ".csv":
+        raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
+    contents = file.file.read()
+    buffer = io.BytesIO(contents)
+    df = pd.read_csv(buffer)
+    success = db_manager.add_table(
+        table_name=table_name,
+        df=df
+    )
+    if success:
+        pass
 
 # app.get("/graphs") # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
 # app.post("/graphs")
