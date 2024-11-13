@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import os
 
-from .GraphManager import GraphManager, Graph, Axes
+from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam
 from .TableManager import TableManager, TableResponse, TableMapResponse
 
 class DataVisualizationFacade:
@@ -18,10 +18,15 @@ class DataVisualizationFacade:
         self.table_manager = TableManager(self.__get_connection)
         self.graph_manager = GraphManager(self.__get_connection)
 
+# ------- graph -------
+    def add_graph(self, query_params: GraphQueryParam):
+        self.graph_manager.add_graph(query_params)
+
+# ------- table -------
     def get_table(self, table_id: int) -> TableResponse:
         return self.table_manager.get_table_respone_by_id(table_id)
 
-    def get_all_tables_mp(self):
+    def get_all_tables_mp(self) -> TableMapResponse:
         return self.table_manager.get_table_id_mp()
 
     def add_table(self, table_name: str, dataframe: pd.DataFrame) -> TableResponse:
