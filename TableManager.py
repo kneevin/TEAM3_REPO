@@ -31,12 +31,6 @@ class TableManager:
         SS = [x_column, y_column]
         df = self.tables[table_id][SS]
         return df.plot(kind=graph_type, x=x_column, y=y_column).get_figure()
-
-    def get_table_columns(self, table_name: str) -> List[str]:
-        if table_name not in self.tables:
-            return []
-        else:
-            return self.tables[table_name].columns.to_list()
         
     def get_graph_types(self) -> Dict[str, str]:
         return self.graph_types
@@ -45,4 +39,24 @@ class TableManager:
         return {
             table_name: df.columns.to_list() 
                 for table_name, df in self.tables.items()
+        }
+    
+    def get_table_data(self, table_name: str) -> dict:
+        if not self.table_exists(table_name):
+            raise ValueError(f"Table {table_name} does not exist.")
+
+        # Get the table as a DataFrame
+        df = self.tables[table_name]
+        df = df.fillna('')
+        # Convert DataFrame to a list of lists
+        data = df.values.tolist()
+
+        # Extract the first row as columns and the rest as data rows
+        columns = df.columns.tolist()
+        rows = data
+
+
+        return {
+            "headers": columns,
+            "rows": rows
         }

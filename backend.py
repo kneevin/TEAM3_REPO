@@ -8,13 +8,29 @@ import pandas as pd
 import codecs
 from TableManager import TableManager
 import os
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+# Allow specific origins (replace with the actual port your React app is running on)
+origins = [
+    "http://localhost:3000",  # React app address
+    "http://127.0.0.1:3000",  # Alternative React app address
+]
+
+# Apply CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows specific origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers (Authorization, Content-Type, etc.)
+)
+
 tb = TableManager()
 
 @app.post("/upload_csv")
 def upload_csv(file: UploadFile = File(...)):
-    if os.path.splitext(file.filename)[-1] != "csv":
+    print(os.path.splitext(file.filename)[-1])
+    if os.path.splitext(file.filename)[-1] != ".csv" and  os.path.splitext(file.filename)[-1] != ".CSV":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
     
     contents = file.file.read()
@@ -76,3 +92,12 @@ async def get_img(background_tasks: BackgroundTasks):
     background_tasks.add_task(img_buf.close)
     headers = {'Content-Disposition': 'inline; filename="out.png"'}
     return Response(bufContents, headers=headers, media_type='image/png')
+
+@app.get("/get_column/{table_id}")
+def get_column(table_id: str):
+    # Check if the table exists
+    if not tb.table_exists(table_id):
+        raise HTTPException(status_code=404, detail=f"Table {table_id} does not exist.")
+
+
+    return tb.get_table_data(table_id)
