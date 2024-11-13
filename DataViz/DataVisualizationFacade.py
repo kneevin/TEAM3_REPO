@@ -16,7 +16,7 @@ class DataVisualizationFacade:
 
     def __init__(self):
         self.table_manager = TableManager(self.__get_connection)
-        # self.graph_manager = GraphManager(self.__get_connection)
+        self.graph_manager = GraphManager(self.__get_connection)
 
     def get_table(self, table_id: int) -> TableResponse:
         return self.table_manager.get_table_respone_by_id(table_id)

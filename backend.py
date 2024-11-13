@@ -10,7 +10,7 @@ import codecs
 # from DataViz.TableManager import TableManager
 # from DataViz.GraphManager import GraphManager, Graph, Axes
 # from DataViz.DashboardManager import DashboardManager, Dashboard
-from DataViz import DataVisualizationFacade, TableResponse, TableMapResponse
+from DataViz import DataVisualizationFacade, TableResponse, TableMapResponse, GraphQueryParam
 import os
 
 app = FastAPI()
@@ -38,7 +38,9 @@ async def post_tables(table_name: str, file: UploadFile = File(...)) -> TableRes
     return tbl_res
 
 # app.get("/graphs") # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
-# app.post("/graphs")
+@app.post("/graphs")
+async def post_graphs(query_params: GraphQueryParam):
+    pass
 
 # @app.get("/dashboards")
 # @app.post("/dashboards")
