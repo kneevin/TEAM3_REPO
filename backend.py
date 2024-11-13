@@ -51,6 +51,9 @@ def read_root():
 def post_dashboard(dashboard_title: str, graphs: List[Graph]) -> Dashboard:
     pass
 
+@app.post("/team6_callback")
+def team6_ingestion():
+    pass
 # @app.post("/{dashboard_id}")
 # def get_
 
