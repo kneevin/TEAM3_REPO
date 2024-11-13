@@ -12,6 +12,7 @@ class TableResponse(BaseModel):
 class TableMapResponse(BaseModel):
     table_ids: List[int]
     table_names: List[str]
+    table_columns: List[List[str]]
 
 class TableManager:
     def __init__(self, get_connection_callback: Callable[[], sqlite3.Connection]):
@@ -33,17 +34,23 @@ class TableManager:
     def get_table_id_mp(self) -> TableMapResponse:
         TABLE_IDS = []
         TABLE_NAMES = []
+        TABLE_COLUMNS = []
         with self.get_sql_db_connection() as conn:
-            SELECT_QUERY = '''SELECT table_id, table_name FROM master_tables'''
+            SELECT_QUERY = '''SELECT table_id, table_name, db_name FROM master_tables'''
             curs = conn.cursor()
             curs.execute(SELECT_QUERY)
-            for table_id, table_name in curs.fetchall():
+            for table_id, table_name, db_name in curs.fetchall():
                 TABLE_IDS.append(table_id)
                 TABLE_NAMES.append(table_name)
 
+                db_cursor = conn.execute(f"PRAGMA table_info({db_name})")
+                columns = [row[1] for row in db_cursor.fetchall()]
+                TABLE_COLUMNS.append(columns)
+
         return TableMapResponse(
             table_ids=TABLE_IDS,
-            table_names=TABLE_NAMES
+            table_names=TABLE_NAMES,
+            table_columns=TABLE_COLUMNS
         )
 
     def insert_master_table(self, table_name: str):
@@ -58,21 +65,6 @@ class TableManager:
             (db_name, ) = row if row else None
             conn.commit()
         return db_name
-
-    def get_table_columns(self):
-        tables_columns = {}
-        ALL_DB_QUERIES = """
-        SELECT db_name, table_name FROM master_tables
-        """
-        with self.get_sql_db_connection() as conn:
-            cursor = conn.execute(ALL_DB_QUERIES)
-            DB_NAMES = [(row[0], row[1]) for row in cursor.fetchall()]
-
-            for db_name, table_name in DB_NAMES:
-                cursor = conn.execute(f"PRAGMA table_info({db_name})")
-                columns = [row[1] for row in cursor.fetchall()]
-                tables_columns[table_name] = columns
-        return tables_columns
 
     def add_table(self, table_name: str, dataframe: pd.DataFrame, tbl_response) -> Optional[TableResponse]:
         with self.get_sql_db_connection() as conn:

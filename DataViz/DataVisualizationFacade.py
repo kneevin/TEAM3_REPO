@@ -21,9 +21,6 @@ class DataVisualizationFacade:
     def get_table(self, table_id: int) -> TableResponse:
         return self.table_manager.get_table_respone_by_id(table_id)
 
-    def get_all_table_columns(self):
-        return self.table_manager.get_table_columns()
-
     def get_all_tables_mp(self):
         return self.table_manager.get_table_id_mp()
 

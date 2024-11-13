@@ -1,5 +1,5 @@
 import io
-from typing import Union, NamedTuple, List, Optional, Any
+from typing import Dict
 from fastapi import (
     FastAPI, File, UploadFile, Query,
     HTTPException, Response, BackgroundTasks, Depends)
@@ -19,10 +19,6 @@ db_manager = DataVisualizationFacade()
 @app.get("/tables/map")
 def get_table_map() -> TableMapResponse:
     return db_manager.get_all_tables_mp()
-
-@app.get("/tables/columns")
-def get_table_columns():
-    return db_manager.get_all_table_columns()
 
 @app.get("/tables")
 async def get_tables(table_id: int) -> TableResponse:
