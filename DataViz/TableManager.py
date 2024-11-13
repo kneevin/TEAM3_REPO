@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-from typing import List, Any, Callable, Optional
+from typing import List, Any, Callable, Optional, Dict
 from pydantic import BaseModel
 
 class TableResponse(BaseModel):
@@ -101,7 +101,7 @@ class TableManager:
         if tbl_response:
             return self.get_table_response(db_name)
 
-    def get_table_respone_by_id(self, table_id: int):
+    def get_table_info(self, *, table_id: int) -> Dict[str, str]:
         with self.get_sql_db_connection() as conn:
             SELECT_TABLE_METADATA = """SELECT * FROM master_tables WHERE table_id = ? LIMIT 1"""
             conn.row_factory = sqlite3.Row
@@ -109,6 +109,11 @@ class TableManager:
             cursor.execute(SELECT_TABLE_METADATA, (table_id, ))
             row = cursor.fetchone()
             tbl_mp = dict(row)
+        return tbl_mp
+
+    def get_table_response_by_id(self, *, table_id: int):
+        with self.get_sql_db_connection() as conn:
+            tbl_mp = self.get_table_info(table_id=table_id)
 
             DB_NAME = tbl_mp['db_name']
             SELECT_TABLE_DATA = f"""SELECT * FROM {DB_NAME}"""
