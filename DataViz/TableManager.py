@@ -59,6 +59,21 @@ class TableManager:
             conn.commit()
         return db_name
 
+    def get_table_columns(self):
+        tables_columns = {}
+        ALL_DB_QUERIES = """
+        SELECT db_name, table_name FROM master_tables
+        """
+        with self.get_sql_db_connection() as conn:
+            cursor = conn.execute(ALL_DB_QUERIES)
+            DB_NAMES = [(row[0], row[1]) for row in cursor.fetchall()]
+
+            for db_name, table_name in DB_NAMES:
+                cursor = conn.execute(f"PRAGMA table_info({db_name})")
+                columns = [row[1] for row in cursor.fetchall()]
+                tables_columns[table_name] = columns
+        return tables_columns
+
     def add_table(self, table_name: str, dataframe: pd.DataFrame, tbl_response) -> Optional[TableResponse]:
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()

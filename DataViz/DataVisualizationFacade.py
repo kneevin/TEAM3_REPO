@@ -15,12 +15,14 @@ class DataVisualizationFacade:
     DB_FNAME = "./unified_db.db"
 
     def __init__(self):
-        # self.__create_all_tables()
         self.table_manager = TableManager(self.__get_connection)
         # self.graph_manager = GraphManager(self.__get_connection)
 
     def get_table(self, table_id: int) -> TableResponse:
         return self.table_manager.get_table_respone_by_id(table_id)
+
+    def get_all_table_columns(self):
+        return self.table_manager.get_table_columns()
 
     def get_all_tables_mp(self):
         return self.table_manager.get_table_id_mp()

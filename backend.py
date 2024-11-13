@@ -16,15 +16,19 @@ import os
 app = FastAPI()
 db_manager = DataVisualizationFacade()
 
-@app.get("/tables_map")
+@app.get("/tables/map")
 def get_table_map() -> TableMapResponse:
     return db_manager.get_all_tables_mp()
 
-@app.get("/table")
+@app.get("/tables/columns")
+def get_table_columns():
+    return db_manager.get_all_table_columns()
+
+@app.get("/tables")
 async def get_tables(table_id: int) -> TableResponse:
     return db_manager.get_table(table_id=table_id)
     
-@app.post("/table")
+@app.post("/tables")
 async def post_tables(table_name: str, file: UploadFile = File(...)) -> TableResponse:
     if os.path.splitext(file.filename)[-1] != ".csv":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
