@@ -10,7 +10,7 @@ import codecs
 # from DataViz.TableManager import TableManager
 # from DataViz.GraphManager import GraphManager, Graph, Axes
 # from DataViz.DashboardManager import DashboardManager, Dashboard
-from DataViz import DataVisualizationFacade, TableResponse
+from DataViz import DataVisualizationFacade, TableResponse, TableMapResponse
 import os
 
 app = FastAPI()
@@ -27,6 +27,8 @@ class TableQueryParams(BaseModel):
         table_id, table_ids = data.get('table_id'), data.get('table_ids')
         if table_id and table_ids:
             raise HTTPException(status_code=400, detail="'table_id' and 'table_ids' cannot be used together. Please provide only one.")
+        if (not table_id) and (not table_ids):
+            raise HTTPException(status_code=400, detail="Please provide table_id(s).")
         return data
 
 def parse_table_query(
@@ -35,28 +37,27 @@ def parse_table_query(
 ) -> TableQueryParams:
     return TableQueryParams(table_id=table_id, table_ids=table_ids)
 
-@app.get("/tables")
-def get_tables(query: TableQueryParams = Depends(parse_table_query)):
-    if query.table_id:
-        return {'table': query.table_id}
-    elif query.table_ids:
-        return {'table': query.table_ids}
-    else:
-        return {'table': "lol"}
+
+@app.get("/tables_map")
+def get_table_map() -> TableMapResponse:
+    return db_manager.get_all_tables_mp()
+
+@app.get("/table")
+async def get_tables(table_id: int) -> TableResponse:
+    return db_manager.get_table(table_id=table_id)
     
-@app.post("/tables")
-async def post_tables(table_name: str, file: UploadFile = File(...)):
+@app.post("/table")
+async def post_tables(table_name: str, file: UploadFile = File(...)) -> TableResponse:
     if os.path.splitext(file.filename)[-1] != ".csv":
         raise HTTPException(status_code=404, detail=".csv file was not uploaded!")
     contents = file.file.read()
     buffer = io.BytesIO(contents)
     df = pd.read_csv(buffer)
-    success = db_manager.add_table(
+    tbl_res = db_manager.add_table(
         table_name=table_name,
-        df=df
+        dataframe=df
     )
-    if success:
-        pass
+    return tbl_res
 
 # app.get("/graphs") # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
 # app.post("/graphs")

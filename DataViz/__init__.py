@@ -1,2 +1,2 @@
 from .DataVisualizationFacade import DataVisualizationFacade
-from .TableManager import Table
+from .TableManager import TableManager, TableResponse, TableMapResponse

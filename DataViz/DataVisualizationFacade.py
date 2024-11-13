@@ -9,7 +9,7 @@ import numpy as np
 import os
 
 from .GraphManager import GraphManager, Graph, Axes
-from .TableManager import TableManager
+from .TableManager import TableManager, TableResponse, TableMapResponse
 
 class DataVisualizationFacade:
     DB_FNAME = "./unified_db.db"
@@ -19,8 +19,15 @@ class DataVisualizationFacade:
         self.table_manager = TableManager(self.__get_connection)
         # self.graph_manager = GraphManager(self.__get_connection)
 
-    def add_table(self, table_name: str, dataframe: pd.DataFrame) -> bool:
-        self.table_manager.add_table(table_name, dataframe)
+    def get_table(self, table_id: int) -> TableResponse:
+        return self.table_manager.get_table_respone_by_id(table_id)
+
+    def get_all_tables_mp(self):
+        return self.table_manager.get_table_id_mp()
+
+    def add_table(self, table_name: str, dataframe: pd.DataFrame) -> TableResponse:
+        res = self.table_manager.add_table(table_name, dataframe, tbl_response=True)
+        return res
 
     def __get_connection(self) -> sqlite3.Connection:
         return closing(sqlite3.connect(self.DB_FNAME))

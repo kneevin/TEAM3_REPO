@@ -1,13 +1,17 @@
 import sqlite3
 import pandas as pd
-from typing import List, Any, Callable
+from typing import List, Any, Callable, Optional
 from pydantic import BaseModel
 
 class TableResponse(BaseModel):
     table_id: int
     table_name: str
     column_names: List[str]
-    data: List[List[Any]]
+    rows: List[List]
+
+class TableMapResponse(BaseModel):
+    table_ids: List[int]
+    table_names: List[str]
 
 
 class TableManager:
@@ -25,6 +29,25 @@ class TableManager:
                 table_name TEXT NOT NULL
             )
             ''')
+            conn.commit()
+
+    def get_table_id_mp(self) -> TableMapResponse:
+        TABLE_IDS = []
+        TABLE_NAMES = []
+        with self.get_sql_db_connection() as conn:
+            SELECT_QUERY = '''SELECT table_id, table_name FROM master_tables'''
+            curs = conn.cursor()
+            curs.execute(SELECT_QUERY)
+            # conn.row_factory = sqlite3.Row
+            for table_id, table_name in curs.fetchall():
+                # print(row)
+                TABLE_IDS.append(table_id)
+                TABLE_NAMES.append(table_name)
+
+        return TableMapResponse(
+            table_ids=TABLE_IDS,
+            table_names=TABLE_NAMES
+        )
 
     def insert_master_table(self, table_name: str):
         with self.get_sql_db_connection() as conn:
@@ -36,10 +59,10 @@ class TableManager:
             cursor.execute(INSERTION_QUERY, (table_name,))
             row = cursor.fetchone()
             (db_name, ) = row if row else None
+            conn.commit()
         return db_name
 
-
-    def add_table(self, table_name: str, dataframe: pd.DataFrame):
+    def add_table(self, table_name: str, dataframe: pd.DataFrame, tbl_response) -> Optional[TableResponse]:
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()
             db_name = self.insert_master_table(table_name)
@@ -66,10 +89,52 @@ class TableManager:
 
             placeholders = ", ".join(["?" for _ in dataframe.columns])
             insert_query = f"""
-            INSERT INTO {table_name} ({', '.join(dataframe.columns)})
+            INSERT INTO {db_name} ({', '.join(dataframe.columns)})
             VALUES ({placeholders})
             """
             cursor.executemany(insert_query, dataframe.values.tolist())
+            conn.commit()
+        if tbl_response:
+            return self.get_table_response(db_name)
+
+    def get_table_respone_by_id(self, table_id: int):
+        with self.get_sql_db_connection() as conn:
+            SELECT_TABLE_METADATA = """SELECT * FROM master_tables WHERE table_id = ? LIMIT 1"""
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute(SELECT_TABLE_METADATA, (table_id, ))
+            row = cursor.fetchone()
+            tbl_mp = dict(row)
+
+            DB_NAME = tbl_mp['db_name']
+            SELECT_TABLE_DATA = f"""SELECT * FROM {DB_NAME}"""
+            df = pd.read_sql_query(SELECT_TABLE_DATA, con=conn)
+        
+        return TableResponse(
+            table_id=tbl_mp['table_id'],
+            table_name=tbl_mp['table_name'],
+            column_names=list(df.columns),
+            rows=df.values.tolist()
+        )
+
+    def get_table_response(self, db_name: str) -> TableResponse:
+        with self.get_sql_db_connection() as conn:
+            SELECT_TABLE_DATA = f"""SELECT * FROM {db_name}"""
+            df = pd.read_sql_query(SELECT_TABLE_DATA, con=conn)
+
+            SELECT_TABLE_METADATA = """SELECT * FROM master_tables WHERE db_name = ? LIMIT 1"""
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute(SELECT_TABLE_METADATA, (db_name, ))
+            row = cursor.fetchone()
+            tbl_mp = dict(row)
+
+        return TableResponse(
+            table_id=tbl_mp['table_id'],
+            table_name=tbl_mp['table_name'],
+            column_names=list(df.columns),
+            rows=df.values.tolist()
+        )
 
 
 
