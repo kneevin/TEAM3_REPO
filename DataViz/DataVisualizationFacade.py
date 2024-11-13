@@ -19,7 +19,7 @@ class DataVisualizationFacade:
         self.graph_manager = GraphManager(self.__get_connection)
 
 # ------- graph -------
-    def add_graph(self, query_params: GraphQueryParam):
+    def add_graph(self, query_params: GraphQueryParam) -> Graph:
         self.graph_manager.add_graph(query_params)
 
 # ------- table -------

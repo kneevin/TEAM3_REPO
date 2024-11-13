@@ -53,7 +53,7 @@ class TableManager:
             table_columns=TABLE_COLUMNS
         )
 
-    def insert_master_table(self, table_name: str):
+    def insert_master_table(self, table_name: str) -> str:
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()
             INSERTION_QUERY = '''
@@ -111,26 +111,33 @@ class TableManager:
             tbl_mp = dict(row)
         return tbl_mp
 
-    def get_table_response_by_id(self, *, table_id: int):
-        with self.get_sql_db_connection() as conn:
-            tbl_mp = self.get_table_info(table_id=table_id)
+    def get_table_response_by_id(self, table_id: int, *, columns: List[str] = None):
+        tbl_mp = self.get_table_info(table_id=table_id)
+        return self.get_table_response(db_name=tbl_mp['db_name'], columns=columns)
+        # with self.get_sql_db_connection() as conn:
 
-            DB_NAME = tbl_mp['db_name']
-            SELECT_TABLE_DATA = f"""SELECT * FROM {DB_NAME}"""
-            df = pd.read_sql_query(SELECT_TABLE_DATA, con=conn)
+        #     DB_NAME = tbl_mp['db_name']
+        #     SELECT_TABLE_DATA = f"""SELECT * FROM {DB_NAME}"""
+        #     df = pd.read_sql_query(SELECT_TABLE_DATA, con=conn)
         
-        return TableResponse(
-            table_id=tbl_mp['table_id'],
-            table_name=tbl_mp['table_name'],
-            column_names=list(df.columns),
-            rows=df.values.tolist()
-        )
+        # return TableResponse(
+        #     table_id=tbl_mp['table_id'],
+        #     table_name=tbl_mp['table_name'],
+        #     column_names=list(df.columns),
+        #     rows=df.values.tolist()
+        # )
 
-    def get_table_response(self, db_name: str) -> TableResponse:
+    def get_table_response(self, db_name: str, *, columns: List[str] = None) -> TableResponse:
         with self.get_sql_db_connection() as conn:
-            SELECT_TABLE_DATA = f"""SELECT * FROM {db_name}"""
+            if columns is None:
+                SELECT_TABLE_DATA = f"SELECT * FROM {db_name}"
+            else:
+                selected_columns = ", ".join(columns)
+                SELECT_TABLE_DATA = f"SELECT {selected_columns} FROM {db_name}"
+            
             df = pd.read_sql_query(SELECT_TABLE_DATA, con=conn)
 
+            # Fetch table metadata
             SELECT_TABLE_METADATA = """SELECT * FROM master_tables WHERE db_name = ? LIMIT 1"""
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
