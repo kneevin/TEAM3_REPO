@@ -7,9 +7,9 @@ from pydantic import BaseModel
 import csv
 import pandas as pd
 import codecs
-from TableManager import TableManager
-from GraphManager import GraphManager, Graph, Axes
-from DashboardManager import DashboardManager, Dashboard
+from DataViz.TableManager import TableManager
+from DataViz.GraphManager import GraphManager, Graph, Axes
+from DataViz.DashboardManager import DashboardManager, Dashboard
 import os
 
 app = FastAPI()
