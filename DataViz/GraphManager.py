@@ -118,6 +118,9 @@ class GraphManager:
         return mp
 
     def insert_graph_table(self, query: GraphQueryParam) -> int:
+        graph_id = self.detect_graph(query)
+        if not graph_id:
+            return graph_id
         
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()

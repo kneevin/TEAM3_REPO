@@ -3,12 +3,6 @@ import sqlite3
 from pydantic import BaseModel
 import pandas as pd
 
-class Dashboard(BaseModel):
-    dashboard_id: int
-    dashboard_title: str
-    graphs: List[str]
-
-
 class DashboardManager:
     def __init__(self, get_connection_callback: Callable[[], sqlite3.Connection]):
         self.get_sql_db_connection = get_connection_callback
@@ -37,3 +31,5 @@ class DashboardManager:
                 )
             """)
             conn.commit() # is called automatically afterwards
+
+    

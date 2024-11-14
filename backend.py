@@ -37,10 +37,13 @@ async def post_tables(table_name: str, file: UploadFile = File(...)) -> TableRes
     )
     return tbl_res
 
-# app.get("/graphs") # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
+# app.get("/graphs") 
 @app.post("/graphs")
 async def post_graphs(query_params: GraphQueryParam = Depends()) -> Graph:
     return db_manager.add_graph(query_params)
+
+@app.get("/graphs") # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
+async def get_graphs()
 
 # @app.get("/dashboards")
 # @app.post("/dashboards")

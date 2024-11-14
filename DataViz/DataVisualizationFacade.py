@@ -10,7 +10,13 @@ import os
 
 from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam
 from .TableManager import TableManager, TableResponse, TableMapResponse
-from .DashboardManager import DashboardManager, Dashboard
+from .DashboardManager import DashboardManager
+
+
+class Dashboard(BaseModel):
+    dashboard_id: int
+    dashboard_title: str
+    graphs: List[Graph]
 
 class DataVisualizationFacade:
     DB_FNAME = "./unified_db.db"
