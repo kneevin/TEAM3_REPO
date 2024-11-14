@@ -1,4 +1,4 @@
-from typing import Dict, List, NamedTuple, Callable
+from typing import Dict, List, NamedTuple, Callable, Optional
 import sqlite3
 import matplotlib.pyplot as pl
 from pydantic import BaseModel
@@ -117,10 +117,8 @@ class GraphManager:
             mp = dict(row)
         return mp
 
-    def add_graph(self, query: GraphQueryParam) -> Graph:
-        pass
-
     def insert_graph_table(self, query: GraphQueryParam) -> int:
+        
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()
             INSERTION_QUERY = '''
@@ -135,3 +133,19 @@ class GraphManager:
             conn.commit()
         return graph_id
 
+    def detect_graph(self, query: GraphQueryParam) -> Optional[int]:
+        with self.get_sql_db_connection() as conn:
+            cursor = conn.cursor()
+            DETECTION_QUERY = '''
+                SELECT graph_id FROM graphs
+                WHERE table_id = ? AND graph_title = ? AND graph_type = ? AND ax0 = ? AND ax1 = ?
+            '''
+            cursor.execute(DETECTION_QUERY, (
+                query.table_id, query.graph_title, query.graph_type, query.ax0, query.ax1
+            ))
+            row = cursor.fetchone()
+        if row:
+            (graph_id,) = row
+            return graph_id
+        else: 
+            return None
