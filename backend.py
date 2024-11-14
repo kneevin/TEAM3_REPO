@@ -14,7 +14,8 @@ from DataViz import (
     DataVisualizationFacade, 
     TableResponse, TableMapResponse, 
     GraphQueryParam, Graph, GraphMapResponse,
-    Dashboard, DashboardCreateQueryParams, DashboardMapResponse, DashboardPutQueryParams
+    Dashboard, DashboardCreateQueryParams, DashboardMapResponse, 
+    DashboardPutQueryParams, DashboardDeleteQueryParams
 )
 import os
 
@@ -70,3 +71,7 @@ async def post_new_dashboard(query_params: DashboardCreateQueryParams = Depends(
 @app.put("/dashboards")
 async def add_new_graphs_dashboard(query_params: DashboardPutQueryParams = Depends()) -> Dashboard:
     return db_manager.add_to_dashboard(query=query_params)
+
+@app.delete("/dashboards")
+async def delete_dashboards(query_params: DashboardDeleteQueryParams):
+    db_manager.delete_dashboard(query=query_params)

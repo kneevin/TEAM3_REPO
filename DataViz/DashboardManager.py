@@ -2,7 +2,6 @@ from typing import Any, Dict, List, NamedTuple, Callable, Optional
 import sqlite3
 from fastapi import HTTPException
 from pydantic import BaseModel, model_validator
-import pandas as pd
 
 class DashboardGraphParams(BaseModel):
     graph_ids: List[int]
@@ -37,6 +36,18 @@ class DashboardCreateQueryParams(DashboardGraphParams):
 class DashboardPutQueryParams(DashboardGraphParams):
     dashboard_id: int
 
+class DashboardDeleteQueryParams(BaseModel):
+    dashboard_id: int
+    graph_ids: Optional[List[int]] = []
+    indices: Optional[List[int]] = []
+
+    @model_validator(mode='before')
+    def check_lengths(cls, data: Any) -> Any:
+        graph_ids, indices = data.get('graph_ids'), data.get('indices')
+        if (graph_ids or indices) and not(len(graph_ids) == len(indices)):
+            raise HTTPException(status_code=400, detail="Arrays are not of the same length.")
+        return data
+
 class DashboardGraphMetadata(BaseModel):
     graph_id: int
     idx: int
@@ -57,6 +68,34 @@ class DashboardManager:
     def __init__(self, get_connection_callback: Callable[[], sqlite3.Connection]):
         self.get_sql_db_connection = get_connection_callback
         self.__create_tables()
+
+    def delete_dashboard(self, query: DashboardDeleteQueryParams):
+        with self.get_sql_db_connection() as conn:
+            # Set the row factory to sqlite3.Row to get dictionary-like row objects
+            conn.row_factory = sqlite3.Row
+
+            dashboard_id = query.dashboard_id
+
+            # Check if the dashboard_id exists
+            if self.__dashboard_exists(dashboard_id=dashboard_id, db_conn=conn):
+                raise HTTPException(status_code=404, detail=f"Dashboard with id {dashboard_id} not found.")
+
+            # Delete the entire dashboard if no graph_ids or indices are provided
+            if not query.graph_ids and not query.indices:
+                self.__delete_entire_dashboard(dashboard_id, db_conn=conn)
+            else: # Otherwise, delete specified graphs
+                GRAPH_IDS = query.graph_ids
+                INDICES = query.indices
+                DASHBOARD_IDS = [dashboard_id for _ in range(len(GRAPH_IDS))]
+                DELETE_QUERY = """
+                    DELETE FROM master_dashboard 
+                    WHERE 1=1
+                        AND dashboard_id = ? 
+                        AND graph_id = ?
+                        AND idx = ?
+                """
+                conn.executemany(DELETE_QUERY, (DASHBOARD_IDS, GRAPH_IDS, INDICES))
+            conn.commit()
 
     def get_dashboard(self, dashboard_id: int) -> DashboardMetadata:
         with self.get_sql_db_connection() as conn:
@@ -240,6 +279,28 @@ class DashboardManager:
         # Return the dashboard_id
         return dashboard_id
 
+    def __delete_entire_dashboard(
+            self, 
+            dashboard_id: int, *, 
+            db_conn: sqlite3.Connect = None
+        ):
+        DELETE_QUERY = "DELETE FROM dashboard_title_mp WHERE dashboard_id = ?"
+        if not db_conn:
+            with self.get_sql_db_connection() as conn:
+                conn.execute(DELETE_QUERY, (dashboard_id, ))
+                conn.commit()
+        else:
+            db_conn.execute(DELETE_QUERY, (dashboard_id, ))
+            db_conn.commit()
+
+    def __dashboard_exists(self, dashboard_id: int, *, db_conn: sqlite3.Connection = None):
+        SELECT_QUERY = "SELECT dashboard_title FROM dashboard_title_mp WHERE dashboard_id = ?"
+        if not db_conn:
+            with self.get_sql_db_connection() as conn:
+                res = conn.execute(SELECT_QUERY, (dashboard_id,)).fetchone()
+        else:
+            res = db_conn.execute(SELECT_QUERY, (dashboard_id,)).fetchone()
+        return res is not None
 
     def __create_tables(self):
         with self.get_sql_db_connection() as conn:

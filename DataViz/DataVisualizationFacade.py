@@ -13,7 +13,7 @@ from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapRe
 from .TableManager import TableManager, TableResponse, TableMapResponse
 from .DashboardManager import (
     DashboardManager, DashboardCreateQueryParams, 
-    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams
+    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams, DashboardDeleteQueryParams
     )
 
 
@@ -23,16 +23,21 @@ class Dashboard(BaseModel):
     graphs: List[Graph]
 
 class DataVisualizationFacade:
-    DB_FNAME = "./unified_db.db"
-
     def __init__(self):
         self.table_manager = TableManager(self.__get_connection)
         self.graph_manager = GraphManager(self.__get_connection)
         self.dashb_manager = DashboardManager(self.__get_connection)
 
+    DB_FNAME = "./unified_db.db"
+    def __get_connection(self) -> sqlite3.Connection:
+        return closing(sqlite3.connect(self.DB_FNAME))
+
 # ------- dashboard -------
     def get_dashboard_id_mp(self) -> DashboardMapResponse:
         return self.dashb_manager.get_dashboard_id_mp()
+
+    def delete_dashboard(self, query: DashboardDeleteQueryParams):
+        self.dashb_manager.delete_dashboard(query=query)
 
     def add_to_dashboard(self, query: DashboardPutQueryParams) -> Dashboard:
         dashboard_id = self.dashb_manager.add_to_dashboard(query=query)
@@ -99,25 +104,3 @@ class DataVisualizationFacade:
     def add_table(self, table_name: str, dataframe: pd.DataFrame) -> TableResponse:
         res = self.table_manager.add_table(table_name, dataframe, tbl_response=True)
         return res
-
-    def __get_connection(self) -> sqlite3.Connection:
-        return closing(sqlite3.connect(self.DB_FNAME))
-
-    # def __create_all_tables(self):
-    #     with self.__get_connection() as conn:
-    #         conn.execute("""
-    #             CREATE TABLE IF NOT EXISTS master_dashboard (
-    #                 dashboard_id INTEGER NOT NULL,
-    #                 graph_id INTEGER NOT NULL,
-    #                 PRIMARY KEY (dashboard_id, graph_id),
-    #                 FOREIGN KEY (graph_id) REFERENCES graphs(graph_id) ON DELETE CASCADE,
-    #                 FOREIGN KEY (dashboard_id) REFERENCES dashboard_title_mp(dashboard_id) ON DELETE CASCADE
-    #             )
-    #         """)
-    #         conn.execute("""
-    #             CREATE TABLE IF NOT EXISTS dashboard_title_mp (
-    #                 dashboard_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #                 dashboard_title TEXT NOT NULL
-    #             )
-    #         """)
-            # conn.commit() is called automatically afterwards
