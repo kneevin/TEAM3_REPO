@@ -34,6 +34,9 @@ class DashboardMetadata(BaseModel):
     dashboard_title: str
     metadata_graphs: List[DashboardGraphMetadata]
 
+class DashboardMapResponse(BaseModel):
+    dashboard_metadatas: List[DashboardMetadata]
+
 class DashboardManager:
     def __init__(self, get_connection_callback: Callable[[], sqlite3.Connection]):
         self.get_sql_db_connection = get_connection_callback
@@ -89,6 +92,56 @@ class DashboardManager:
             )
 
             return dashboard_metadata
+
+    def get_dashboard_id_mp(self) -> DashboardMapResponse:
+        with self.get_sql_db_connection() as conn:
+            # Set row factory to get dictionary-like row objects
+            conn.row_factory = sqlite3.Row
+
+            # Retrieve all dashboards with their metadata
+            dashboards = conn.execute("""
+                SELECT dt.dashboard_id, dt.dashboard_title, 
+                    md.graph_id, md.idx, md.width, md.height, md.x_coord, md.y_coord
+                FROM dashboard_title_mp AS dt
+                LEFT JOIN master_dashboard AS md ON dt.dashboard_id = md.dashboard_id
+                ORDER BY dt.dashboard_id, md.idx
+            """).fetchall()
+
+            # Group metadata by dashboard_id
+            dashboard_map = {}
+            for row in dashboards:
+                dashboard_id = row['dashboard_id']
+                if dashboard_id not in dashboard_map:
+                    dashboard_map[dashboard_id] = {
+                        "dashboard_id": dashboard_id,
+                        "dashboard_title": row['dashboard_title'],
+                        "metadata_graphs": []
+                    }
+                
+                # Append graph metadata if exists
+                if row['graph_id'] is not None:
+                    dashboard_map[dashboard_id]["metadata_graphs"].append(
+                        DashboardGraphMetadata(
+                            graph_id=row['graph_id'],
+                            idx=row['idx'],
+                            width=row['width'],
+                            height=row['height'],
+                            x_coord=row['x_coord'],
+                            y_coord=row['y_coord']
+                        )
+                    )
+
+            # Convert dictionary to list of DashboardMetadata objects
+            dashboard_metadatas = [
+                DashboardMetadata(
+                    dashboard_id=meta["dashboard_id"],
+                    dashboard_title=meta["dashboard_title"],
+                    metadata_graphs=meta["metadata_graphs"]
+                ) for meta in dashboard_map.values()
+            ]
+
+            return DashboardMapResponse(dashboard_metadatas=dashboard_metadatas)
+
 
 
     def create_new_dashboard(self, query: DashboardCreateQueryParams):

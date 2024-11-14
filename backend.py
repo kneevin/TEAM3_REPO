@@ -14,7 +14,7 @@ from DataViz import (
     DataVisualizationFacade, 
     TableResponse, TableMapResponse, 
     GraphQueryParam, Graph, GraphMapResponse,
-    Dashboard, DashboardCreateQueryParams
+    Dashboard, DashboardCreateQueryParams, DashboardMapResponse
 )
 import os
 
@@ -54,6 +54,14 @@ async def get_graphs(graph_id: int) -> Graph:
 @app.get("/graphs/map") # return map of all graph ids and their corresponding tables, axes, and info (if no parameters)
 async def get_graph_map() -> GraphMapResponse:
     return db_manager.get_graph_mp()
+
+@app.get("/dashboards/map")
+async def get_dashboard_mp() -> DashboardMapResponse:
+    pass
+
+@app.get("/dashboards")
+async def get_dashboard(dashboard_id: int) -> Dashboard:
+    pass
 
 @app.post("/dashboards")
 async def post_new_dashboard(query_params: DashboardCreateQueryParams = Depends()) -> Dashboard:
