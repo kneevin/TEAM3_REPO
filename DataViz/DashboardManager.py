@@ -188,7 +188,8 @@ class DashboardManager:
         # Optionally, return the dashboard_id
         return dashboard_id
 
-    def add_to_dashboard(self, dashboard_id: int, query: DashboardPutQueryParams) -> int:
+    def add_to_dashboard(self, query: DashboardPutQueryParams) -> int:
+        dashboard_id = query.dashboard_id
         with self.get_sql_db_connection() as conn:
             # Set row factory to get dictionary-like row objects
             conn.row_factory = sqlite3.Row

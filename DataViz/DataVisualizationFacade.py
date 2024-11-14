@@ -13,7 +13,7 @@ from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapRe
 from .TableManager import TableManager, TableResponse, TableMapResponse
 from .DashboardManager import (
     DashboardManager, DashboardCreateQueryParams, 
-    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse
+    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams
     )
 
 
@@ -33,6 +33,10 @@ class DataVisualizationFacade:
 # ------- dashboard -------
     def get_dashboard_id_mp(self) -> DashboardMapResponse:
         return self.dashb_manager.get_dashboard_id_mp()
+
+    def add_to_dashboard(self, query: DashboardPutQueryParams) -> Dashboard:
+        dashboard_id = self.dashb_manager.add_to_dashboard(query=query)
+        return self.render_dashboard(dashboard_id=dashboard_id)
 
     def create_new_dashboard(self, query: DashboardCreateQueryParams) -> Dashboard:
         for graph_id in query.graph_ids:
