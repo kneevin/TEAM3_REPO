@@ -14,6 +14,14 @@ class Axes(NamedTuple):
     def to_list(self):
         return [self.ax0, self.ax1]
 
+class PlotSize(NamedTuple):
+    width: int
+    height: int
+
+class Coordinates(NamedTuple):
+    x_coord: int
+    y_coord: int
+
 class Graph(BaseModel):
     table_id: int
     table_name: str
@@ -22,6 +30,10 @@ class Graph(BaseModel):
     graph_type: str
     ax: Axes
     rows: list[list]
+
+    xy_coords: Optional[Coordinates]
+    plotsize: Optional[PlotSize]
+
 
 class GraphQueryParam(BaseModel):
     table_id: str
@@ -135,6 +147,20 @@ class GraphManager:
             (graph_id, ) = row if row else None
             conn.commit()
         return graph_id
+
+    def graph_exists(self, graph_id: int) -> bool:
+        with self.get_sql_db_connection() as conn:
+            cursor = conn.cursor()
+            DETECTION_QUERY = '''
+                SELECT * FROM graphs
+                WHERE graph_id = ?
+            '''
+            cursor.execute(DETECTION_QUERY, (graph_id, ))
+            row = cursor.fetchone()
+        if row:
+            return True
+        else: 
+            return False
 
     def detect_graph(self, query: GraphQueryParam) -> Optional[int]:
         with self.get_sql_db_connection() as conn:

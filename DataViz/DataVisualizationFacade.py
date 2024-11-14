@@ -3,14 +3,15 @@ from contextlib import closing
 import sqlite3
 import matplotlib.pyplot as pl
 from pydantic import BaseModel
+from fastapi import HTTPException
 import seaborn as sns
 import pandas as pd
 import numpy as np
 import os
 
-from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam
+from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapResponse
 from .TableManager import TableManager, TableResponse, TableMapResponse
-from .DashboardManager import DashboardManager
+from .DashboardManager import DashboardManager, DashboardCreateQueryParams
 
 
 class Dashboard(BaseModel):
@@ -26,10 +27,23 @@ class DataVisualizationFacade:
         self.graph_manager = GraphManager(self.__get_connection)
         self.dashb_manager = DashboardManager(self.__get_connection)
 
+# ------- dashboard -------
+    def create_new_dashboard(self, query: DashboardCreateQueryParams):
+        for graph_id in query.graph_ids:
+            if not self.graph_manager.graph_exists(graph_id):
+                raise HTTPException(status_code=404, detail=f"Graph ID {graph_id} does not exist!")
+        self.dashb_manager.create_new_dashboard(query)
+
+    def render_dashboard(self, dashboard_id: int):
+        pass
+
 # ------- graph -------
     def add_graph(self, query_params: GraphQueryParam) -> Graph:
         graph_id = self.graph_manager.insert_graph_table(query_params)
         return self.get_graph(graph_id=graph_id)
+
+    def get_graph_mp(self) -> GraphMapResponse:
+        return self.graph_manager.get_graph_map_response()
 
     def get_graph(self, graph_id: int) -> Graph:
         graph_mp = self.graph_manager.get_graph_metadata(graph_id=graph_id)
