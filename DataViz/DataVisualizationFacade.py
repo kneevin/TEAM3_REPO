@@ -20,7 +20,12 @@ class DataVisualizationFacade:
 
 # ------- graph -------
     def add_graph(self, query_params: GraphQueryParam) -> Graph:
-        self.graph_manager.add_graph(query_params)
+        graph_id = self.graph_manager.insert_graph_table(query_params)
+        graph_mp = self.graph_manager.get_graph_metadata(graph_id=graph_id)
+
+    # def render_graph(self, graph_id: int) -> Graph:
+
+
 
 # ------- table -------
     def get_table(self, table_id: int) -> TableResponse:

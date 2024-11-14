@@ -11,6 +11,9 @@ class Axes(NamedTuple):
     ax0: str
     ax1: str
 
+    def to_list(self):
+        return [self.ax0, self.ax1]
+
 class Graph(BaseModel):
     table_id: int
     table_name: str
@@ -18,7 +21,7 @@ class Graph(BaseModel):
     graph_title: str
     graph_type: str
     ax: Axes
-    data: list[list]
+    rows: list[list]
 
 class GraphQueryParam(BaseModel):
     table_id: str
@@ -96,7 +99,23 @@ class GraphManager:
             
             return response
 
-
+    def get_graph_metadata(self, graph_id: int) -> Dict:
+        with self.get_sql_db_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT 
+                    mt.table_id, mt.table_name,
+                    g.graph_id, g.graph_title, 
+                    g.graph_type, g.ax0, g.ax1
+                FROM master_tables mt
+                JOIN graphs g ON mt.table_id = g.table_id
+                WHERE g.graph_id = ?
+            ''', (graph_id, ))
+            row = cursor.fetchone()
+            # table_id, table_name, graph_id, graph_title, graph_type, ax0, ax1 = row
+            mp = dict(row)
+        return mp
 
     def add_graph(self, query: GraphQueryParam) -> Graph:
         pass
