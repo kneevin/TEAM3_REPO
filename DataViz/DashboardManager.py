@@ -77,7 +77,7 @@ class DashboardManager:
             dashboard_id = query.dashboard_id
 
             # Check if the dashboard_id exists
-            if self.__dashboard_exists(dashboard_id=dashboard_id, db_conn=conn):
+            if not self.__dashboard_exists(dashboard_id=dashboard_id, db_conn=conn):
                 raise HTTPException(status_code=404, detail=f"Dashboard with id {dashboard_id} not found.")
 
             # Delete the entire dashboard if no graph_ids or indices are provided
@@ -94,7 +94,8 @@ class DashboardManager:
                         AND graph_id = ?
                         AND idx = ?
                 """
-                conn.executemany(DELETE_QUERY, (DASHBOARD_IDS, GRAPH_IDS, INDICES))
+                values = list(zip(DASHBOARD_IDS, GRAPH_IDS, INDICES))
+                conn.executemany(DELETE_QUERY, values)
             conn.commit()
 
     def get_dashboard(self, dashboard_id: int) -> DashboardMetadata:
@@ -282,7 +283,7 @@ class DashboardManager:
     def __delete_entire_dashboard(
             self, 
             dashboard_id: int, *, 
-            db_conn: sqlite3.Connect = None
+            db_conn: sqlite3.Connection = None
         ):
         DELETE_QUERY = "DELETE FROM dashboard_title_mp WHERE dashboard_id = ?"
         if not db_conn:
