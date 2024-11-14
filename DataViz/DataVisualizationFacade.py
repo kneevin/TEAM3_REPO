@@ -11,7 +11,7 @@ import os
 
 from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapResponse
 from .TableManager import TableManager, TableResponse, TableMapResponse
-from .DashboardManager import DashboardManager, DashboardCreateQueryParams
+from .DashboardManager import DashboardManager, DashboardCreateQueryParams, DashboardMetadata, DashboardGraphMetadata
 
 
 class Dashboard(BaseModel):
@@ -32,9 +32,9 @@ class DataVisualizationFacade:
         for graph_id in query.graph_ids:
             if not self.graph_manager.graph_exists(graph_id):
                 raise HTTPException(status_code=404, detail=f"Graph ID {graph_id} does not exist!")
-        self.dashb_manager.create_new_dashboard(query)
+        dashboard_id = self.dashb_manager.create_new_dashboard(query)
 
-    def render_dashboard(self, dashboard_id: int):
+    def render_dashboard(self, dashboard_id: int) -> Dashboard:
         pass
 
 # ------- graph -------

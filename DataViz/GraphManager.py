@@ -34,7 +34,6 @@ class Graph(BaseModel):
     xy_coords: Optional[Coordinates]
     plotsize: Optional[PlotSize]
 
-
 class GraphQueryParam(BaseModel):
     table_id: str
     graph_title: str
