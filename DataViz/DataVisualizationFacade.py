@@ -10,6 +10,7 @@ import os
 
 from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam
 from .TableManager import TableManager, TableResponse, TableMapResponse
+from .DashboardManager import DashboardManager, Dashboard
 
 class DataVisualizationFacade:
     DB_FNAME = "./unified_db.db"
@@ -17,6 +18,7 @@ class DataVisualizationFacade:
     def __init__(self):
         self.table_manager = TableManager(self.__get_connection)
         self.graph_manager = GraphManager(self.__get_connection)
+        self.dashb_manager = DashboardManager(self.__get_connection)
 
 # ------- graph -------
     def add_graph(self, query_params: GraphQueryParam) -> Graph:
@@ -41,7 +43,6 @@ class DataVisualizationFacade:
         )
 
 
-
 # ------- table -------
     def get_table(self, table_id: int) -> TableResponse:
         return self.table_manager.get_table_response_by_id(table_id=table_id)
@@ -58,17 +59,6 @@ class DataVisualizationFacade:
 
     # def __create_all_tables(self):
     #     with self.__get_connection() as conn:
-    #         conn.execute("""
-    #             CREATE TABLE IF NOT EXISTS graphs (
-    #                 graph_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #                 table_id INTEGER NOT NULL,
-    #                 graph_title TEXT NOT NULL,
-    #                 graph_type TEXT CHECK(graph_type IN ('Bar', 'Line', 'Scatter')) NOT NULL,
-    #                 ax0 TEXT NOT NULL,
-    #                 ax1 TEXT NOT NULL,
-    #                 FOREIGN KEY (table_id) REFERENCES master_tables(table_id) ON DELETE CASCADE
-    #             )
-    #         """)
     #         conn.execute("""
     #             CREATE TABLE IF NOT EXISTS master_dashboard (
     #                 dashboard_id INTEGER NOT NULL,
