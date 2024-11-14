@@ -21,8 +21,10 @@ class DataVisualizationFacade:
 # ------- graph -------
     def add_graph(self, query_params: GraphQueryParam) -> Graph:
         graph_id = self.graph_manager.insert_graph_table(query_params)
-        graph_mp = self.graph_manager.get_graph_metadata(graph_id=graph_id)
+        return self.get_graph(graph_id=graph_id)
 
+    def get_graph(self, graph_id: int) -> Graph:
+        graph_mp = self.graph_manager.get_graph_metadata(graph_id=graph_id)
         table_response = self.table_manager.get_table_response_by_id(
             table_id=graph_mp['table_id'],
             columns=[graph_mp['ax0'], graph_mp['ax1']]
@@ -37,8 +39,6 @@ class DataVisualizationFacade:
             ax = Axes(ax0=graph_mp['ax0'], ax1=graph_mp['ax1']),
             rows=table_response.rows
         )
-
-    # def render_graph(self, graph_id: int) -> Graph:
 
 
 
