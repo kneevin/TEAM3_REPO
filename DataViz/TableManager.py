@@ -111,7 +111,7 @@ class TableManager:
             tbl_mp = dict(row)
         return tbl_mp
 
-    def get_table_response_by_id(self, table_id: int, *, columns: List[str] = None):
+    def get_table_response_by_id(self, table_id: int, *, columns: List[str] = None) -> TableResponse:
         tbl_mp = self.get_table_info(table_id=table_id)
         return self.get_table_response(db_name=tbl_mp['db_name'], columns=columns)
         # with self.get_sql_db_connection() as conn:
