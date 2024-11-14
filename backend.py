@@ -57,11 +57,11 @@ async def get_graph_map() -> GraphMapResponse:
 
 @app.get("/dashboards/map")
 async def get_dashboard_mp() -> DashboardMapResponse:
-    pass
+    return db_manager.get_dashboard_id_mp()
 
-@app.get("/dashboards")
-async def get_dashboard(dashboard_id: int) -> Dashboard:
-    pass
+# @app.get("/dashboards")
+# async def get_dashboard(dashboard_id: int) -> Dashboard:
+#     pass
 
 @app.post("/dashboards")
 async def post_new_dashboard(query_params: DashboardCreateQueryParams = Depends()) -> Dashboard:

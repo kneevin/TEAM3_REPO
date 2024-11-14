@@ -11,7 +11,10 @@ import os
 
 from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapResponse, Coordinates, PlotSize
 from .TableManager import TableManager, TableResponse, TableMapResponse
-from .DashboardManager import DashboardManager, DashboardCreateQueryParams, DashboardMetadata, DashboardGraphMetadata
+from .DashboardManager import (
+    DashboardManager, DashboardCreateQueryParams, 
+    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse
+    )
 
 
 class Dashboard(BaseModel):
@@ -28,6 +31,9 @@ class DataVisualizationFacade:
         self.dashb_manager = DashboardManager(self.__get_connection)
 
 # ------- dashboard -------
+    def get_dashboard_id_mp(self) -> DashboardMapResponse:
+        return self.dashb_manager.get_dashboard_id_mp()
+
     def create_new_dashboard(self, query: DashboardCreateQueryParams) -> Dashboard:
         for graph_id in query.graph_ids:
             if not self.graph_manager.graph_exists(graph_id):
