@@ -56,6 +56,6 @@ async def get_graph_map() -> GraphMapResponse:
     return db_manager.get_graph_mp()
 
 @app.post("/dashboards")
-async def post_new_dashboard(query_params: DashboardCreateQueryParams = Depends()):
-    db_manager.create_new_dashboard(query=query_params)
+async def post_new_dashboard(query_params: DashboardCreateQueryParams = Depends()) -> Dashboard:
+    return db_manager.create_new_dashboard(query=query_params)
 # @app.post("/dashboards")

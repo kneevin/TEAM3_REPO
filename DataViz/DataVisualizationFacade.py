@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 import os
 
-from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapResponse
+from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapResponse, Coordinates, PlotSize
 from .TableManager import TableManager, TableResponse, TableMapResponse
 from .DashboardManager import DashboardManager, DashboardCreateQueryParams, DashboardMetadata, DashboardGraphMetadata
 
@@ -28,14 +28,27 @@ class DataVisualizationFacade:
         self.dashb_manager = DashboardManager(self.__get_connection)
 
 # ------- dashboard -------
-    def create_new_dashboard(self, query: DashboardCreateQueryParams):
+    def create_new_dashboard(self, query: DashboardCreateQueryParams) -> Dashboard:
         for graph_id in query.graph_ids:
             if not self.graph_manager.graph_exists(graph_id):
                 raise HTTPException(status_code=404, detail=f"Graph ID {graph_id} does not exist!")
         dashboard_id = self.dashb_manager.create_new_dashboard(query)
+        return self.render_dashboard(dashboard_id=dashboard_id)
 
     def render_dashboard(self, dashboard_id: int) -> Dashboard:
-        pass
+        dashb_metadata = self.dashb_manager.get_dashboard(dashboard_id=dashboard_id)
+        graphs = []
+        for g in dashb_metadata.metadata_graphs:
+            xy_coords = Coordinates(x_coord=g.x_coord, y_coord=g.y_coord)
+            plotsize = PlotSize(width=g.width, height=g.height)
+            _graph = self.get_graph(g.graph_id, xy_coord=xy_coords, plotsize=plotsize)
+            graphs.append(_graph)
+        return Dashboard(
+            dashboard_id=dashboard_id,
+            dashboard_title=dashb_metadata.dashboard_title,
+            graphs=graphs
+        )
+
 
 # ------- graph -------
     def add_graph(self, query_params: GraphQueryParam) -> Graph:
@@ -45,7 +58,8 @@ class DataVisualizationFacade:
     def get_graph_mp(self) -> GraphMapResponse:
         return self.graph_manager.get_graph_map_response()
 
-    def get_graph(self, graph_id: int) -> Graph:
+    def get_graph(self, graph_id: int, *, 
+                  xy_coord: Coordinates=None, plotsize: PlotSize=None) -> Graph:
         graph_mp = self.graph_manager.get_graph_metadata(graph_id=graph_id)
         table_response = self.table_manager.get_table_response_by_id(
             table_id=graph_mp['table_id'],
@@ -59,7 +73,9 @@ class DataVisualizationFacade:
             graph_title=graph_mp['graph_title'],
             graph_type=graph_mp['graph_type'],
             ax = Axes(ax0=graph_mp['ax0'], ax1=graph_mp['ax1']),
-            rows=table_response.rows
+            rows=table_response.rows,
+            xy_coords=xy_coord,
+            plotsize=plotsize
         )
 
 
