@@ -4,22 +4,38 @@ from fastapi import HTTPException
 from pydantic import BaseModel, model_validator
 import pandas as pd
 
-class DashboardCreateQueryParams(BaseModel):
-    dashboard_title: str
+class DashboardGraphParams(BaseModel):
     graph_ids: List[int]
     indices: List[int]
     width_height: List[List[int]]
 
     @model_validator(mode='before')
-    def check_lengths(cls, data: Any) -> Any:
-        graph_ids, indices, width_height = data.get('graph_ids'), data.get('indices'), data.get('width_height')
-        if not(len(graph_ids) == len(indices) == len(width_height)):
-            raise HTTPException(status_code=404, detail="Arrays are not of the same length")
-        if not all(2 == len(wh) for wh in width_height):
-            raise HTTPException(status_code=404, 
-                                detail="width_height array must contain only array elements with exactly length 2"
+    def check_values(cls, data: Any) -> Any:
+        graph_ids = data.get('graph_ids')
+        indices = data.get('indices')
+        width_height = data.get('width_height')
+        
+        # Ensure all lists are present
+        if graph_ids is None or indices is None or width_height is None:
+            raise HTTPException(status_code=400, detail="Missing required fields.")
+        
+        # Check if all lists have the same length
+        if not (len(graph_ids) == len(indices) == len(width_height)):
+            raise HTTPException(status_code=400, detail="Arrays are not of the same length.")
+        
+        # Check if each width_height element has exactly two integers
+        if not all(len(wh) == 2 for wh in width_height):
+            raise HTTPException(
+                status_code=400,
+                detail="Each element in width_height must be a list of two integers."
             )
         return data
+
+class DashboardCreateQueryParams(DashboardGraphParams):
+    dashboard_title: str
+
+class DashboardPutQueryParams(DashboardGraphParams):
+    dashboard_id: int
 
 class DashboardGraphMetadata(BaseModel):
     graph_id: int
@@ -142,9 +158,7 @@ class DashboardManager:
 
             return DashboardMapResponse(dashboard_metadatas=dashboard_metadatas)
 
-
-
-    def create_new_dashboard(self, query: DashboardCreateQueryParams):
+    def create_new_dashboard(self, query: DashboardCreateQueryParams) -> int:
         with self.get_sql_db_connection() as conn:
             # Insert the dashboard title and get the new dashboard_id
             cursor = conn.execute(
@@ -171,8 +185,60 @@ class DashboardManager:
             # Commit the transaction
             conn.commit()
 
-            # Optionally, return the dashboard_id
-            return dashboard_id
+        # Optionally, return the dashboard_id
+        return dashboard_id
+
+    def add_to_dashboard(self, dashboard_id: int, query: DashboardPutQueryParams) -> int:
+        with self.get_sql_db_connection() as conn:
+            # Set row factory to get dictionary-like row objects
+            conn.row_factory = sqlite3.Row
+
+            # Check if the dashboard_id exists
+            result = conn.execute(
+                "SELECT dashboard_title FROM dashboard_title_mp WHERE dashboard_id = ?",
+                (dashboard_id,)
+            ).fetchone()
+
+            if result is None:
+                raise HTTPException(status_code=404, detail=f"Dashboard with id {dashboard_id} not found.")
+
+            # Retrieve existing graph_ids and idxs in the dashboard
+            existing_entries = conn.execute(
+                "SELECT graph_id, idx FROM master_dashboard WHERE dashboard_id = ?",
+                (dashboard_id,)
+            ).fetchall()
+
+            existing_idxs = {row['idx'] for row in existing_entries}
+
+            # Check for idx values that are already used
+            conflicting_idxs = set(query.indices) & existing_idxs
+            if conflicting_idxs:
+                raise HTTPException(
+                    status_code=400, 
+                    detail=f"Idx values {conflicting_idxs} are already used in the dashboard."
+                )
+
+            # Prepare the data for bulk insertion
+            data_to_insert = [
+                (dashboard_id, graph_id, idx, width, height)
+                for graph_id, idx, (width, height) in zip(query.graph_ids, query.indices, query.width_height)
+            ]
+
+            # Insert the data into the master_dashboard table
+            conn.executemany(
+                """
+                INSERT INTO master_dashboard (dashboard_id, graph_id, idx, width, height)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                data_to_insert
+            )
+
+            # Commit the transaction
+            conn.commit()
+
+        # Return the dashboard_id
+        return dashboard_id
+
 
     def __create_tables(self):
         with self.get_sql_db_connection() as conn:
@@ -185,7 +251,7 @@ class DashboardManager:
                     height INTEGER NOT NULL,
                     x_coord INTEGER GENERATED ALWAYS AS ((idx * 4) % 12) STORED,
                     y_coord INTEGER GENERATED ALWAYS AS (idx / 3) STORED,
-                    PRIMARY KEY (dashboard_id, graph_id),
+                    PRIMARY KEY (dashboard_id, graph_id, idx),
                     FOREIGN KEY (graph_id) REFERENCES graphs(graph_id) ON DELETE CASCADE,
                     FOREIGN KEY (dashboard_id) REFERENCES dashboard_title_mp(dashboard_id) ON DELETE CASCADE
                 )
