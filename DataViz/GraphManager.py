@@ -12,6 +12,8 @@ class Axes(NamedTuple):
     ax1: str
 
 class Graph(BaseModel):
+    table_id: int
+    table_name: str
     graph_id: int
     graph_title: str
     graph_type: str
@@ -99,17 +101,18 @@ class GraphManager:
     def add_graph(self, query: GraphQueryParam) -> Graph:
         pass
 
-    def insert_graph_table(self, query: GraphQueryParam):
+    def insert_graph_table(self, query: GraphQueryParam) -> int:
         with self.get_sql_db_connection() as conn:
             cursor = conn.cursor()
             INSERTION_QUERY = '''
                 INSERT INTO graphs (table_id, graph_title, graph_type, ax0, ax1) VALUES (?, ?, ?, ?, ?)
-                RETURNING db_name
+                RETURNING graph_id
             '''
             cursor.execute(INSERTION_QUERY, (
                 query.table_id, query.graph_title, query.graph_type, query.ax0, query.ax1)
             )
             row = cursor.fetchone()
-            (db_name, ) = row if row else None
+            (graph_id, ) = row if row else None
             conn.commit()
+        return graph_id
 

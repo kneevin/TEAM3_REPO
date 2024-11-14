@@ -134,7 +134,6 @@ class TableManager:
             else:
                 selected_columns = ", ".join(columns)
                 SELECT_TABLE_DATA = f"SELECT {selected_columns} FROM {db_name}"
-            
             df = pd.read_sql_query(SELECT_TABLE_DATA, con=conn)
 
             # Fetch table metadata
