@@ -25,7 +25,7 @@ yarn-error.log*
 .env
 
 package-lock.json
-src/Usecase3/backend/.venv/bin/markdown-it
-/src/Usecase3/backend/.venv
-/src/Usecase3/backend/DataViz/__pycache__
-src/Usecase3/backend/unified_db.db
+src/components/Usecase3/backend/.venv/bin/markdown-it
+/src/components/Usecase3/backend/.venv
+/src/components/Usecase3/backend/DataViz/__pycache__
+src/components/Usecase3/backend/unified_db.db

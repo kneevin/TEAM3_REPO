@@ -4,8 +4,7 @@ import Landing from './components/Landing.js'
 import SingleDashboard from './components/SingleDashboard.js'; 
 import Read_OnlyDash from './components/Read_OnlyDash.js';
 import './UC3.css';
-import AuthWrapper from "../../components/authwrapper.js";
-import Loading from "../../components/loading.js";
+import Loading from "../../../components/loading.js";
 
 function UC3() {
   const [currentView, setCurrentView] = useState('landing');
@@ -32,7 +31,6 @@ function UC3() {
   };
 
   return (
-    <AuthWrapper>
       <Suspense
         fallback={
           <div className="h-screen flex justify-center items-center">
@@ -42,7 +40,6 @@ function UC3() {
       >
         {renderComponent()}
       </Suspense>
-    </AuthWrapper>
   );
 }
 

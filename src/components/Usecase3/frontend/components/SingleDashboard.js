@@ -3,11 +3,11 @@ import { Box, Typography, Button, TextField } from '@mui/material';
 import React, { useState, useEffect } from "react";
 import Modal from '@mui/material/Modal';
 import Tile from './Tile';
-import { Responsive, WidthProvider } from 'react-grid-layout';
+import { WidthProvider, Responsive } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import axios from 'axios';
-const ResponsiveGridLayout = WidthProvider(Responsive);
+const GridLayout = WidthProvider(Responsive);
 
 function SingleDashboard({dashboardId, onNavigate }) {
   //const { dashboardId } = useParams();
@@ -52,8 +52,13 @@ function SingleDashboard({dashboardId, onNavigate }) {
       console.log('Generated layout from graph coordinates:', generatedLayout);
       setCurrentLayout(generatedLayout);
       setTiles(dashboard.graphs);
+
+      // Add this: Trigger a window resize event after layout changes
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 100);
     }
-  }, [dashboard]);
+  }, [dashboard, containerWidth]);
 
 
   // Loading state
@@ -109,11 +114,9 @@ function SingleDashboard({dashboardId, onNavigate }) {
     }
   };
 
-  const onLayoutChange = async (layout, allLayouts) => {
-    // We receive the layout for all breakpoints, but we only want 'lg'
-    const lgLayout = allLayouts.lg || layout;
-    setCurrentLayout(lgLayout);
-
+  const onLayoutChange = async (layout) => {
+    setCurrentLayout(layout);
+    
     try {
       const response = await fetch(`http://localhost:8000/dashboards/layout`, {
         method: 'PUT',
@@ -122,16 +125,15 @@ function SingleDashboard({dashboardId, onNavigate }) {
         },
         body: JSON.stringify({
           dashboard_id: dashboard.dashboard_id,
-          graph_ids: lgLayout.map(tile => tile.i),
-          xy_coords: lgLayout.map(tile => [tile.x, tile.y]),
-          width_height: lgLayout.map(tile => [tile.w, tile.h])
+          graph_ids: layout.map(tile => tile.i),
+          xy_coords: layout.map(tile => [tile.x, tile.y]),
+          width_height: layout.map(tile => [tile.w, tile.h])
         })
       });
       if (!response.ok) throw new Error('Failed to update layout');
     } catch (error) {
       console.error('Failed to update layout:', error);
     }
-    console.log("layouts", currentLayout);
   };
 
   const tileStyle = {
@@ -281,18 +283,18 @@ function SingleDashboard({dashboardId, onNavigate }) {
         </Box>
       </Modal>
 
-      <ResponsiveGridLayout
+      <GridLayout
         className="layout"
-        layouts={{ lg: currentLayout }}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        layout={currentLayout}
+        breakpoints={{ lg: 0 }}
+        cols={{ lg: 12 }}
         rowHeight={100}
-        onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
+        onLayoutChange={(layout) => onLayoutChange(layout)}
         onWidthChange={(width, margin, cols) => {
           setContainerWidth(width);
         }}
         compactType={null}
-        preventCollision={false}
+        preventCollision={true}
         isResizable={true}
         isDraggable={true}
         margin={[20, 20]}
@@ -302,7 +304,8 @@ function SingleDashboard({dashboardId, onNavigate }) {
       >
         {tiles.map((tile) => {
           const layoutItem = currentLayout.find(item => item.i === tile.graph_id.toString());
-          const gridItemWidth = layoutItem ? (layoutItem.w / 12) * containerWidth : undefined;
+          const gridItemWidth = layoutItem ? (layoutItem.w / 12) * containerWidth - 40 : undefined;
+          const gridItemHeight = layoutItem ? layoutItem.h * 100 - 40 : undefined;
           
           return (
             <Box 
@@ -310,21 +313,28 @@ function SingleDashboard({dashboardId, onNavigate }) {
               sx={{
                 ...tileStyle,
                 position: 'relative',
-                overflow: 'visible'
+                overflow: 'hidden',
+                padding: '10px',
+              }}
+              data-grid={{
+                i: String(tile.graph_id),
+                x: tile.xy_coords[0],
+                y: tile.xy_coords[1],
+                w: tile.plotsize[0],
+                h: tile.plotsize[1],
               }}
             >
               <Tile
                 tile={tile}
                 deleteTile={() => deleteTile(tile)}
                 dashboardId={dashboard.dashboard_id}
-                width={gridItemWidth-45}
-                height={layoutItem ? layoutItem.h * 100: undefined}
-                layoutItem={layoutItem}
+                width={gridItemWidth}
+                height={gridItemHeight}
               />
             </Box>
           );
         })}
-      </ResponsiveGridLayout>
+      </GridLayout>
     </Box>
   );
 }
