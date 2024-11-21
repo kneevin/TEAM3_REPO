@@ -1,178 +1,70 @@
-# Team 3 Repository (Dashboarding)
+# Getting Started with Create React App
 
-The team members are:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-- Gurjot Chohan (GKC20000@utdallas.edu)
-- Joey Huynh (JHH190004@utdallas.edu)
-- Kevin Le (KKL190000@utdallas.edu)
-- Charles Simmons (CLS200010@utdallas.edu)
-- Dylan Tran (DTT190001@utdallas.edu)
+## Available Scripts
 
-## Table of Contents
+In the project directory, you can run:
 
-- [High Level Summary](#high-level-summary)
-- [Functional Requirements](#functional-requirements)
-- [Integration Guide](#integration-guide)
+### `npm start`
 
-## High-Level Summary
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-This project implements a comprehensive dashboard management application that allows users to upload, visualize, and manage data through an interactive and user-friendly interface. The application provides several core functionalities, ranging from dashboard and tile management to robust file handling and visualization capabilities. Key features include:
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- **Dashboard and Tile Management**: Users can create, view, and delete dashboards and tiles. Tiles support various chart types, including bar, line, and pie charts, with customization options for axes and data points.
-- **File Management**: Users can upload, select, and parse CSV files to generate visualizations. IPython notebook integration allows users to upload notebooks and extract plots for dashboard use.
-- **Chart Generation and Data Visualization**: Users can generate charts based on their CSV data and toggle between raw data views and graph views. The application supports basic charts (bar, line, pie), with plans for future enhancements such as scatter plots and heatmaps.
-- **Navigation and Local Storage**: Users can navigate seamlessly between different pages and persist their dashboard configurations across sessions using browser local storage.
-- **Error Handling and Pagination**: Error handling is planned for future development to manage issues like file upload errors. Users can also paginate through large datasets within the data table.
-- **Backend Integration**: The FastAPI backend and JSON server integration enable file uploads, dashboard state persistence, and the retrieval of saved data. The backend efficiently responds to requests from the frontend for data and plot display.
-  
-The app has been thoroughly tested, and most core functionalities have been implemented and completed. Future enhancements will focus on improving user experience, adding new chart types, and enhancing error handling.
+### `npm test`
 
-## Functional Requirements
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Dashboard Management
+### `npm run build`
 
-**Description:**  
-Users should be able to manage dashboards by creating, viewing, and deleting them.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-**Status:**  
-*Completed*
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-**Status Report:**  
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- Users can now:
-  - Create new dashboards
-  - View existing dashboards
-  - Delete dashboards as needed
-- Initial testing shows that these features work as expected, with no major bugs or issues identified.
-- The system handles multiple dashboards efficiently.
-- Future enhancements could focus on:
-  - Improving the user interface
-  - Adding more management features
+### `npm run eject`
 
-### Functional Requirement: Tile Management
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-**Description:**  
-Users should be able to manage individual dashboard tiles, adding new tiles, deleting tiles, and viewing tiles in various chart types (e.g., bar, line, pie).
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-**Status:**  
-*Pending Completion*
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-**Status Report:**  
-Users can now add, view, and delete tiles within their dashboards. Various chart types, including bar, line, and pie charts, are available for visualization. The system operates as expected with standard datasets, and no critical issues were encountered during testing. Enhancements for tile customization and further chart types may be considered in future iterations.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-### Functional Requirement: File Management
+## Learn More
 
-**Description:**  
-Users can upload, select, and parse CSV files for chart creation. This includes the ability to upload new CSV files, select previously uploaded files, and parse them for data extraction.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-**Status:**  
-*Completed*
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-**Status Report:**  
-Users are able to upload CSV files, select previously uploaded files, and parse them for chart creation. Basic functionality has been verified through manual checks, and the feature appears to be working as expected. Further formal testing can be conducted as needed.
+### Code Splitting
 
-### Functional Requirement: Chart Generation
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-**Description:**  
-Users can generate various types of charts (bar, line, pie) by selecting relevant columns from their uploaded CSV data for visualization. The application allows users to customize the X and Y axes and select multiple Y-axis data points for comparison.
+### Analyzing the Bundle Size
 
-**Status:**  
-*Completed*
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-**Status Report:**  
-Users can successfully create charts using data from uploaded CSV files and customize the chart types and axis settings. Basic tests show that the system handles multiple chart types and axis customizations as expected. Minor visual optimizations may be required in future iterations.
+### Making a Progressive Web App
 
-**Comments:**  
-Current functionality supports basic chart types (bar, line, pie). Future enhancements could include more advanced charts like scatter plots or heatmaps.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Functional Requirement: Data Visualization
+### Advanced Configuration
 
-**Description:**  
-Users can toggle between a data table view and a graph view to visualize CSV data. The data table displays the raw CSV data, while the graph view presents a chart generated from the selected data.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-**Status:**  
-*Completed*
+### Deployment
 
-**Status Report:**  
-Users are able to seamlessly toggle between the data table and the graph view, allowing them to visualize the CSV data in either form. The feature has been tested and is functioning as expected.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### Functional Requirement: Pagination for Data Tables
+### `npm run build` fails to minify
 
-**Description:**  
-Users can paginate through large datasets in the data table, with options to control how many rows are displayed per page for better navigation through the data.
-
-**Status:**  
-*Completed*
-
-**Status Report:**  
-Users can efficiently navigate through large datasets by selecting how many rows to display per page. The feature has been tested and performs well for typical dataset sizes.
-
-### Functional Requirement: Local Storage
-
-**Description:**  
-The dashboard’s state, including tiles and configurations, is saved to the browser’s local storage to ensure that data persists between user sessions without requiring server-side storage.
-
-**Status:**  
-*Completed*
-
-**Status Report:**  
-Users can now preserve their dashboard state, including tiles and configurations, between sessions. Manual tests show that the data persists after refreshing or closing the browser. No major issues were encountered, and the feature operates as intended.
-
-### Functional Requirement: Navigation
-
-**Description:**  
-The app allows users to navigate between different pages, including the landing page, individual dashboards, and the tile creation page. Users can easily return to the main dashboard view from any sub-page.
-
-**Status:**  
-*Completed*
-
-**Status Report:**  
-Users can smoothly transition between the landing page, individual dashboard views, and the tile creation page. Testing has shown that the navigation is intuitive and responsive.
-
-### Functional Requirement: Error Handling
-
-**Description:**  
-The app should handle various types of errors, such as issues during file uploads or problems during chart generation, and provide appropriate feedback to the user.
-
-**Status:**  
-*Future*
-
-**Status Report:**  
-The error handling system is currently planned for future development. The app will implement error detection for common issues, such as invalid file formats during upload or incorrect data
-
-### Functional Requirement: JSON Server Integration
-
-**Description:**  
-The app integrates with a JSON server to handle file uploads, file retrieval, and dashboard state persistence. This enables the app to upload and fetch data, as well as store dashboards and their states.
-
-**Status:**  
-*Completed*
-
-**Status Report:**  
-JSON server integration has been fully implemented. Users can now upload files, retrieve file content, and persist dashboard states on the server. The functionality has been tested, and both file upload and retrieval operations are working as expected.
-
-### Functional Requirement: IPython Notebook Integration
-
-**Description:**  
-The app is able to accept IPython notebooks as input and save the plots from the notebook to local storage for use in the dashboards.
-
-**Status:**  
-*Completed*
-
-**Status Report:**  
-Users can now upload IPython notebooks, and the system extracts the relevant plots for use in dashboards. The feature has been tested and works well with a range of notebook configurations. There are no known critical issues.
-
-### Functional Requirement: FastAPI Backend
-
-**Description:**  
-The FastAPI backend is able to search through the saved plots at the request of the React frontend and send them in a response back to the frontend for display in the dashboard.
-
-**Status:**  
-*Completed*
-
-**Status Report:**  
-The FastAPI backend has been successfully integrated with the frontend. It responds to requests from the React app to retrieve saved plots for display in the dashboard.
-
-## Integration Guide
-
-(Work in progress)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
