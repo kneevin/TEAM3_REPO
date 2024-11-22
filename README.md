@@ -1,3 +1,58 @@
+```mermaid
+graph TD
+    subgraph "Frontend Architecture"
+        subgraph "Page Components"
+            DL[DashboardList]
+            SD[SingleDashboard]
+            RO[ReadOnlyDashboard]
+            ATP[AddTilePage]
+        end
+
+        subgraph "Core Components"
+            DC[DashboardCard]
+            GT[GraphTile]
+            GC[Graph Component]
+            FC[FilterControls]
+        end
+
+        subgraph "Layout Components"
+            GL[GridLayout]
+            RGL[ResponsiveGridLayout]
+        end
+
+        subgraph "Modal Components"
+            SM[ShareModal]
+            PM[PermissionsModal]
+            FM[FilterModal]
+            AFM[AddFilterModal]
+        end
+
+        subgraph "State Management"
+            LS[Layout State]
+            FS[Filter State]
+            DS[Dashboard State]
+        end
+
+        subgraph "Utility Components"
+            FH[FilterHandlers]
+            LH[LayoutHandlers]
+            DH[DataHandlers]
+        end
+    end
+
+    %% Connections
+    DL --> DC
+    SD --> GL
+    GL --> GT
+    GT --> GC
+    GT --> FC
+    FC --> FM
+    DC --> SM
+    DC --> PM
+
+```
+
+
 ### 1. Overall Architecture
 
 The application follows a three-tier architecture:
