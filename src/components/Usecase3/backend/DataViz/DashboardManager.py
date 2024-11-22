@@ -36,12 +36,17 @@ class DashboardGraphParams(BaseModel):
                 detail="Each element in width_height must be a list of two integers."
             )
         return data
-
+class DashboardPermission(BaseModel):
+    user_email: str
+    permission_type: str  # 'owner', 'view', or 'edit'
 class DashboardCreateQueryParams(DashboardGraphParams):
     dashboard_title: str
+    owner_email: str
+    permissions: List[DashboardPermission] = []
 
 class DashboardPutQueryParams(DashboardGraphParams):
     dashboard_id: int
+    requester_email: str
 
 class DashboardDeleteQueryParams(BaseModel):
     dashboard_id: int
@@ -66,6 +71,7 @@ class DashboardMetadata(BaseModel):
     dashboard_id: int
     dashboard_title: str
     metadata_graphs: List[DashboardGraphMetadata]
+    permission_type: str 
 
 class DashboardMapResponse(BaseModel):
     dashboard_metadatas: List[DashboardMetadata]
@@ -75,6 +81,23 @@ class DashboardLayoutUpdateParams(BaseModel):
     graph_ids: List[int]
     xy_coords: List[List[int]]
     width_height: List[List[int]]
+
+class DashboardCreateWithPermissions(BaseModel):
+    dashboard_title: str
+    owner_email: str
+    graph_ids: List[int] = []
+    xy_coords: List[List[int]] = []
+    width_height: List[List[int]] = []
+    shared_with: List[DashboardPermission] = []
+
+class DashboardPermissionResponse(BaseModel):
+    user_email: str
+    permission_type: str
+
+class DeletePermissionParams(BaseModel):
+    dashboard_id: int
+    user_email: str
+    requester_email: str
 
 class DashboardManager:
     def __init__(self, get_connection_callback: Callable[[], sqlite3.Connection]):
@@ -110,22 +133,25 @@ class DashboardManager:
                 conn.executemany(DELETE_QUERY, values)
             conn.commit()
 
-    def get_dashboard(self, dashboard_id: int) -> DashboardMetadata:
+    def get_dashboard(self, dashboard_id: int, user_email: str) -> DashboardMetadata:
         with self.get_sql_db_connection() as conn:
-            # Set the row factory to sqlite3.Row to get dictionary-like row objects
             conn.row_factory = sqlite3.Row
 
-            # Retrieve the dashboard title
-            result = conn.execute(
-                "SELECT dashboard_title FROM dashboard_title_mp WHERE dashboard_id = ?",
-                (dashboard_id,)
-            ).fetchone()
+        # First check if user has permission
+            result = conn.execute("""
+                SELECT dt.dashboard_title, dp.permission_type
+                FROM dashboard_title_mp dt
+                JOIN dashboard_permissions dp ON dt.dashboard_id = dp.dashboard_id
+                WHERE dt.dashboard_id = ? AND dp.user_email = ?
+            """, (dashboard_id, user_email)).fetchone()
 
             if result is None:
-                raise HTTPException(status_code=404, detail=f"Dashboard with id {dashboard_id} not found.")
-
+                raise HTTPException(
+                    status_code=403,
+                    detail=f"You don't have permission to access dashboard {dashboard_id}"
+                )
             dashboard_title = result['dashboard_title']
-
+            permission_type = result['permission_type']
             # Retrieve the graph metadata associated with the dashboard
             cursor = conn.execute("""
                 SELECT graph_id, width, height, x_coord, y_coord
@@ -150,7 +176,8 @@ class DashboardManager:
             dashboard_metadata = DashboardMetadata(
                 dashboard_id=dashboard_id,
                 dashboard_title=dashboard_title,
-                metadata_graphs=metadata_graphs  # This will be empty list if no graphs found
+                metadata_graphs=metadata_graphs, # This will be empty list if no graphs found
+                permission_type=permission_type 
             )
 
             return dashboard_metadata
@@ -309,6 +336,18 @@ class DashboardManager:
 
     def __create_tables(self):
         with self.get_sql_db_connection() as conn:
+            # Add dashboard permissions table
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS dashboard_permissions (
+                    dashboard_id INTEGER NOT NULL,
+                    user_email TEXT NOT NULL,
+                    permission_type TEXT NOT NULL CHECK(permission_type IN ('owner', 'view', 'edit')),
+                    PRIMARY KEY (dashboard_id, user_email),
+                    FOREIGN KEY (dashboard_id) REFERENCES dashboard_title_mp(dashboard_id) ON DELETE CASCADE
+                )
+            """)
+            
+            # Existing tables...
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS master_dashboard (
                     dashboard_id INTEGER NOT NULL,
@@ -325,10 +364,11 @@ class DashboardManager:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS dashboard_title_mp (
                     dashboard_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    dashboard_title TEXT NOT NULL
+                    dashboard_title TEXT NOT NULL,
+                    created_by TEXT NOT NULL
                 )
             """)
-            conn.commit() # is called automatically afterwards
+            conn.commit()
 
     def update_dashboard_layout(self, query: DashboardLayoutUpdateParams) -> None:
         with self.get_sql_db_connection() as conn:
@@ -339,6 +379,254 @@ class DashboardManager:
                     SET x_coord = ?, y_coord = ?, width = ?, height = ?
                     WHERE dashboard_id = ? AND graph_id = ?
                 """, (xy[0], xy[1], width, height, query.dashboard_id, graph_id))
+            conn.commit()
+
+    def create_dashboard_with_permissions(self, query: DashboardCreateQueryParams) -> int:
+        with self.get_sql_db_connection() as conn:
+            # Insert dashboard title and owner
+            cursor = conn.execute(
+                "INSERT INTO dashboard_title_mp (dashboard_title, created_by) VALUES (?, ?)",
+                (query.dashboard_title, query.owner_email)
+            )
+            dashboard_id = cursor.lastrowid
+
+            # Insert owner permission
+            conn.execute(
+                """
+                INSERT INTO dashboard_permissions 
+                (dashboard_id, user_email, permission_type) 
+                VALUES (?, ?, ?)
+                """,
+                (dashboard_id, query.owner_email, 'owner')
+            )
+
+            # Insert shared permissions
+            if query.permissions:  # Changed from shared_with to permissions
+                conn.executemany(
+                    """
+                    INSERT INTO dashboard_permissions 
+                    (dashboard_id, user_email, permission_type) 
+                    VALUES (?, ?, ?)
+                    """,
+                    [(dashboard_id, p.user_email, p.permission_type) 
+                     for p in query.permissions]  # Changed from shared_with to permissions
+                )
+
+            # Insert graph data if any
+            if query.graph_ids:
+                data_to_insert = [
+                    (dashboard_id, graph_id, xy[0], xy[1], width, height)
+                    for graph_id, xy, (width, height) 
+                    in zip(query.graph_ids, query.xy_coords, query.width_height)
+                ]
+                conn.executemany(
+                    """
+                    INSERT INTO master_dashboard 
+                    (dashboard_id, graph_id, x_coord, y_coord, width, height)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    data_to_insert
+                )
+            conn.commit()
+            return dashboard_id
+
+    def get_user_dashboards(self, user_email: str) -> DashboardMapResponse:
+        with self.get_sql_db_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            
+            # Get all dashboards user has access to
+            dashboards = conn.execute("""
+                SELECT DISTINCT 
+                    dt.dashboard_id, 
+                    dt.dashboard_title,
+                    dt.created_by,
+                    dp.permission_type,
+                    md.graph_id, 
+                    md.width, 
+                    md.height, 
+                    md.x_coord, 
+                    md.y_coord
+                FROM dashboard_title_mp dt
+                JOIN dashboard_permissions dp 
+                    ON dt.dashboard_id = dp.dashboard_id
+                LEFT JOIN master_dashboard md 
+                    ON dt.dashboard_id = md.dashboard_id
+                WHERE dp.user_email = ?
+                ORDER BY dt.dashboard_id
+            """, (user_email,)).fetchall()
+
+            dashboard_map = {}
+            for row in dashboards:
+                dashboard_id = row['dashboard_id']
+                if dashboard_id not in dashboard_map:
+                    dashboard_map[dashboard_id] = {
+                        "dashboard_id": dashboard_id,
+                        "dashboard_title": row['dashboard_title'],
+                        "created_by": row['created_by'],
+                        "permission_type": row['permission_type'],
+                        "metadata_graphs": []
+                    }
+                
+                if row['graph_id'] is not None:
+                    dashboard_map[dashboard_id]["metadata_graphs"].append(
+                        DashboardGraphMetadata(
+                            graph_id=row['graph_id'],
+                            width=row['width'],
+                            height=row['height'],
+                            x_coord=row['x_coord'],
+                            y_coord=row['y_coord']
+                        )
+                    )
+
+            dashboard_metadatas = [
+                DashboardMetadata(
+                    dashboard_id=meta["dashboard_id"],
+                    dashboard_title=meta["dashboard_title"],
+                    metadata_graphs=meta["metadata_graphs"],
+                    permission_type=meta["permission_type"]
+                ) for meta in dashboard_map.values()
+            ]
+
+            return DashboardMapResponse(dashboard_metadatas=dashboard_metadatas)
+
+    def check_user_permission(
+        self, 
+        dashboard_id: int, 
+        user_email: str, 
+        required_permission: str = 'view'
+    ) -> bool:
+        with self.get_sql_db_connection() as conn:
+            result = conn.execute("""
+                SELECT permission_type 
+                FROM dashboard_permissions 
+                WHERE dashboard_id = ? AND user_email = ?
+            """, (dashboard_id, user_email)).fetchone()
+            
+            if not result:
+                return False
+            
+            permission = result[0]
+            if required_permission == 'view':
+                return True  # Any permission allows viewing
+            elif required_permission == 'edit':
+                return permission in ['edit', 'owner']
+            elif required_permission == 'owner':
+                return permission == 'owner'
+            return False
+
+    def update_permissions(
+        self, 
+        dashboard_id: int, 
+        permissions: List[DashboardPermission], 
+        requester_email: str
+    ) -> None:
+        if not self.check_user_permission(dashboard_id, requester_email, 'owner'):
+            raise HTTPException(
+                status_code=403, 
+                detail="Only the dashboard owner can modify permissions"
+            )
+        
+        with self.get_sql_db_connection() as conn:
+            # Delete existing non-owner permissions
+            conn.execute("""
+                DELETE FROM dashboard_permissions 
+                WHERE dashboard_id = ? AND permission_type != 'owner'
+            """, (dashboard_id,))
+            
+            # Insert new permissions
+            conn.executemany(
+                """
+                INSERT INTO dashboard_permissions 
+                (dashboard_id, user_email, permission_type) 
+                VALUES (?, ?, ?)
+                """,
+                [(dashboard_id, p.user_email, p.permission_type) 
+                 for p in permissions]
+            )
+            conn.commit()
+
+    def get_dashboard_permissions(
+        self, 
+        dashboard_id: int,
+        requester_email: str
+    ) -> List[DashboardPermissionResponse]:
+        with self.get_sql_db_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            
+            # First verify requester has permission to view permissions
+            owner_check = conn.execute("""
+                SELECT permission_type 
+                FROM dashboard_permissions 
+                WHERE dashboard_id = ? AND user_email = ?
+            """, (dashboard_id, requester_email)).fetchone()
+            
+            if not owner_check or owner_check['permission_type'] != 'owner':
+                raise HTTPException(
+                    status_code=403,
+                    detail="Only the owner can view permissions"
+                )
+            
+            # Get all permissions
+            permissions = conn.execute("""
+                SELECT user_email, permission_type
+                FROM dashboard_permissions
+                WHERE dashboard_id = ?
+            """, (dashboard_id,)).fetchall()
+            
+            return [
+                DashboardPermissionResponse(
+                    user_email=row['user_email'],
+                    permission_type=row['permission_type']
+                ) for row in permissions
+            ]
+
+    def delete_dashboard_permission(
+        self,
+        dashboard_id: int,
+        user_email: str,
+        requester_email: str
+    ) -> None:
+        with self.get_sql_db_connection() as conn:
+            conn.row_factory = sqlite3.Row  # Add this line
+            
+            # First verify requester is owner
+            owner_check = conn.execute("""
+                SELECT permission_type 
+                FROM dashboard_permissions 
+                WHERE dashboard_id = ? AND user_email = ?
+            """, (dashboard_id, requester_email)).fetchone()
+            
+            if not owner_check or owner_check['permission_type'] != 'owner':
+                raise HTTPException(
+                    status_code=403,
+                    detail="Only the owner can delete permissions"
+                )
+                
+            # Don't allow deleting owner's permission
+            target_check = conn.execute("""
+                SELECT permission_type 
+                FROM dashboard_permissions 
+                WHERE dashboard_id = ? AND user_email = ?
+            """, (dashboard_id, user_email)).fetchone()
+            
+            if not target_check:
+                raise HTTPException(
+                    status_code=404,
+                    detail=f"Permission not found for user {user_email}"
+                )
+                
+            if target_check['permission_type'] == 'owner':
+                raise HTTPException(
+                    status_code=400,
+                    detail="Cannot delete owner's permission"
+                )
+            
+            # Delete the permission
+            conn.execute("""
+                DELETE FROM dashboard_permissions
+                WHERE dashboard_id = ? AND user_email = ?
+            """, (dashboard_id, user_email))
+            
             conn.commit()
 
     

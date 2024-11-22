@@ -10,7 +10,7 @@ import React, { useState } from "react";
 import { DateRangePicker } from '@mui/lab';
 import axios from 'axios';
 import CloseIcon from '@mui/icons-material/Close';
-function AddTilePage({ dashboardId, onNavigate }) {
+function AddTilePage({ dashboardId, onNavigate, userEmail }) {
   //const { dashboardId } = useParams();
   const [fileUploaded, setFileUploaded] = useState(false);
   const [file, setFile] = useState('');
@@ -201,13 +201,13 @@ function AddTilePage({ dashboardId, onNavigate }) {
         const dashboardParams = {
           graph_ids: [response.data.graph_id],
           xy_coords: [[0, -1]],
-          width_height: [[2, 2]]
+          width_height: [[2, 2]],
         };
 
         
         // call the put request
         try {
-            const dashboardResponse = await axios.put(`http://localhost:8000/dashboards?dashboard_id=${parseInt(dashboardId)}`, dashboardParams);
+            const dashboardResponse = await axios.put(`http://localhost:8000/dashboards?dashboard_id=${parseInt(dashboardId)}&requester_email=${userEmail}`, dashboardParams);
             console.log('Dashboard update successful:', dashboardResponse.data);
         } catch (error) {
             console.error('Dashboard update failed:', {
@@ -532,7 +532,10 @@ function AddTilePage({ dashboardId, onNavigate }) {
                     )}
                   />
                    
-                  { y!= undefined && <Graph 
+                    { x !== undefined && 
+                    chartType !== '' && 
+                    y && 
+                    y.length > 0 && <Graph 
                     headers={headers} 
                     data={data} 
                     chartType={chartType} 

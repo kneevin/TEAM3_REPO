@@ -1,8 +1,8 @@
 import io
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 from fastapi import (
     FastAPI, File, UploadFile, Query,
-    HTTPException, Response, BackgroundTasks, Depends, Form)
+    HTTPException, Response, BackgroundTasks, Depends, Form, Security)
 from pydantic import BaseModel, model_validator
 import csv
 import pandas as pd
@@ -15,10 +15,27 @@ from DataViz import (
     TableResponse, TableMapResponse, 
     GraphQueryParam, Graph, GraphMapResponse,
     Dashboard, DashboardCreateQueryParams, DashboardMapResponse, 
-    DashboardPutQueryParams, DashboardDeleteQueryParams
+    DashboardPutQueryParams, DashboardDeleteQueryParams, 
 )
 import os
 from fastapi.middleware.cors import CORSMiddleware
+# Add these new models
+class DashboardPermission(BaseModel):
+    user_email: str
+    permission_type: str  # 'view' or 'edit'
+
+class DashboardWithPermissions(BaseModel):
+    dashboard_title: str
+    permissions: List[DashboardPermission] = []
+
+class DashboardPermissionResponse(BaseModel):
+    user_email: str
+    permission_type: str
+
+class DeletePermissionParams(BaseModel):
+    dashboard_id: int
+    user_email: str
+    requester_email: str
 
 app = FastAPI()
 
@@ -60,17 +77,6 @@ async def post_tables(
 # app.get("/graphs") 
 @app.post("/graphs")
 async def post_graphs(query_params: GraphQueryParam = Depends()):
-    print("\n=== DEBUG START ===")
-    print("Request received for /graphs endpoint")
-    
-    # Print raw request data
-    print("Raw query_params type:", type(query_params))
-    print("Raw query_params:", query_params)
-    
-    # Print the expected model
-    print("\nExpected Model Schema:")
-    print(GraphQueryParam.schema_json(indent=2))
-    
     try:
         print("\nAttempting to add graph...")
         result = db_manager.add_graph(query_params)
@@ -82,8 +88,6 @@ async def post_graphs(query_params: GraphQueryParam = Depends()):
         print(f"Error message: {str(e)}")
         print(f"Error details: {e.__dict__}")
         raise
-    finally:
-        print("=== DEBUG END ===\n")
 
 @app.get("/graphs")
 async def get_graphs(graph_id: int) -> Graph:
@@ -94,16 +98,45 @@ async def get_graph_map() -> GraphMapResponse:
     return db_manager.get_graph_mp()
 
 @app.get("/dashboards/map")
-async def get_dashboard_mp() -> DashboardMapResponse:
-    return db_manager.get_dashboard_id_mp()
+async def get_dashboard_mp(user_email: str) -> DashboardMapResponse:
+    return db_manager.get_dashboard_id_mp(user_email=user_email)
 
 @app.get("/dashboards")
-async def get_dashboard(dashboard_id: int) -> Dashboard:
-    return db_manager.render_dashboard(dashboard_id=dashboard_id)
+async def get_dashboard(dashboard_id: int, user_email: str) -> Dashboard:
+    return db_manager.render_dashboard(dashboard_id=dashboard_id, user_email=user_email)
 
 @app.post("/dashboards")
 async def post_new_dashboard(query_params: DashboardCreateQueryParams = Depends()) -> Dashboard:
     return db_manager.create_new_dashboard(query=query_params)
+
+class DashboardPermissionsUpdateParams(BaseModel):
+    dashboard_id: int
+    permissions: List[DashboardPermission]
+    requester_email: str
+
+@app.put("/dashboards/permissions")
+async def update_dashboard_permissions(
+    query_params: DashboardPermissionsUpdateParams
+) -> Dict[str, Any]:
+    try:
+        db_manager.update_dashboard_permissions(
+            dashboard_id=query_params.dashboard_id,
+            permissions=query_params.permissions,
+            requester_email=query_params.requester_email
+        )
+        
+        # Return a success response dictionary
+        return {
+            "status": "success",
+            "message": "Permissions updated successfully",
+            "dashboard_id": query_params.dashboard_id
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to update permissions: {str(e)}"
+        )
 
 @app.put("/dashboards")
 async def add_new_graphs_dashboard(query_params: DashboardPutQueryParams = Depends()) -> Dashboard:
@@ -120,5 +153,45 @@ class DashboardLayoutUpdateParams(BaseModel):
     width_height: List[List[int]]
 
 @app.put("/dashboards/layout")
-async def update_dashboard_layout(query_params: DashboardLayoutUpdateParams) -> Dashboard:
+async def update_dashboard_layout(query_params: DashboardLayoutUpdateParams) -> None:
     return db_manager.update_dashboard_layout(query=query_params)
+
+@app.get("/dashboards/{dashboard_id}/permissions")
+async def get_dashboard_permissions(
+    dashboard_id: int,
+    requester_email: str
+) -> List[DashboardPermissionResponse]:
+    try:
+        permissions = db_manager.get_dashboard_permissions(
+            dashboard_id=dashboard_id,
+            requester_email=requester_email
+        )
+        return permissions
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to get permissions: {str(e)}"
+        )
+
+@app.delete("/dashboards/permissions")
+async def delete_dashboard_permission(
+    query_params: DeletePermissionParams
+) -> Dict[str, Any]:
+    try:
+        db_manager.delete_dashboard_permission(
+            dashboard_id=query_params.dashboard_id,
+            user_email=query_params.user_email,
+            requester_email=query_params.requester_email
+        )
+        
+        return {
+            "status": "success",
+            "message": "Permission deleted successfully",
+            "dashboard_id": query_params.dashboard_id,
+            "user_email": query_params.user_email
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to delete permission: {str(e)}"
+        )

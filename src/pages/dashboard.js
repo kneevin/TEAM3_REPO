@@ -66,7 +66,7 @@ export default function Dashboard() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex flex-1 h-[calc(100vh-4.5rem)] mt-[4.5rem] overflow-hidden">
-        <div className={`bg-yellow-300 transition-all h-[calc(100vh-4.5rem)] ${expanded ? "w-[20%]" : "w-[5%]"}`}>
+        <div className={`bg-yellow-300 transition-all h-[calc(100vh-4.5rem)] ${expanded ? "w-[15%]" : "w-[5%]"}`}>
           <aside className="h-full overflow-hidden">
             <nav className="h-full flex flex-row bg-background border-r border-gray-200 shadow-sm">
               {/* Left Column - Sidebar Items */}
@@ -99,7 +99,7 @@ export default function Dashboard() {
             {activeComponent || <Usecase1 />} {/* Render the active component */}
           </div>
         </div>
-        <div className="bg-blue-300 h-[calc(100vh-4.5rem)] w-[20%] overflow-hidden" >
+        <div className="bg-blue-300 h-[calc(100vh-4.5rem)] w-[15%] overflow-hidden" >
           <FaultSide/>
       </div>
     </div>

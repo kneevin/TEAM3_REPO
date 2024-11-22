@@ -13,14 +13,15 @@ from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapRe
 from .TableManager import TableManager, TableResponse, TableMapResponse
 from .DashboardManager import (
     DashboardManager, DashboardCreateQueryParams, 
-    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams, DashboardDeleteQueryParams, DashboardLayoutUpdateParams
-    )
+    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams, DashboardDeleteQueryParams, DashboardLayoutUpdateParams, DashboardCreateWithPermissions, DashboardPermission, DashboardPermissionResponse, DeletePermissionParams
+)
 
 
 class Dashboard(BaseModel):
     dashboard_id: int
     dashboard_title: str
     graphs: List[Graph]
+    permission_type: str
 
 class DataVisualizationFacade:
     def __init__(self):
@@ -33,25 +34,26 @@ class DataVisualizationFacade:
         return closing(sqlite3.connect(self.DB_FNAME))
 
 # ------- dashboard -------
-    def get_dashboard_id_mp(self) -> DashboardMapResponse:
-        return self.dashb_manager.get_dashboard_id_mp()
+    def get_dashboard_id_mp(self, user_email: str) -> DashboardMapResponse:
+        return self.dashb_manager.get_user_dashboards(user_email=user_email)
 
     def delete_dashboard(self, query: DashboardDeleteQueryParams):
         self.dashb_manager.delete_dashboard(query=query)
 
     def add_to_dashboard(self, query: DashboardPutQueryParams) -> Dashboard:
         dashboard_id = self.dashb_manager.add_to_dashboard(query=query)
-        return self.render_dashboard(dashboard_id=dashboard_id)
+        return self.render_dashboard(dashboard_id=dashboard_id, user_email=query.requester_email)
 
     def create_new_dashboard(self, query: DashboardCreateQueryParams) -> Dashboard:
         for graph_id in query.graph_ids:
             if not self.graph_manager.graph_exists(graph_id):
                 raise HTTPException(status_code=404, detail=f"Graph ID {graph_id} does not exist!")
-        dashboard_id = self.dashb_manager.create_new_dashboard(query)
-        return self.render_dashboard(dashboard_id=dashboard_id)
+        dashboard_id = self.dashb_manager.create_dashboard_with_permissions(query)
+        return self.render_dashboard(dashboard_id=dashboard_id, user_email=query.owner_email)
+    def render_dashboard(self, dashboard_id: int, user_email: str) -> Dashboard:
 
-    def render_dashboard(self, dashboard_id: int) -> Dashboard:
-        dashb_metadata = self.dashb_manager.get_dashboard(dashboard_id=dashboard_id)
+        # If they have permission, proceed with rendering
+        dashb_metadata = self.dashb_manager.get_dashboard(dashboard_id=dashboard_id, user_email=user_email)
         graphs = []
         for g in dashb_metadata.metadata_graphs:
             xy_coords = Coordinates(x_coord=g.x_coord, y_coord=g.y_coord)
@@ -62,14 +64,76 @@ class DataVisualizationFacade:
         return Dashboard(
             dashboard_id=dashboard_id,
             dashboard_title=dashb_metadata.dashboard_title,
-            graphs=graphs
+            graphs=graphs,
+            permission_type=dashb_metadata.permission_type
         )
 
-    def update_dashboard_layout(self, query: DashboardLayoutUpdateParams) -> Dashboard:
+    def update_dashboard_layout(self, query: DashboardLayoutUpdateParams) -> None:
         # First update the layout
         self.dashb_manager.update_dashboard_layout(query=query)
         # Then render and return the dashboard
-        return self.render_dashboard(dashboard_id=query.dashboard_id)
+        return None
+
+    def create_dashboard_with_permissions(
+        self, 
+        query: DashboardCreateWithPermissions
+    ) -> Dashboard:
+        dashboard_id = self.dashb_manager.create_dashboard_with_permissions(query)
+        return self.render_dashboard(
+            dashboard_id=dashboard_id, 
+            user_email=query.owner_email
+        )
+
+    def get_user_dashboards(self, user_email: str) -> DashboardMapResponse:
+        return self.dashb_manager.get_user_dashboards(user_email)
+
+    def update_dashboard_permissions(
+        self, 
+        dashboard_id: int, 
+        permissions: List[DashboardPermission], 
+        requester_email: str
+    ):
+        return self.dashb_manager.update_permissions(
+            dashboard_id, 
+            permissions, 
+            requester_email
+        )
+
+    def check_dashboard_access(
+        self, 
+        dashboard_id: int, 
+        user_email: str, 
+        required_permission: str = 'view'
+    ) -> bool:
+        return self.dashb_manager.check_user_permission(
+            dashboard_id, 
+            user_email, 
+            required_permission
+        )
+
+    def get_dashboard_permissions(
+        self, 
+        dashboard_id: int,
+        requester_email: str
+    ) -> List[DashboardPermissionResponse]:
+        """Get all permissions for a dashboard"""
+        return self.dashb_manager.get_dashboard_permissions(
+            dashboard_id=dashboard_id,
+            requester_email=requester_email
+        )
+
+    def delete_dashboard_permission(
+        self,
+        dashboard_id: int,
+        user_email: str,
+        requester_email: str
+    ) -> None:
+        """Delete a specific permission from a dashboard"""
+        self.dashb_manager.delete_dashboard_permission(
+            dashboard_id=dashboard_id,
+            user_email=user_email,
+            requester_email=requester_email
+        )
 
 
 # ------- graph -------

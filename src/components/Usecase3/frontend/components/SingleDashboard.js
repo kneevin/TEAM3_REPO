@@ -9,7 +9,7 @@ import 'react-resizable/css/styles.css';
 import axios from 'axios';
 const GridLayout = WidthProvider(Responsive);
 
-function SingleDashboard({dashboardId, onNavigate }) {
+function SingleDashboard({dashboardId, onNavigate, userEmail }) {
   //const { dashboardId } = useParams();
 
   const [tiles, setTiles] = useState([]);
@@ -24,7 +24,7 @@ function SingleDashboard({dashboardId, onNavigate }) {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/dashboards?dashboard_id=${dashboardId}`);
+        const response = await fetch(`http://127.0.0.1:8000/dashboards?dashboard_id=${dashboardId}&user_email=${userEmail}`);
         if (!response.ok) throw new Error('Failed to fetch dashboard');
         const data = await response.json();
         setDashboard(data);

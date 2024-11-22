@@ -13,16 +13,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import ShareIcon from '@mui/icons-material/Share';
 
-const Landing = ({ onNavigate }) => {
+const Landing = ({ onNavigate, userEmail }) => {
   const navigate = useNavigate();
-  const [dashboardName, setDashboardName] = useState('');
+  const [selectedTab, setSelectedTab] = useState('myDashboards');
   const [open, setOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState('1'); // Track the active tab
-  const [dashboards, setDashboards] = useState([]);
+  const [dashboardName, setDashboardName] = useState('');
+  const [ownedDashboards, setOwnedDashboards] = useState([]);
+  const [editableDashboards, setEditableDashboards] = useState([]);
+  const [viewOnlyDashboards, setViewOnlyDashboards] = useState([]);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleTabChange = (event, newValue) => setSelectedTab(newValue);
 
   const style = {
     position: 'absolute',
@@ -42,7 +46,8 @@ const Landing = ({ onNavigate }) => {
     if (dashboardName.trim()) {
       try {
         const params = new URLSearchParams({
-          dashboard_title: dashboardName
+          dashboard_title: dashboardName,
+          owner_email: userEmail
         });
 
         const requestBody = {
@@ -66,19 +71,24 @@ const Landing = ({ onNavigate }) => {
 
   const fetchDashboards = async () => {
     try {
-      // Get the dashboard map to retrieve all dashboard IDs
-      const mapResponse = await axios.get('http://127.0.0.1:8000/dashboards/map');
+      const mapResponse = await axios.get(`http://127.0.0.1:8000/dashboards/map?user_email=${userEmail}`);
       const dashboardMetadatas = mapResponse.data.dashboard_metadatas;
+      console.log("dashboardMetadatas", dashboardMetadatas);
 
-      // Fetch full dashboard data for each dashboard using the /dashboards endpoint
-      const dashboardPromises = dashboardMetadatas.map(metadata => 
-        axios.get(`http://127.0.0.1:8000/dashboards?dashboard_id=${metadata.dashboard_id}`)
-      );
+      // const dashboardPromises = dashboardMetadatas.map(metadata => 
+      //   axios.get(`http://127.0.0.1:8000/dashboards?dashboard_id=${metadata.dashboard_id}&user_email=${userEmail}`)
+      // );
       
-      const dashboardResponses = await Promise.all(dashboardPromises);
-      const dashboards = dashboardResponses.map(response => response.data);
+      // const dashboardResponses = await Promise.all(dashboardPromises);
+      // const allDashboards = dashboardResponses.map(response => ({
+      //   ...response.data,
+      //   permission_type: response.data.permission_type
+      // }));
 
-      setDashboards(dashboards);
+      // Split dashboards based on permission type
+      setOwnedDashboards(dashboardMetadatas.filter(dash => dash.permission_type === 'owner'));
+      setEditableDashboards(dashboardMetadatas.filter(dash => dash.permission_type === 'edit'));
+      setViewOnlyDashboards(dashboardMetadatas.filter(dash => dash.permission_type === 'view'));
     } catch (error) {
       console.error('Error fetching dashboards:', error);
       alert('Failed to load dashboards. Please try again.');
@@ -104,29 +114,132 @@ const Landing = ({ onNavigate }) => {
   };
 
   useEffect(() => {
-    const fetchDashboards = async () => {
-      try {
-        // Get the dashboard map to retrieve all dashboard IDs
-        const mapResponse = await axios.get('http://127.0.0.1:8000/dashboards/map');
-        const dashboardMetadatas = mapResponse.data.dashboard_metadatas;
-
-        // Fetch full dashboard data for each dashboard using the /dashboards endpoint
-        const dashboardPromises = dashboardMetadatas.map(metadata => 
-          axios.get(`http://127.0.0.1:8000/dashboards?dashboard_id=${metadata.dashboard_id}`)
-        );
-        
-        const dashboardResponses = await Promise.all(dashboardPromises);
-        const dashboards = dashboardResponses.map(response => response.data);
-
-        setDashboards(dashboards);
-      } catch (error) {
-        console.error('Error fetching dashboards:', error);
-        alert('Failed to load dashboards. Please try again.');
-      }
-    };
-
     fetchDashboards();
   }, []);
+
+  const renderContent = () => {
+    switch(selectedTab) {
+      case 'myDashboards':
+        return (
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: '30px' }}>
+              My Dashboards
+            </Typography>
+            <Box sx={{ 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gap: '24px'
+            }}>
+              {ownedDashboards.map(dashboard => (
+                <DashBoard 
+                  key={dashboard.dashboard_id} 
+                  dashboard={dashboard} 
+                  deleteDashboard={deleteDashboard}
+                  onNavigate={onNavigate}
+                  permissionType={dashboard.permission_type}
+                  userEmail={userEmail}
+                />
+              ))}
+            </Box>
+          </Box>
+        );
+
+      case 'shared':
+        return (
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: '30px' }}>
+              Shared with Me
+            </Typography>
+            
+            {/* Can Edit Section */}
+            {editableDashboards.length > 0 && (
+              <Box sx={{ marginBottom: '40px' }}>
+                <Typography 
+                  variant="subtitle1" 
+                  sx={{ 
+                    fontWeight: 500, 
+                    marginBottom: '16px',
+                    color: '#2196f3',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1
+                  }}
+                >
+                  <EditIcon fontSize="small" />
+                  Can Edit
+                </Typography>
+                <Box sx={{ 
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                  gap: '24px'
+                }}>
+                  {editableDashboards.map(dashboard => (
+                    <DashBoard 
+                      key={dashboard.dashboard_id} 
+                      dashboard={dashboard} 
+                      deleteDashboard={null}
+                      onNavigate={onNavigate}
+                      permissionType={dashboard.permission_type}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            )}
+
+            {/* View Only Section */}
+            {viewOnlyDashboards.length > 0 && (
+              <Box>
+                <Typography 
+                  variant="subtitle1" 
+                  sx={{ 
+                    fontWeight: 500, 
+                    marginBottom: '16px',
+                    color: '#4caf50',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1
+                  }}
+                >
+                  <VisibilityIcon fontSize="small" />
+                  View Only
+                </Typography>
+                <Box sx={{ 
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                  gap: '24px'
+                }}>
+                  {viewOnlyDashboards.map(dashboard => (
+                    <DashBoard 
+                      key={dashboard.dashboard_id} 
+                      dashboard={dashboard} 
+                      deleteDashboard={null}
+                      onNavigate={onNavigate}
+                      permissionType={dashboard.permission_type}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            )}
+
+            {editableDashboards.length === 0 && viewOnlyDashboards.length === 0 && (
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  color: '#666',
+                  textAlign: 'center',
+                  padding: '20px'
+                }}
+              >
+                No dashboards have been shared with you yet.
+              </Typography>
+            )}
+          </Box>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <Box sx={{ display: 'flex', height: '100vh', backgroundColor: '#ffffff' }}>
@@ -155,30 +268,30 @@ const Landing = ({ onNavigate }) => {
               padding: '12px 16px',
               textTransform: 'none',
               color: '#1a1a1a',
-              backgroundColor: selectedTab === '1' ? '#f0f7ff' : 'transparent',
+              backgroundColor: selectedTab === 'myDashboards' ? '#f0f7ff' : 'transparent',
               '&:hover': {
                 backgroundColor: '#f0f7ff'
               }
             }}
-            onClick={() => setSelectedTab('1')}
+            onClick={() => setSelectedTab('myDashboards')}
           >
-            View Dashboards
+            My Dashboards
           </Button>
           <Button
-            startIcon={<EditIcon />}
+            startIcon={<ShareIcon />}
             sx={{
               justifyContent: 'flex-start',
               padding: '12px 16px',
               textTransform: 'none',
               color: '#1a1a1a',
-              backgroundColor: selectedTab === '2' ? '#f0f7ff' : 'transparent',
+              backgroundColor: selectedTab === 'shared' ? '#f0f7ff' : 'transparent',
               '&:hover': {
                 backgroundColor: '#f0f7ff'
               }
             }}
-            onClick={() => setSelectedTab('2')}
+            onClick={() => setSelectedTab('shared')}
           >
-            Edit Dashboards
+            Shared with Me
           </Button>
           <Button
             startIcon={<AddIcon />}
@@ -187,7 +300,6 @@ const Landing = ({ onNavigate }) => {
               padding: '12px 16px',
               textTransform: 'none',
               color: '#1a1a1a',
-              backgroundColor: selectedTab === '3' ? '#f0f7ff' : 'transparent',
               '&:hover': {
                 backgroundColor: '#f0f7ff'
               }
@@ -198,6 +310,19 @@ const Landing = ({ onNavigate }) => {
           </Button>
         </Box>
       </Box>
+
+      {/* Main Content */}
+      <Box sx={{ 
+        flexGrow: 1, 
+        backgroundColor: '#f8f9fa',
+        padding: '30px',
+        overflowY: 'auto'
+      }}>
+        <Box sx={{ maxWidth: '1200px', margin: '0 auto' }}>
+          {renderContent()}
+        </Box>
+      </Box>
+
       <Modal 
         open={open} 
         onClose={handleClose}
@@ -302,59 +427,6 @@ const Landing = ({ onNavigate }) => {
           </Box>
         </Box>
       </Modal>
-      {/* Main Content */}
-      <Box sx={{ 
-        flexGrow: 1, 
-        backgroundColor: '#f8f9fa',
-        padding: '30px',
-        overflowY: 'auto'
-      }}>
-        <Box sx={{ maxWidth: '1200px', margin: '0 auto' }}>
-          {/* Content header */}
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center',
-            marginBottom: '30px'
-          }}>
-            <Typography variant="h5" sx={{ fontWeight: 600 }}>
-              {selectedTab === '1' ? 'View Dashboards' : 'Edit Dashboards'}
-            </Typography>
-            
-            {/* Search bar */}
-            <TextField
-              size="small"
-              placeholder="Search..."
-              InputProps={{
-                startAdornment: <SearchIcon sx={{ color: '#666', mr: 1 }} />,
-              }}
-              sx={{
-                width: '300px',
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: '#ffffff',
-                  borderRadius: '8px',
-                }
-              }}
-            />
-          </Box>
-
-          {/* Dashboard grid */}
-          <Box sx={{ 
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '24px'
-          }}>
-            {dashboards.map(dashboard => (
-              <DashBoard 
-                key={dashboard.id} 
-                dashboard={dashboard} 
-                deleteDashboard={selectedTab === '2' ? deleteDashboard : null} 
-                onNavigate={onNavigate} 
-              />
-            ))}
-          </Box>
-        </Box>
-      </Box>
     </Box>
   );
 };
