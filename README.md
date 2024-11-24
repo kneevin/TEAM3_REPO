@@ -1,178 +1,606 @@
-# Team 3 Repository (Dashboarding)
+```mermaid
+graph TD
+    subgraph "Frontend Architecture"
+        subgraph "Page Components"
+            DL[DashboardList]
+            SD[SingleDashboard]
+            RO[ReadOnlyDashboard]
+            ATP[AddTilePage]
+        end
 
-The team members are:
+        subgraph "Core Components"
+            DC[DashboardCard]
+            GT[GraphTile]
+            GC[Graph Component]
+            FC[FilterControls]
+        end
 
-- Gurjot Chohan (GKC20000@utdallas.edu)
-- Joey Huynh (JHH190004@utdallas.edu)
-- Kevin Le (KKL190000@utdallas.edu)
-- Charles Simmons (CLS200010@utdallas.edu)
-- Dylan Tran (DTT190001@utdallas.edu)
+        subgraph "Layout Components"
+            GL[GridLayout]
+            RGL[ResponsiveGridLayout]
+        end
 
-## Table of Contents
+        subgraph "Modal Components"
+            SM[ShareModal]
+            PM[PermissionsModal]
+            FM[FilterModal]
+            AFM[AddFilterModal]
+        end
 
-- [High Level Summary](#high-level-summary)
-- [Functional Requirements](#functional-requirements)
-- [Integration Guide](#integration-guide)
+        subgraph "State Management"
+            LS[Layout State]
+            FS[Filter State]
+            DS[Dashboard State]
+        end
 
-## High-Level Summary
+        subgraph "Utility Components"
+            FH[FilterHandlers]
+            LH[LayoutHandlers]
+            DH[DataHandlers]
+        end
+    end
 
-This project implements a comprehensive dashboard management application that allows users to upload, visualize, and manage data through an interactive and user-friendly interface. The application provides several core functionalities, ranging from dashboard and tile management to robust file handling and visualization capabilities. Key features include:
+    %% Connections
+    DL --> DC
+    SD --> GL
+    GL --> GT
+    GT --> GC
+    GT --> FC
+    FC --> FM
+    DC --> SM
+    DC --> PM
 
-- **Dashboard and Tile Management**: Users can create, view, and delete dashboards and tiles. Tiles support various chart types, including bar, line, and pie charts, with customization options for axes and data points.
-- **File Management**: Users can upload, select, and parse CSV files to generate visualizations. IPython notebook integration allows users to upload notebooks and extract plots for dashboard use.
-- **Chart Generation and Data Visualization**: Users can generate charts based on their CSV data and toggle between raw data views and graph views. The application supports basic charts (bar, line, pie), with plans for future enhancements such as scatter plots and heatmaps.
-- **Navigation and Local Storage**: Users can navigate seamlessly between different pages and persist their dashboard configurations across sessions using browser local storage.
-- **Error Handling and Pagination**: Error handling is planned for future development to manage issues like file upload errors. Users can also paginate through large datasets within the data table.
-- **Backend Integration**: The FastAPI backend and JSON server integration enable file uploads, dashboard state persistence, and the retrieval of saved data. The backend efficiently responds to requests from the frontend for data and plot display.
-  
-The app has been thoroughly tested, and most core functionalities have been implemented and completed. Future enhancements will focus on improving user experience, adding new chart types, and enhancing error handling.
+```
 
-## Functional Requirements
 
-### Dashboard Management
+### 1. Overall Architecture
 
-**Description:**  
-Users should be able to manage dashboards by creating, viewing, and deleting them.
+The application follows a three-tier architecture:
+```
+[Frontend (React)] <---> [Backend (FastAPI)] <---> [Database (SQLite)]
+```
 
-**Status:**  
-*Completed*
+**Key Design Patterns:**
+- Facade Pattern (Backend)
+- Component-Based Architecture (Frontend)
+- Repository Pattern (Data Access)
+- MVC Pattern (Overall Structure)
 
-**Status Report:**  
+### 1. Frontend Architecture
+```
+App
+├── Navigation
+│   └── NavigationBar
+├── DashboardList (MyDashboards)
+│   ├── DashboardCards
+│   │   ├── OwnerDashboardCard
+│   │   │   ├── ShareModal
+│   │   │   │   ├── EmailInput
+│   │   │   │   └── PermissionSelect
+│   │   │   ├── ManagePermissionsModal
+│   │   │   │   ├── PermissionsList
+│   │   │   │   └── DeletePermissionButton
+│   │   │   └── DeleteDashboardButton
+│   │   ├── EditDashboardCard
+│   │   │   └── EditControls
+│   │   └── ViewOnlyDashboardCard
+│   └── CreateDashboardCard
+├── SingleDashboard
+│   ├── DashboardHeader
+│   │   ├── EditView
+│   │   │   ├── AddTileButton
+│   │   │   ├── EditTitleButton
+│   │   │   └── SaveLayoutButton
+│   │   └── ReadOnlyView
+│   │       └── DashboardTitle
+│   ├── GridLayout
+│   │   ├── EditableGraphTile
+│   │   ├── GraphVisualization
+│   │   ├── TileControls
+│   │   │   ├── ResizeHandle
+│   │   │   ├── DragHandle
+│   │   │   └── DeleteButton
+│   │   ├── FilterControls
+│   │   │   │   ├── FilterButton
+│   │   │   │   │   └── FilterMenu
+│   │   │   │   │       ├── DateRangeFilter
+│   │   │   │   │       ├── CategoryFilter
+│   │   │   │   │       └── ApplyFilterButton
+│   │   │   │   ├── SortButton
+│   │   │   │   │   └── SortMenu
+│   │   │   │   │       ├── SortByOptions
+│   │   │   │   │       └── SortDirectionToggle
+│   │   │   │   └── ResetFiltersButton
+│   │   │   └── EditGraphSettings
+│   │   │       ├── TitleEdit
+│   │   │       └── GraphTypeEdit
+│   │   └── ReadOnlyGraphTile
+│   │       ├── GraphVisualization
+│   │       ├── TileInfo
+│   │       └── FilterControls // Same as EditableGraphTile
+│   └── LayoutControls
+│        ├── EditView
+│        │   ├── SaveLayout
+│        │   └── ResetLayout
+│        └── ReadOnlyView
+│            └── ViewModeIndicator
+├── AddTilePage
+│   ├── TableSelector
+│   │   └── TableList
+│   ├── ChartTypeSelector
+│   │   └── ChartTypeOptions
+│   ├── AxisSelector
+│   │   ├── XAxisSelect
+│   │   └── YAxisSelect
+│   └── PreviewSection
+│       └── GraphPreview
+└── ErrorBoundary
+    └── ErrorDisplay
+```
 
-- Users can now:
-  - Create new dashboards
-  - View existing dashboards
-  - Delete dashboards as needed
-- Initial testing shows that these features work as expected, with no major bugs or issues identified.
-- The system handles multiple dashboards efficiently.
-- Future enhancements could focus on:
-  - Improving the user interface
-  - Adding more management features
+**Detailed Dashboard Card Types:**
 
-### Functional Requirement: Tile Management
+1. **OwnerDashboardCard**
+```javascript
+// Full control over dashboard
+- Share functionality
+- Manage permissions
+- Delete dashboard
+- Edit layout
+- Add/remove graphs
+```
 
-**Description:**  
-Users should be able to manage individual dashboard tiles, adding new tiles, deleting tiles, and viewing tiles in various chart types (e.g., bar, line, pie).
+2. **EditDashboardCard**
+```javascript
+// Can modify but not share/delete
+- Edit layout
+- Add/remove graphs
+- Cannot share with others
+- Cannot delete dashboard
+```
 
-**Status:**  
-*Pending Completion*
+3. **ViewOnlyDashboardCard**
+```javascript
+// Can only view
+- View graphs
+- No edit capabilities
+- No sharing permissions
+- No delete access
+```
 
-**Status Report:**  
-Users can now add, view, and delete tiles within their dashboards. Various chart types, including bar, line, and pie charts, are available for visualization. The system operates as expected with standard datasets, and no critical issues were encountered during testing. Enhancements for tile customization and further chart types may be considered in future iterations.
+4. **CreateDashboardCard**
+```javascript
+// Special card for creating new dashboards
+- "+" icon design
+- Creates new dashboard on click
+- Always appears first in grid
+```
 
-### Functional Requirement: File Management
+**Visual Representation:**
+```mermaid
+graph TD
+    DL[DashboardList] --> CDC[CreateDashboardCard]
+    DL --> ODC[OwnerDashboardCard]
+    DL --> EDC[EditDashboardCard]
+    DL --> VDC[ViewOnlyDashboardCard]
+    
+    ODC --> SM[ShareModal]
+    ODC --> MPM[ManagePermissionsModal]
+    ODC --> DDB[DeleteDashboardButton]
+    
+    EDC --> EC[EditControls]
+    
+    subgraph "Owner Permissions"
+        SM
+        MPM
+        DDB
+    end
+    
+    subgraph "Edit Permissions"
+        EC
+    end
+```
 
-**Description:**  
-Users can upload, select, and parse CSV files for chart creation. This includes the ability to upload new CSV files, select previously uploaded files, and parse them for data extraction.
 
-**Status:**  
-*Completed*
 
-**Status Report:**  
-Users are able to upload CSV files, select previously uploaded files, and parse them for chart creation. Basic functionality has been verified through manual checks, and the feature appears to be working as expected. Further formal testing can be conducted as needed.
+**Detailed Visual Representation of Frontend Architecture:**
 
-### Functional Requirement: Chart Generation
+```mermaid
+graph TD
+    subgraph "App Container"
+        App[App Component]
+        Nav[Navigation]
+        Router[Router]
+    end
 
-**Description:**  
-Users can generate various types of charts (bar, line, pie) by selecting relevant columns from their uploaded CSV data for visualization. The application allows users to customize the X and Y axes and select multiple Y-axis data points for comparison.
+    subgraph "Dashboard Views"
+        DL[DashboardList]
+        SD[SingleDashboard]
+        ATP[AddTilePage]
+    end
 
-**Status:**  
-*Completed*
+    subgraph "Dashboard Cards"
+        CDC[CreateDashboardCard]
+        ODC[OwnerDashboardCard]
+        EDC[EditDashboardCard]
+        VDC[ViewOnlyDashboardCard]
+    end
 
-**Status Report:**  
-Users can successfully create charts using data from uploaded CSV files and customize the chart types and axis settings. Basic tests show that the system handles multiple chart types and axis customizations as expected. Minor visual optimizations may be required in future iterations.
+    subgraph "Single Dashboard Components"
+        DH[DashboardHeader]
+        GL[GridLayout]
+        LC[LayoutControls]
+    end
 
-**Comments:**  
-Current functionality supports basic chart types (bar, line, pie). Future enhancements could include more advanced charts like scatter plots or heatmaps.
+    subgraph "Graph Tiles"
+        EGT[EditableGraphTile]
+        RGT[ReadOnlyGraphTile]
+        FC[FilterControls]
+        GV[GraphVisualization]
+    end
 
-### Functional Requirement: Data Visualization
+    subgraph "Filter Components"
+        FB[FilterButton]
+        FM[FilterMenu]
+        RF[ResetFilters]
+    end
 
-**Description:**  
-Users can toggle between a data table view and a graph view to visualize CSV data. The data table displays the raw CSV data, while the graph view presents a chart generated from the selected data.
+    subgraph "Modal Components"
+        ShareM[ShareModal]
+        PermM[PermissionsModal]
+    end
 
-**Status:**  
-*Completed*
+    %% Main Flow
+    App --> Nav
+    App --> Router
+    Router --> DL
+    Router --> SD
+    Router --> ATP
 
-**Status Report:**  
-Users are able to seamlessly toggle between the data table and the graph view, allowing them to visualize the CSV data in either form. The feature has been tested and is functioning as expected.
+    %% Dashboard List Flow
+    DL --> CDC
+    DL --> ODC
+    DL --> EDC
+    DL --> VDC
 
-### Functional Requirement: Pagination for Data Tables
+    %% Single Dashboard Flow
+    SD --> DH
+    SD --> GL
+    SD --> LC
 
-**Description:**  
-Users can paginate through large datasets in the data table, with options to control how many rows are displayed per page for better navigation through the data.
+    %% Graph Tile Flow
+    GL --> EGT
+    GL --> RGT
+    EGT --> FC
+    EGT --> GV
+    RGT --> FC
+    RGT --> GV
 
-**Status:**  
-*Completed*
+    %% Filter Flow
+    FC --> FB
+    FC --> RF
+    FB --> FM
 
-**Status Report:**  
-Users can efficiently navigate through large datasets by selecting how many rows to display per page. The feature has been tested and performs well for typical dataset sizes.
+    %% Modal Flow
+    ODC --> ShareM
+    ODC --> PermM
 
-### Functional Requirement: Local Storage
+    classDef container fill:#e6f3ff,stroke:#4a90e2,stroke-width:2px
+    classDef component fill:#f9f9f9,stroke:#666,stroke-width:1px
+    classDef interactive fill:#f0fff0,stroke:#2ecc71,stroke-width:1px
+    classDef modal fill:#fff0f0,stroke:#e74c3c,stroke-width:1px
 
-**Description:**  
-The dashboard’s state, including tiles and configurations, is saved to the browser’s local storage to ensure that data persists between user sessions without requiring server-side storage.
+    class App,Nav,Router container
+    class DL,SD,ATP component
+    class CDC,ODC,EDC,VDC interactive
+    class ShareM,PermM modal
+```
 
-**Status:**  
-*Completed*
+**Component State Flow:**
 
-**Status Report:**  
-Users can now preserve their dashboard state, including tiles and configurations, between sessions. Manual tests show that the data persists after refreshing or closing the browser. No major issues were encountered, and the feature operates as intended.
+```mermaid
+flowchart TD
+    subgraph "State Management"
+        direction TB
+        US[User State]
+        DS[Dashboard State]
+        FS[Filter State]
+        LS[Layout State]
+    end
 
-### Functional Requirement: Navigation
+    subgraph "Components"
+        direction TB
+        App --> US
+        DashboardList --> DS
+        SingleDashboard --> DS
+        SingleDashboard --> LS
+        GraphTile --> FS
+    end
 
-**Description:**  
-The app allows users to navigate between different pages, including the landing page, individual dashboards, and the tile creation page. Users can easily return to the main dashboard view from any sub-page.
+    subgraph "Data Flow"
+        direction LR
+        API[API Calls]
+        Props[Props]
+        Events[Events]
+    end
 
-**Status:**  
-*Completed*
+    US --> Props
+    DS --> Props
+    FS --> Props
+    LS --> Props
+    
+    Props --> Events
+    Events --> API
+    API --> US
+    API --> DS
 
-**Status Report:**  
-Users can smoothly transition between the landing page, individual dashboard views, and the tile creation page. Testing has shown that the navigation is intuitive and responsive.
+    classDef stateNode fill:#f9f2ff,stroke:#9b51e0,stroke-width:2px
+    classDef componentNode fill:#e6f3ff,stroke:#4a90e2,stroke-width:2px
+    classDef dataNode fill:#fff0f0,stroke:#e74c3c,stroke-width:2px
 
-### Functional Requirement: Error Handling
+    class US,DS,FS,LS stateNode
+    class App,DashboardList,SingleDashboard,GraphTile componentNode
+    class API,Props,Events dataNode
+```
 
-**Description:**  
-The app should handle various types of errors, such as issues during file uploads or problems during chart generation, and provide appropriate feedback to the user.
+**Component Interaction Model:**
 
-**Status:**  
-*Future*
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant DL as DashboardList
+    participant SD as SingleDashboard
+    participant GT as GraphTile
+    participant API as Backend API
 
-**Status Report:**  
-The error handling system is currently planned for future development. The app will implement error detection for common issues, such as invalid file formats during upload or incorrect data
+    U->>DL: View Dashboards
+    DL->>API: Fetch Dashboards
+    API-->>DL: Return Dashboard List
+    
+    U->>SD: Select Dashboard
+    SD->>API: Fetch Dashboard Details
+    API-->>SD: Return Dashboard Data
+    
+    U->>GT: Interact with Graph
+    GT->>GT: Apply Filters/Sort
+    
+    U->>GT: Save Changes
+    GT->>SD: Update Layout
+    SD->>API: Save Dashboard State
+    API-->>SD: Confirm Update
+```
 
-### Functional Requirement: JSON Server Integration
+**Permission-Based Rendering:**
+```javascript
+function DashboardCard({ dashboard, permissionType }) {
+    switch(permissionType) {
+        case 'owner':
+            return <OwnerDashboardCard dashboard={dashboard} />;
+        case 'edit':
+            return <EditDashboardCard dashboard={dashboard} />;
+        case 'view':
+            return <ViewOnlyDashboardCard dashboard={dashboard} />;
+        default:
+            return null;
+    }
+}
+```
 
-**Description:**  
-The app integrates with a JSON server to handle file uploads, file retrieval, and dashboard state persistence. This enables the app to upload and fetch data, as well as store dashboards and their states.
+**Card-Specific Features:**
 
-**Status:**  
-*Completed*
+1. **OwnerDashboardCard Features:**
+```javascript
+const OwnerDashboardCard = ({ dashboard }) => {
+    return (
+        <Card>
+            <CardHeader 
+                action={
+                    <>
+                        <ShareButton />
+                        <ManagePermissionsButton />
+                        <DeleteButton />
+                    </>
+                }
+            />
+            <CardContent>
+                // Dashboard content
+            </CardContent>
+        </Card>
+    );
+};
+```
 
-**Status Report:**  
-JSON server integration has been fully implemented. Users can now upload files, retrieve file content, and persist dashboard states on the server. The functionality has been tested, and both file upload and retrieval operations are working as expected.
+2. **EditDashboardCard Features:**
+```javascript
+const EditDashboardCard = ({ dashboard }) => {
+    return (
+        <Card>
+            <CardHeader 
+                action={
+                    <EditControls />
+                }
+            />
+            <CardContent>
+                // Dashboard content
+            </CardContent>
+        </Card>
+    );
+};
+```
 
-### Functional Requirement: IPython Notebook Integration
+3. **ViewOnlyDashboardCard Features:**
+```javascript
+const ViewOnlyDashboardCard = ({ dashboard }) => {
+    return (
+        <Card>
+            <CardHeader />
+            <CardContent>
+                // Dashboard content
+            </CardContent>
+        </Card>
+    );
+};
+```
 
-**Description:**  
-The app is able to accept IPython notebooks as input and save the plots from the notebook to local storage for use in the dashboards.
+4. **CreateDashboardCard Features:**
+```javascript
+const CreateDashboardCard = () => {
+    return (
+        <Card>
+            <CardActionArea onClick={handleCreate}>
+                <AddIcon />
+                <Typography>
+                    Create New Dashboard
+                </Typography>
+            </CardActionArea>
+        </Card>
+    );
+};
+```
 
-**Status:**  
-*Completed*
+This breakdown shows how the different types of dashboard cards have different capabilities and UI elements based on the user's permission level, making the hierarchy and permission system clearer.
 
-**Status Report:**  
-Users can now upload IPython notebooks, and the system extracts the relevant plots for use in dashboards. The feature has been tested and works well with a range of notebook configurations. There are no known critical issues.
+### 3. Backend Architecture
 
-### Functional Requirement: FastAPI Backend
+**Technology Stack:**
+- FastAPI
+- SQLite
+- Pydantic for data validation
 
-**Description:**  
-The FastAPI backend is able to search through the saved plots at the request of the React frontend and send them in a response back to the frontend for display in the dashboard.
+**Architectural Layers:**
 
-**Status:**  
-*Completed*
+1. **API Layer**
+```python
+# REST Endpoints
+/dashboards           # Dashboard CRUD
+/graphs              # Graph management
+/tables              # Data source management
+/permissions         # Access control
+```
 
-**Status Report:**  
-The FastAPI backend has been successfully integrated with the frontend. It responds to requests from the React app to retrieve saved plots for display in the dashboard.
+2. **Facade Layer (DataVisualizationFacade)**
+```python
+class DataVisualizationFacade:
+    def __init__(self):
+        self.dashb_manager = DashboardManager()
+        self.graph_manager = GraphManager()
+        self.table_manager = TableManager()
+```
 
-## Integration Guide
+3. **Manager Layer**
+```python
+# Handles specific domain operations
+- DashboardManager
+- GraphManager
+- TableManager
+```
 
-(Work in progress)
+4. **Data Access Layer**
+```python
+# Database connection and operations
+- SQLite connection management
+- SQL query execution
+- Data transformation
+```
+
+### 4. Database Design
+
+**Core Tables:**
+```sql
+1. dashboard_permissions
+   - dashboard_id (PK, FK)
+   - user_email
+   - permission_type
+
+2. dashboard_title_mp
+   - dashboard_id (PK)
+   - dashboard_title
+
+3. master_dashboard
+   - dashboard_id (FK)
+   - graph_id (FK)
+   - width, height
+   - x_coord, y_coord
+
+4. graphs
+   - graph_id (PK)
+   - graph_title
+   - graph_type
+   - table_id (FK)
+   - ax0, ax1
+
+5. tables
+   - table_id (PK)
+   - table_name
+
+6. table_data
+   - table_id (FK)
+   - column_name
+   - value
+```
+
+### 5. Key Features & Workflows
+
+1. **Dashboard Management**
+```mermaid
+sequenceDiagram
+    User->>Frontend: Create Dashboard
+    Frontend->>Backend: POST /dashboards
+    Backend->>Database: Insert Dashboard
+    Database-->>Frontend: Dashboard Created
+```
+
+2. **Permission Control**
+```mermaid
+sequenceDiagram
+    Owner->>Frontend: Share Dashboard
+    Frontend->>Backend: PUT /permissions
+    Backend->>Database: Update Permissions
+    Database-->>Frontend: Access Granted
+```
+
+3. **Graph Creation**
+```mermaid
+sequenceDiagram
+    User->>Frontend: Configure Graph
+    Frontend->>Backend: POST /graphs
+    Backend->>Database: Store Graph
+    Backend->>Frontend: Return Graph Data
+    Frontend->>User: Display Graph
+```
+
+### 6. Security & Performance
+
+**Security Measures:**
+1. Permission-based access control
+2. Input validation using Pydantic
+3. SQL injection prevention
+4. CORS configuration
+
+**Performance Optimizations:**
+1. Efficient SQL queries with JOINs
+2. Frontend component memoization
+3. Optimized re-rendering
+4. Lazy loading of dashboard data
+
+### 7. Error Handling
+
+1. **Frontend:**
+```javascript
+try {
+    // API calls with axios
+} catch (error) {
+    // Error handling and user feedback
+}
+```
+
+2. **Backend:**
+```python
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail}
+    )
+```
+
