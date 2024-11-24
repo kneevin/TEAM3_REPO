@@ -1,5 +1,6 @@
 import io
 from typing import Dict, List, Tuple, Any
+import sqlite3
 from fastapi import (
     FastAPI, File, UploadFile, Query,
     HTTPException, Response, BackgroundTasks, Depends, Form, Security)
@@ -7,19 +8,17 @@ from pydantic import BaseModel, model_validator
 import csv
 import pandas as pd
 import codecs
-# from DataViz.TableManager import TableManager
-# from DataViz.GraphManager import GraphManager, Graph, Axes
-# from DataViz.DashboardManager import DashboardManager, Dashboard
 from DataViz import (
     DataVisualizationFacade, 
     TableResponse, TableMapResponse, 
     GraphQueryParam, Graph, GraphMapResponse,
     Dashboard, DashboardCreateQueryParams, DashboardMapResponse, 
-    DashboardPutQueryParams, DashboardDeleteQueryParams, 
+    DashboardPutQueryParams, DashboardDeleteQueryParams 
 )
 import os
 from fastapi.middleware.cors import CORSMiddleware
 # Add these new models
+from DataViz.DashboardManager import DashboardPermission, DashboardMetadata
 class DashboardPermission(BaseModel):
     user_email: str
     permission_type: str  # 'view' or 'edit'
@@ -36,6 +35,21 @@ class DeletePermissionParams(BaseModel):
     dashboard_id: int
     user_email: str
     requester_email: str
+
+class DashboardAccessLevelUpdate(BaseModel):
+    dashboard_id: int
+    access_level: str
+    requester_email: str
+
+    @model_validator(mode='before')
+    def validate_access_level(cls, data: Any) -> Any:
+        access_level = data.get('access_level')
+        if access_level not in ['private', 'public', 'all_users']:
+            raise HTTPException(
+                status_code=400,
+                detail="access_level must be either 'private', 'public', or 'all_users'"
+            )
+        return data
 
 app = FastAPI()
 
@@ -102,7 +116,7 @@ async def get_dashboard_mp(user_email: str) -> DashboardMapResponse:
     return db_manager.get_dashboard_id_mp(user_email=user_email)
 
 @app.get("/dashboards")
-async def get_dashboard(dashboard_id: int, user_email: str) -> Dashboard:
+async def get_dashboard(dashboard_id: int, user_email: str | None = None) -> Dashboard:
     return db_manager.render_dashboard(dashboard_id=dashboard_id, user_email=user_email)
 
 @app.post("/dashboards")
@@ -194,4 +208,64 @@ async def delete_dashboard_permission(
         raise HTTPException(
             status_code=500,
             detail=f"Failed to delete permission: {str(e)}"
+        )
+
+@app.put("/dashboards/access-level")
+async def update_dashboard_access_level(
+    query_params: DashboardAccessLevelUpdate
+) -> Dict[str, Any]:
+    try:
+        db_manager.update_access_level(
+            dashboard_id=query_params.dashboard_id,
+            access_level=query_params.access_level,
+            requester_email=query_params.requester_email
+        )
+        
+        return {
+            "status": "success",
+            "message": "Access level updated successfully",
+            "dashboard_id": query_params.dashboard_id,
+            "new_access_level": query_params.access_level
+        }
+        
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to update access level: {str(e)}"
+        )
+
+@app.get("/public-dashboards")
+async def get_public_dashboards() -> DashboardMapResponse:
+    try:
+        with db_manager.dashb_manager.get_sql_db_connection() as conn:
+            conn.row_factory = sqlite3.Row
+            
+            # Only fetch public dashboards
+            dashboards = conn.execute("""
+                SELECT 
+                    dashboard_id,
+                    dashboard_title,
+                    created_by,
+                    access_level
+                FROM dashboard_title_mp
+                WHERE access_level = 'public'
+            """).fetchall()
+
+            dashboard_metadatas = [
+                DashboardMetadata(
+                    dashboard_id=dash['dashboard_id'],
+                    dashboard_title=dash['dashboard_title'],
+                    metadata_graphs=[],  # Can be populated if needed
+                    permission_type='view',
+                    access_level='public'
+                ) for dash in dashboards
+            ]
+
+            return DashboardMapResponse(dashboard_metadatas=dashboard_metadatas)
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to fetch public dashboards: {str(e)}"
         )

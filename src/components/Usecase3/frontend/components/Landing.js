@@ -15,6 +15,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShareIcon from '@mui/icons-material/Share';
+import PublicIcon from '@mui/icons-material/Public';
+import BadgeIcon from '@mui/icons-material/Badge';
 
 const Landing = ({ onNavigate, userEmail }) => {
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ const Landing = ({ onNavigate, userEmail }) => {
   const [ownedDashboards, setOwnedDashboards] = useState([]);
   const [editableDashboards, setEditableDashboards] = useState([]);
   const [viewOnlyDashboards, setViewOnlyDashboards] = useState([]);
+  const [publicDashboards, setPublicDashboards] = useState([]);
+  const [allUsersDashboards, setAllUsersDashboards] = useState([]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,22 +77,11 @@ const Landing = ({ onNavigate, userEmail }) => {
     try {
       const mapResponse = await axios.get(`http://127.0.0.1:8000/dashboards/map?user_email=${userEmail}`);
       const dashboardMetadatas = mapResponse.data.dashboard_metadatas;
-      console.log("dashboardMetadatas", dashboardMetadatas);
-
-      // const dashboardPromises = dashboardMetadatas.map(metadata => 
-      //   axios.get(`http://127.0.0.1:8000/dashboards?dashboard_id=${metadata.dashboard_id}&user_email=${userEmail}`)
-      // );
-      
-      // const dashboardResponses = await Promise.all(dashboardPromises);
-      // const allDashboards = dashboardResponses.map(response => ({
-      //   ...response.data,
-      //   permission_type: response.data.permission_type
-      // }));
-
-      // Split dashboards based on permission type
       setOwnedDashboards(dashboardMetadatas.filter(dash => dash.permission_type === 'owner'));
       setEditableDashboards(dashboardMetadatas.filter(dash => dash.permission_type === 'edit'));
       setViewOnlyDashboards(dashboardMetadatas.filter(dash => dash.permission_type === 'view'));
+      setPublicDashboards(dashboardMetadatas.filter(dash => dash.access_level === 'public')); 
+      setAllUsersDashboards(dashboardMetadatas.filter(dash => dash.access_level === 'all_users'));
     } catch (error) {
       console.error('Error fetching dashboards:', error);
       alert('Failed to load dashboards. Please try again.');
@@ -236,6 +229,66 @@ const Landing = ({ onNavigate, userEmail }) => {
           </Box>
         );
 
+      case 'public':
+        return (
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: '30px' }}>
+              Public Dashboards
+            </Typography>
+            <Box sx={{ 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gap: '24px'
+            }}>
+              {publicDashboards.map(dashboard => (
+                <DashBoard 
+                  key={dashboard.dashboard_id} 
+                  dashboard={dashboard} 
+                  deleteDashboard={null}
+                  onNavigate={onNavigate}
+                  permissionType="view"
+                  userEmail={userEmail}
+                />
+              ))}
+              {publicDashboards.length === 0 && (
+                <Typography variant="body1" sx={{ color: '#666', textAlign: 'center', padding: '20px' }}>
+                  No public dashboards available.
+                </Typography>
+              )}
+            </Box>
+          </Box>
+        );
+
+      case 'allUsers':
+        return (
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: '30px' }}>
+              Internal Dashboards
+            </Typography>
+            <Box sx={{ 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gap: '24px'
+            }}>
+              {allUsersDashboards.map(dashboard => (
+                <DashBoard 
+                  key={dashboard.dashboard_id} 
+                  dashboard={dashboard} 
+                  deleteDashboard={null}
+                  onNavigate={onNavigate}
+                  permissionType="view"
+                  userEmail={userEmail}
+                />
+              ))}
+              {allUsersDashboards.length === 0 && (
+                <Typography variant="body1" sx={{ color: '#666', textAlign: 'center', padding: '20px' }}>
+                  No dashboards available.
+                </Typography>
+              )}
+            </Box>
+          </Box>
+        );
+
       default:
         return null;
     }
@@ -292,6 +345,34 @@ const Landing = ({ onNavigate, userEmail }) => {
             onClick={() => setSelectedTab('shared')}
           >
             Shared with Me
+          </Button>
+          <Button
+            startIcon={<PublicIcon />}
+            sx={{
+              justifyContent: 'flex-start',
+              padding: '12px 16px',
+              textTransform: 'none',
+              color: '#1a1a1a',
+              backgroundColor: selectedTab === 'public' ? '#f0f7ff' : 'transparent',
+              '&:hover': { backgroundColor: '#f0f7ff' }
+            }}
+            onClick={() => setSelectedTab('public')}
+          >
+            Public Dashboards
+          </Button>
+          <Button
+            startIcon={<BadgeIcon />}
+            sx={{
+              justifyContent: 'flex-start',
+              padding: '12px 16px',
+              textTransform: 'none',
+              color: '#1a1a1a',
+              backgroundColor: selectedTab === 'allUsers' ? '#f0f7ff' : 'transparent',
+              '&:hover': { backgroundColor: '#f0f7ff' }
+            }}
+            onClick={() => setSelectedTab('allUsers')}
+          >
+            Internal Dashboards
           </Button>
           <Button
             startIcon={<AddIcon />}

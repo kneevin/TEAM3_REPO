@@ -5,9 +5,6 @@ import './Graph.css';
 
 const Graph = ({ headers, data, chartType, x, y, filters, width, height }) => {
     // Helper function to convert date strings to consistent format
-    useEffect(() => {
-        console.log('Graph received dimensions:', { width, height });
-      }, [width, height]);
 
     const parseDate = (dateStr) => {
         if (!dateStr) return null;
@@ -124,9 +121,7 @@ const Graph = ({ headers, data, chartType, x, y, filters, width, height }) => {
     
 
     const plotData = y.map((col, index) => {
-        console.log("col", col);
         const averagedData = getAveragesByGroup(filteredData, x, col);
-        console.log("averagedData", averagedData);
         return {
             x: averagedData.map(d => d.x),
             y: averagedData.map(d => d.y),
@@ -191,12 +186,8 @@ const Graph = ({ headers, data, chartType, x, y, filters, width, height }) => {
     };
 
     return (
-        console.log("chartType", chartType),
        <div style={{ width: '100%', height: '100%' }}>
-                    {console.log(width)}
-            {console.log(filteredData)}
             {chartType === 'Bar' && (
-                console.log("plotData", plotData),
                 <Plot
                     data={plotData}
                     layout={{ 

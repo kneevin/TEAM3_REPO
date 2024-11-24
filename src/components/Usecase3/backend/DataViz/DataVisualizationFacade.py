@@ -13,7 +13,7 @@ from .GraphManager import GraphManager, Graph, Axes, GraphQueryParam, GraphMapRe
 from .TableManager import TableManager, TableResponse, TableMapResponse
 from .DashboardManager import (
     DashboardManager, DashboardCreateQueryParams, 
-    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams, DashboardDeleteQueryParams, DashboardLayoutUpdateParams, DashboardCreateWithPermissions, DashboardPermission, DashboardPermissionResponse, DeletePermissionParams
+    DashboardMetadata, DashboardGraphMetadata, DashboardMapResponse, DashboardPutQueryParams, DashboardDeleteQueryParams, DashboardLayoutUpdateParams, DashboardCreateWithPermissions, DashboardPermission, DashboardPermissionResponse, DeletePermissionParams, DashboardAccessLevelUpdate
 )
 
 
@@ -50,7 +50,7 @@ class DataVisualizationFacade:
                 raise HTTPException(status_code=404, detail=f"Graph ID {graph_id} does not exist!")
         dashboard_id = self.dashb_manager.create_dashboard_with_permissions(query)
         return self.render_dashboard(dashboard_id=dashboard_id, user_email=query.owner_email)
-    def render_dashboard(self, dashboard_id: int, user_email: str) -> Dashboard:
+    def render_dashboard(self, dashboard_id: int, user_email: str | None = None) -> Dashboard:
 
         # If they have permission, proceed with rendering
         dashb_metadata = self.dashb_manager.get_dashboard(dashboard_id=dashboard_id, user_email=user_email)
@@ -132,6 +132,19 @@ class DataVisualizationFacade:
         self.dashb_manager.delete_dashboard_permission(
             dashboard_id=dashboard_id,
             user_email=user_email,
+            requester_email=requester_email
+        )
+
+    def update_access_level(
+        self,
+        dashboard_id: int,
+        access_level: str,
+        requester_email: str
+    ) -> None:
+        """Update the access level of a dashboard. Only the owner can perform this action."""
+        self.dashb_manager.update_access_level(
+            dashboard_id=dashboard_id,
+            access_level=access_level,
             requester_email=requester_email
         )
 

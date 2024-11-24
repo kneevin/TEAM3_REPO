@@ -171,7 +171,6 @@ function AddTilePage({ dashboardId, onNavigate, userEmail }) {
   };
 
   const handleAddTile = async () => {
-    console.log('=== Frontend Debug ===');
     
     // Validate required fields
     if (!selectedTableId || !chartType || x === undefined || !y) {
@@ -188,14 +187,12 @@ function AddTilePage({ dashboardId, onNavigate, userEmail }) {
         ax1: y.map(yAxis => headers[yAxis.value]).join(', ')
     };
     
-    console.log('Sending params:', params);
     
     try {
         const response = await axios.post('http://localhost:8000/graphs', null, {
             params: params  // Send as query parameters instead of body
         });
         
-        console.log('Graph creation successful:', response.data);
         
         //now put the graph into the dashboard using the graph_id and the put request
         const dashboardParams = {
@@ -208,7 +205,6 @@ function AddTilePage({ dashboardId, onNavigate, userEmail }) {
         // call the put request
         try {
             const dashboardResponse = await axios.put(`http://localhost:8000/dashboards?dashboard_id=${parseInt(dashboardId)}&requester_email=${userEmail}`, dashboardParams);
-            console.log('Dashboard update successful:', dashboardResponse.data);
         } catch (error) {
             console.error('Dashboard update failed:', {
               sentParams: dashboardParams,
@@ -293,7 +289,7 @@ function AddTilePage({ dashboardId, onNavigate, userEmail }) {
               fontWeight: 500
             }}
           >
-            Select Data Source
+            Select Data Table
           </Typography>
 
           <FormControl fullWidth>
@@ -542,8 +538,6 @@ function AddTilePage({ dashboardId, onNavigate, userEmail }) {
                     x={x} 
                     y={y.map(y => y.value)} 
                   /> }
-                  {console.log("y", y)}
-                  {console.log("y", y.map(y => y.value))}
                   <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 3 }}>
                     <Button
                       variant="contained"

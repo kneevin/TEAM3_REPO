@@ -22,21 +22,21 @@ function SingleDashboard({dashboardId, onNavigate, userEmail }) {
   
   // Find dashboard and layout
   useEffect(() => {
-    const fetchDashboard = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:8000/dashboards?dashboard_id=${dashboardId}&user_email=${userEmail}`);
-        if (!response.ok) throw new Error('Failed to fetch dashboard');
-        const data = await response.json();
-        setDashboard(data);
-      } catch (error) {
-        console.error('Error fetching dashboard:', error);
-      }
-    };
-
     if (dashboardId) {
       fetchDashboard();
     }
   }, [dashboardId]);
+
+  const fetchDashboard = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/dashboards?dashboard_id=${dashboardId}&user_email=${userEmail}`);
+      if (!response.ok) throw new Error('Failed to fetch dashboard');
+      const data = await response.json();
+      setDashboard(data);
+    } catch (error) {
+      console.error('Error fetching dashboard:', error);
+    }
+  };
 
   useEffect(() => {
     if (dashboard?.graphs) {
@@ -49,7 +49,6 @@ function SingleDashboard({dashboardId, onNavigate, userEmail }) {
         minW: 2,
         minH: 2,
       }));
-      console.log('Generated layout from graph coordinates:', generatedLayout);
       setCurrentLayout(generatedLayout);
       setTiles(dashboard.graphs);
 
@@ -106,7 +105,7 @@ function SingleDashboard({dashboardId, onNavigate, userEmail }) {
       };
 
       await axios.delete('http://127.0.0.1:8000/dashboards', { data: requestBody });
-      window.location.reload();
+      fetchDashboard();
     } catch (error) {
       console.error('Error deleting dashboard:', error);
       console.error('Error response:', error.response?.data);
@@ -153,16 +152,60 @@ function SingleDashboard({dashboardId, onNavigate, userEmail }) {
 
   return (
     <Box sx={{ padding: 3, backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-      <Box className="dashboard-header" sx={{ mb: 3, borderRadius: '10px' }}>
-        <Typography variant="h4" gutterBottom>
+      <Box className="dashboard-header" sx={{ 
+        mb: 3, 
+        borderRadius: '10px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '20px',
+        backgroundColor: '#ffffff',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            margin: 0,
+            fontWeight: 700,
+            color: '#1a237e',
+            fontSize: '2.2rem',
+            position: 'relative',
+            display: 'inline-block',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+            background: 'linear-gradient(180deg, transparent 65%, rgba(26,35,126,0.15) 65%)',
+            padding: '0 10px',
+            borderRadius: '4px',
+            transform: 'skew(-3deg)',
+            '&:hover': {
+              background: 'linear-gradient(180deg, transparent 65%, rgba(26,35,126,0.25) 65%)',
+              transition: 'all 0.3s ease'
+            }
+          }}
+        >
           {dashboard.dashboard_title}
         </Typography>
         
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: 2,
+          alignItems: 'center' 
+        }}>
           <Button 
-            variant="contained" 
+            variant="outlined" 
             className="custom-button"
-            sx={{ backgroundColor: '#ffffff', color: '#1a237e' }}
+            sx={{ 
+              borderColor: '#1a237e',
+              color: '#1a237e',
+              '&:hover': {
+                backgroundColor: '#1a237e15',
+                borderColor: '#000051',
+              },
+              padding: '10px 20px',
+              borderRadius: '8px',
+              textTransform: 'none',
+              fontWeight: 500,
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
             onClick={returnDashboard}
           >
             Return to Dashboard
@@ -170,7 +213,18 @@ function SingleDashboard({dashboardId, onNavigate, userEmail }) {
           <Button 
             variant="contained" 
             className="custom-button"
-            sx={{ backgroundColor: '#3949ab' }}
+            sx={{ 
+              backgroundColor: '#1a237e',
+              color: '#ffffff',
+              '&:hover': {
+                backgroundColor: '#000051',
+              },
+              padding: '10px 20px',
+              borderRadius: '8px',
+              textTransform: 'none',
+              fontWeight: 500,
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
             onClick={handleOpen}
           >
             Add Tile

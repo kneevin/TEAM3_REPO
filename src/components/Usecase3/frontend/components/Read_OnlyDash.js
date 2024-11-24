@@ -19,8 +19,10 @@ function Read_OnlyDash({ dashboardId, onNavigate, userEmail }) {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        
-        const response = await fetch(`http://127.0.0.1:8000/dashboards?dashboard_id=${dashboardId}&user_email=${userEmail}`);
+        const url = `http://127.0.0.1:8000/dashboards?dashboard_id=${dashboardId}`;
+        const response = await fetch(
+          userEmail ? `${url}&user_email=${userEmail}` : `${url}`
+        );
         if (!response.ok) throw new Error('Failed to fetch dashboard');
         const data = await response.json();
         setDashboard(data);
@@ -46,7 +48,6 @@ function Read_OnlyDash({ dashboardId, onNavigate, userEmail }) {
         minW: 2,
         minH: 2,
       }));
-      console.log('Generated layout from graph coordinates:', generatedLayout);
       setCurrentLayout(generatedLayout);
       setTiles(dashboard.graphs);
 
@@ -78,20 +79,63 @@ function Read_OnlyDash({ dashboardId, onNavigate, userEmail }) {
   };
 
   const returnToDashboard = () => {
-    onNavigate('landing');
+    if (onNavigate) {
+      onNavigate('landing');
+    } else {
+      window.location.href = 'http://localhost:3000/public-dashboards';
+    }
   };
 
   return (
     <Box sx={{ padding: 3, backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-      <Box className="dashboard-header" sx={{ mb: 3, borderRadius: '10px' }}>
-        <Typography variant="h4" gutterBottom>
+      <Box className="dashboard-header" sx={{ 
+        mb: 3, 
+        borderRadius: '10px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '20px',
+        backgroundColor: '#ffffff',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <Typography 
+          variant="h4" 
+          sx={{ 
+            margin: 0,
+            fontWeight: 700,
+            color: '#1a237e',
+            fontSize: '2.2rem',
+            position: 'relative',
+            display: 'inline-block',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+            background: 'linear-gradient(180deg, transparent 65%, rgba(26,35,126,0.15) 65%)',
+            padding: '0 10px',
+            borderRadius: '4px',
+            transform: 'skew(-3deg)',
+            '&:hover': {
+              background: 'linear-gradient(180deg, transparent 65%, rgba(26,35,126,0.25) 65%)',
+              transition: 'all 0.3s ease'
+            }
+          }}
+        >
           {dashboard.dashboard_title}
         </Typography>
         
         <Button 
           variant="contained" 
           className="custom-button"
-          sx={{ backgroundColor: '#ffffff', color: '#1a237e' }}
+          sx={{ 
+            backgroundColor: '#1a237e',
+            color: '#ffffff',
+            '&:hover': {
+              backgroundColor: '#000051',
+            },
+            padding: '10px 20px',
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontWeight: 500,
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}
           onClick={returnToDashboard}
         >
           Return to Dashboard
