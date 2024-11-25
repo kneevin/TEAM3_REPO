@@ -203,8 +203,9 @@ function DashBoard({ dashboard, deleteDashboard, onNavigate, permissionType, use
       }}
     >
       {/* Access Control Buttons */}
-      <Box sx={{ 
-        width: '100%',
+      {(permissionType === 'owner' || permissionType === 'OWNER') && (
+        <Box sx={{ 
+          width: '100%',
         display: 'flex', 
         justifyContent: 'flex-end',
         gap: 1,
@@ -242,6 +243,7 @@ function DashBoard({ dashboard, deleteDashboard, onNavigate, permissionType, use
           <PeopleIcon />
         </IconButton>
       </Box>
+      )}
 
       {/* Content Container */}
       <Box sx={{
