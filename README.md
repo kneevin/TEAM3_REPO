@@ -1,63 +1,53 @@
-```mermaid
-graph TD
-    subgraph "Frontend Architecture"
-        subgraph "Page Components"
-            DL[DashboardList]
-            SD[SingleDashboard]
-            RO[ReadOnlyDashboard]
-            ATP[AddTilePage]
-        end
-
-        subgraph "Core Components"
-            DC[DashboardCard]
-            GT[GraphTile]
-            GC[Graph Component]
-            FC[FilterControls]
-        end
-
-        subgraph "Layout Components"
-            GL[GridLayout]
-            RGL[ResponsiveGridLayout]
-        end
-
-        subgraph "Modal Components"
-            SM[ShareModal]
-            PM[PermissionsModal]
-            FM[FilterModal]
-            AFM[AddFilterModal]
-        end
-
-        subgraph "State Management"
-            LS[Layout State]
-            FS[Filter State]
-            DS[Dashboard State]
-        end
-
-        subgraph "Utility Components"
-            FH[FilterHandlers]
-            LH[LayoutHandlers]
-            DH[DataHandlers]
-        end
-    end
-
-    %% Connections
-    DL --> DC
-    SD --> GL
-    GL --> GT
-    GT --> GC
-    GT --> FC
-    FC --> FM
-    DC --> SM
-    DC --> PM
-
-```
-
-
 ### 1. Overall Architecture
 
 The application follows a three-tier architecture:
 ```
 [Frontend (React)] <---> [Backend (FastAPI)] <---> [Database (SQLite)]
+```
+#### 1.1 System Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph Frontend
+        UI[User Interface]
+        RC[React Components]
+        AS[Application State]
+    end
+    subgraph Backend
+        API[FastAPI Server]
+        BL[Business Logic]
+        DM[Data Managers]
+    end
+    subgraph Database
+        SQL[SQLite DB]
+        FS[File Storage]
+    end
+    
+ %% Connections
+UI --> RC
+RC --> AS
+RC --> API
+API --> BL
+BL --> DM
+DM --> SQL
+DM --> FS
+```
+#### 1.2 Overall Component Interaction Flow
+```mermaid
+sequenceDiagram
+participant U as User
+participant F as Frontend
+participant B as Backend
+participant DB as Database
+participant A as Auth0
+U->>F: Access Dashboard
+F->>A: Authenticate
+A->>F: Return Token
+F->>B: Request Dashboard Data
+B->>DB: Query Data
+DB->>B: Return Data
+B->>F: Send Dashboard
+F->>U: Display Dashboard
 ```
 
 **Key Design Patterns:**
@@ -66,76 +56,32 @@ The application follows a three-tier architecture:
 - Repository Pattern (Data Access)
 - MVC Pattern (Overall Structure)
 
-### 1. Frontend Architecture
-```
-App
-├── Navigation
-│   └── NavigationBar
-├── DashboardList (MyDashboards)
-│   ├── DashboardCards
-│   │   ├── OwnerDashboardCard
-│   │   │   ├── ShareModal
-│   │   │   │   ├── EmailInput
-│   │   │   │   └── PermissionSelect
-│   │   │   ├── ManagePermissionsModal
-│   │   │   │   ├── PermissionsList
-│   │   │   │   └── DeletePermissionButton
-│   │   │   └── DeleteDashboardButton
-│   │   ├── EditDashboardCard
-│   │   │   └── EditControls
-│   │   └── ViewOnlyDashboardCard
-│   └── CreateDashboardCard
-├── SingleDashboard
-│   ├── DashboardHeader
-│   │   ├── EditView
-│   │   │   ├── AddTileButton
-│   │   │   ├── EditTitleButton
-│   │   │   └── SaveLayoutButton
-│   │   └── ReadOnlyView
-│   │       └── DashboardTitle
-│   ├── GridLayout
-│   │   ├── EditableGraphTile
-│   │   ├── GraphVisualization
-│   │   ├── TileControls
-│   │   │   ├── ResizeHandle
-│   │   │   ├── DragHandle
-│   │   │   └── DeleteButton
-│   │   ├── FilterControls
-│   │   │   │   ├── FilterButton
-│   │   │   │   │   └── FilterMenu
-│   │   │   │   │       ├── DateRangeFilter
-│   │   │   │   │       ├── CategoryFilter
-│   │   │   │   │       └── ApplyFilterButton
-│   │   │   │   ├── SortButton
-│   │   │   │   │   └── SortMenu
-│   │   │   │   │       ├── SortByOptions
-│   │   │   │   │       └── SortDirectionToggle
-│   │   │   │   └── ResetFiltersButton
-│   │   │   └── EditGraphSettings
-│   │   │       ├── TitleEdit
-│   │   │       └── GraphTypeEdit
-│   │   └── ReadOnlyGraphTile
-│   │       ├── GraphVisualization
-│   │       ├── TileInfo
-│   │       └── FilterControls // Same as EditableGraphTile
-│   └── LayoutControls
-│        ├── EditView
-│        │   ├── SaveLayout
-│        │   └── ResetLayout
-│        └── ReadOnlyView
-│            └── ViewModeIndicator
-├── AddTilePage
-│   ├── TableSelector
-│   │   └── TableList
-│   ├── ChartTypeSelector
-│   │   └── ChartTypeOptions
-│   ├── AxisSelector
-│   │   ├── XAxisSelect
-│   │   └── YAxisSelect
-│   └── PreviewSection
-│       └── GraphPreview
-└── ErrorBoundary
-    └── ErrorDisplay
+### 2. Frontend Architecture
+```mermaid
+
+graph TB
+subgraph Components
+UC3[UC3 Main Component]
+L[Landing]
+SD[SingleDashboard]
+RD[ReadOnlyDash]
+PD[PublicDashboard]
+ATP[AddTilePage]
+G[Graph]
+T[Tile]
+end
+subgraph State Management
+Props[Props]
+State[Local State]
+API[API Calls]
+end
+UC3 --> L & SD & RD & PD
+SD --> ATP & T
+RD --> T
+T --> G
+PD --> RD
+L & SD & RD & PD --> State
+State --> API
 ```
 
 **Detailed Dashboard Card Types:**
@@ -176,172 +122,6 @@ App
 - Always appears first in grid
 ```
 
-**Visual Representation:**
-```mermaid
-graph TD
-    DL[DashboardList] --> CDC[CreateDashboardCard]
-    DL --> ODC[OwnerDashboardCard]
-    DL --> EDC[EditDashboardCard]
-    DL --> VDC[ViewOnlyDashboardCard]
-    
-    ODC --> SM[ShareModal]
-    ODC --> MPM[ManagePermissionsModal]
-    ODC --> DDB[DeleteDashboardButton]
-    
-    EDC --> EC[EditControls]
-    
-    subgraph "Owner Permissions"
-        SM
-        MPM
-        DDB
-    end
-    
-    subgraph "Edit Permissions"
-        EC
-    end
-```
-
-
-
-**Detailed Visual Representation of Frontend Architecture:**
-
-```mermaid
-graph TD
-    subgraph "App Container"
-        App[App Component]
-        Nav[Navigation]
-        Router[Router]
-    end
-
-    subgraph "Dashboard Views"
-        DL[DashboardList]
-        SD[SingleDashboard]
-        ATP[AddTilePage]
-    end
-
-    subgraph "Dashboard Cards"
-        CDC[CreateDashboardCard]
-        ODC[OwnerDashboardCard]
-        EDC[EditDashboardCard]
-        VDC[ViewOnlyDashboardCard]
-    end
-
-    subgraph "Single Dashboard Components"
-        DH[DashboardHeader]
-        GL[GridLayout]
-        LC[LayoutControls]
-    end
-
-    subgraph "Graph Tiles"
-        EGT[EditableGraphTile]
-        RGT[ReadOnlyGraphTile]
-        FC[FilterControls]
-        GV[GraphVisualization]
-    end
-
-    subgraph "Filter Components"
-        FB[FilterButton]
-        FM[FilterMenu]
-        RF[ResetFilters]
-    end
-
-    subgraph "Modal Components"
-        ShareM[ShareModal]
-        PermM[PermissionsModal]
-    end
-
-    %% Main Flow
-    App --> Nav
-    App --> Router
-    Router --> DL
-    Router --> SD
-    Router --> ATP
-
-    %% Dashboard List Flow
-    DL --> CDC
-    DL --> ODC
-    DL --> EDC
-    DL --> VDC
-
-    %% Single Dashboard Flow
-    SD --> DH
-    SD --> GL
-    SD --> LC
-
-    %% Graph Tile Flow
-    GL --> EGT
-    GL --> RGT
-    EGT --> FC
-    EGT --> GV
-    RGT --> FC
-    RGT --> GV
-
-    %% Filter Flow
-    FC --> FB
-    FC --> RF
-    FB --> FM
-
-    %% Modal Flow
-    ODC --> ShareM
-    ODC --> PermM
-
-    classDef container fill:#e6f3ff,stroke:#4a90e2,stroke-width:2px
-    classDef component fill:#f9f9f9,stroke:#666,stroke-width:1px
-    classDef interactive fill:#f0fff0,stroke:#2ecc71,stroke-width:1px
-    classDef modal fill:#fff0f0,stroke:#e74c3c,stroke-width:1px
-
-    class App,Nav,Router container
-    class DL,SD,ATP component
-    class CDC,ODC,EDC,VDC interactive
-    class ShareM,PermM modal
-```
-
-**Component State Flow:**
-
-```mermaid
-flowchart TD
-    subgraph "State Management"
-        direction TB
-        US[User State]
-        DS[Dashboard State]
-        FS[Filter State]
-        LS[Layout State]
-    end
-
-    subgraph "Components"
-        direction TB
-        App --> US
-        DashboardList --> DS
-        SingleDashboard --> DS
-        SingleDashboard --> LS
-        GraphTile --> FS
-    end
-
-    subgraph "Data Flow"
-        direction LR
-        API[API Calls]
-        Props[Props]
-        Events[Events]
-    end
-
-    US --> Props
-    DS --> Props
-    FS --> Props
-    LS --> Props
-    
-    Props --> Events
-    Events --> API
-    API --> US
-    API --> DS
-
-    classDef stateNode fill:#f9f2ff,stroke:#9b51e0,stroke-width:2px
-    classDef componentNode fill:#e6f3ff,stroke:#4a90e2,stroke-width:2px
-    classDef dataNode fill:#fff0f0,stroke:#e74c3c,stroke-width:2px
-
-    class US,DS,FS,LS stateNode
-    class App,DashboardList,SingleDashboard,GraphTile componentNode
-    class API,Props,Events dataNode
-```
 
 **Component Interaction Model:**
 
@@ -370,93 +150,9 @@ sequenceDiagram
     API-->>SD: Confirm Update
 ```
 
-**Permission-Based Rendering:**
-```javascript
-function DashboardCard({ dashboard, permissionType }) {
-    switch(permissionType) {
-        case 'owner':
-            return <OwnerDashboardCard dashboard={dashboard} />;
-        case 'edit':
-            return <EditDashboardCard dashboard={dashboard} />;
-        case 'view':
-            return <ViewOnlyDashboardCard dashboard={dashboard} />;
-        default:
-            return null;
-    }
-}
-```
 
-**Card-Specific Features:**
 
-1. **OwnerDashboardCard Features:**
-```javascript
-const OwnerDashboardCard = ({ dashboard }) => {
-    return (
-        <Card>
-            <CardHeader 
-                action={
-                    <>
-                        <ShareButton />
-                        <ManagePermissionsButton />
-                        <DeleteButton />
-                    </>
-                }
-            />
-            <CardContent>
-                // Dashboard content
-            </CardContent>
-        </Card>
-    );
-};
-```
 
-2. **EditDashboardCard Features:**
-```javascript
-const EditDashboardCard = ({ dashboard }) => {
-    return (
-        <Card>
-            <CardHeader 
-                action={
-                    <EditControls />
-                }
-            />
-            <CardContent>
-                // Dashboard content
-            </CardContent>
-        </Card>
-    );
-};
-```
-
-3. **ViewOnlyDashboardCard Features:**
-```javascript
-const ViewOnlyDashboardCard = ({ dashboard }) => {
-    return (
-        <Card>
-            <CardHeader />
-            <CardContent>
-                // Dashboard content
-            </CardContent>
-        </Card>
-    );
-};
-```
-
-4. **CreateDashboardCard Features:**
-```javascript
-const CreateDashboardCard = () => {
-    return (
-        <Card>
-            <CardActionArea onClick={handleCreate}>
-                <AddIcon />
-                <Typography>
-                    Create New Dashboard
-                </Typography>
-            </CardActionArea>
-        </Card>
-    );
-};
-```
 
 This breakdown shows how the different types of dashboard cards have different capabilities and UI elements based on the user's permission level, making the hierarchy and permission system clearer.
 
@@ -502,6 +198,32 @@ class DataVisualizationFacade:
 - SQL query execution
 - Data transformation
 ```
+5. **Backend Architecture**
+
+```mermaid
+graph TB
+subgraph API Layer
+FE[FastAPI Endpoints]
+MW[Middleware]
+Val[Validators]
+end
+subgraph Business Layer
+DVF[DataVisualizationFacade]
+DM[DashboardManager]
+GM[GraphManager]
+TM[TableManager]
+end
+subgraph Data Layer
+DB[(SQLite DB)]
+FS[File System]
+end
+FE --> MW --> Val
+Val --> DVF
+DVF --> DM & GM & TM
+DM & GM & TM --> DB
+TM --> FS
+```
+   
 
 ### 4. Database Design
 
@@ -569,7 +291,121 @@ sequenceDiagram
     Frontend->>User: Display Graph
 ```
 
-### 6. Security & Performance
+
+### 6. Technology Architecture
+
+#### 6.1 Web Application Architecture
+Detailed component breakdown:
+
+```mermaid
+graph TB
+subgraph Client Side
+React[React SPA]
+MUI[Material UI]
+Plotly[Plotly.js]
+Grid[React Grid Layout]
+end
+subgraph Server Side
+FastAPI[FastAPI]
+Pandas[Pandas]
+NumPy[NumPy]
+SQLite[SQLite]
+end
+subgraph External Services
+Auth0[Auth0]
+Storage[File Storage]
+end
+React --> MUI & Plotly & Grid
+FastAPI --> Pandas & NumPy & SQLite
+React --> FastAPI
+FastAPI --> Auth0
+FastAPI --> Storage
+```
+
+#### 6.2 Data Flow Architecture
+
+```mermaid
+sequenceDiagram
+participant User
+participant Frontend
+participant API
+participant Manager
+participant Database
+User->>Frontend: Upload CSV
+Frontend->>API: POST /tables
+API->>Manager: Process Data
+Manager->>Database: Store Data
+Database->>Manager: Confirm Storage
+Manager->>API: Return Table ID
+API->>Frontend: Success Response
+Frontend->>User: Show Success
+```
+
+
+
+### 7. Database Schema
+
+```mermaid
+erDiagram
+master_tables ||--o{ graphs : contains
+graphs ||--o{ dashboard_graphs : includes
+dashboard_title_mp ||--o{ dashboard_graphs : has
+dashboard_title_mp ||--o{ dashboard_permissions : manages
+master_tables {
+int table_id PK
+string table_name
+string db_name
+}
+graphs {
+int graph_id PK
+int table_id FK
+string graph_title
+string graph_type
+string ax0
+string ax1
+}
+dashboard_title_mp {
+int dashboard_id PK
+string dashboard_title
+string created_by
+string access_level
+}
+dashboard_permissions {
+int dashboard_id FK
+string user_email
+string permission_type
+}
+```
+
+### 8. Key Features Implementation
+
+#### Dashboard Creation Flow
+
+```mermaid
+graph TD
+A[User Input] -->|Create Dashboard| B(Validate Input)
+B --> C{Check Permissions}
+C -->|Valid| D[Create Dashboard Entry]
+D --> E[Initialize Layout]
+E --> F[Save to Database]
+C -->|Invalid| G[Show Error]
+F --> H[Return Dashboard ID]
+H --> I[Redirect to Editor]
+```
+
+#### Permission Management System
+```mermaid
+graph TD
+A[User Action] -->|Share Dashboard| B(Check Owner)
+B --> C{Is Owner?}
+C -->|Yes| D[Show Share Modal]
+D --> E[Set Permissions]
+E --> F[Save Permissions]
+C -->|No| G[Show Error]
+F --> H[Notify Users]
+```
+
+### 9. Security & Performance
 
 **Security Measures:**
 1. Permission-based access control
@@ -583,7 +419,7 @@ sequenceDiagram
 3. Optimized re-rendering
 4. Lazy loading of dashboard data
 
-### 7. Error Handling
+### 10. Error Handling
 
 1. **Frontend:**
 ```javascript
