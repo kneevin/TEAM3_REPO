@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Team 3 Repository (Dashboarding)
 
 The team members are:
@@ -176,3 +177,6 @@ The FastAPI backend has been successfully integrated with the frontend. It respo
 ## Integration Guide
 
 (Work in progress)
+=======
+
+>>>>>>> t7_integration/main
