@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "react-grid-layout": "^1.5.0"
-  }
-}
-=======
   "name": "test",
   "version": "0.1.0",
   "private": true,
@@ -65,4 +59,3 @@
     ]
   }
 }
->>>>>>> t7_integration/main
