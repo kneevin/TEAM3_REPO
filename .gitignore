@@ -40,3 +40,8 @@ __pycache__/
 /api/notebook
 /api/.venv
 >>>>>>> t7_integration/main
+src/components/Usecase3/backend/unified_db.db
+api/unified_db.db
+api/unified_db.db
+api/unified_db.db
+api/unified_db.db
