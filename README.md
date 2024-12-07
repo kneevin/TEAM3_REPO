@@ -1,3 +1,63 @@
+```mermaid
+sequenceDiagram
+    actor Client
+    participant API
+    participant DataViz
+    participant DB
+
+    Note over Client,DB: Dashboard Creation Flow
+    Client->>API: POST /dashboards
+    Note right of Client: {dashboard_title, owner_email, graph_ids, xy_coords, width_height}
+    API->>DataViz: create_new_dashboard()
+    DataViz->>DB: Insert dashboard & permissions
+    DB-->>DataViz: Return dashboard_id
+    DataViz-->>API: Return Dashboard object
+    API-->>Client: Dashboard response
+
+    Note over Client,DB: View Dashboards Flow
+    Client->>API: GET /dashboards/map?user_email=user@example.com
+    API->>DataViz: get_dashboard_id_mp()
+    DataViz->>DB: Query accessible dashboards
+    DB-->>DataViz: Return dashboard metadata
+    DataViz-->>API: DashboardMapResponse
+    API-->>Client: List of accessible dashboards
+
+    Note over Client,DB: View Single Dashboard
+    Client->>API: GET /dashboards?dashboard_id=123&user_email=user@example.com
+    API->>DataViz: render_dashboard()
+    DataViz->>DB: Check permissions & fetch data
+    DB-->>DataViz: Return dashboard data
+    DataViz-->>API: Dashboard object
+    API-->>Client: Dashboard with graphs
+
+    Note over Client,DB: Manage Permissions
+    Client->>API: PUT /dashboards/permissions
+    Note right of Client: {dashboard_id, permissions[], requester_email}
+    API->>DataViz: update_dashboard_permissions()
+    DataViz->>DB: Update permission records
+    DB-->>DataViz: Success
+    DataViz-->>API: Success response
+    API-->>Client: Success message
+
+    Note over Client,DB: Update Access Level
+    Client->>API: PUT /dashboards/access-level
+    Note right of Client: {dashboard_id, access_level, requester_email}
+    API->>DataViz: update_access_level()
+    DataViz->>DB: Update access level
+    DB-->>DataViz: Success
+    DataViz-->>API: Success response
+    API-->>Client: Success message
+
+    Note over Client,DB: Delete Dashboard
+    Client->>API: DELETE /dashboards
+    Note right of Client: {dashboard_id, graph_ids[]}
+    API->>DataViz: delete_dashboard()
+    DataViz->>DB: Delete dashboard/graphs
+    DB-->>DataViz: Success
+    DataViz-->>API: Success response
+    API-->>Client: Success message
+
+```
 ### 1. Overall Architecture
 
 The application follows a three-tier architecture:
